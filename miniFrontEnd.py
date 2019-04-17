@@ -25,7 +25,8 @@ parser = None
 tokens = (
     'ID', 'INT_LITERAL',
     'PLUS', 'EQUALS', 'MINUS', 'TIMES', 'DIVIDE', 'MODULUS', 'EXPONENT',
-    'LPAREN', 'RPAREN', 'SEMICOLON', 'LBRACE','RBRACE',
+    'LPAREN', 'RPAREN', 'SEMICOLON', 'LBRACE','RBRACE', 'LESS', 'LESS_EQ', 'GREATER', 'GREATER_EQ',
+    'IS_EQ', 'NOT_EQ', 'AND', 'OR'
 )
 
 # Tokens
@@ -42,6 +43,15 @@ t_SEMICOLON = r';'
 t_EXPONENT = r'\^'
 t_LBRACE = r'\{'
 t_RBRACE = r'\}'
+t_LESS = r'<'
+t_LESS_EQ = r'<='
+t_GREATER = r'>'
+t_GREATER_EQ = r'>='
+t_IS_EQ = r'=='
+t_NOT_EQ = r'!='
+t_AND = r'&&'
+t_OR = r'\|\|'
+
 
 t_ID = r'[a-zA-Z_][a-zA-Z0-9_]*'
 
@@ -95,6 +105,10 @@ start = 'program'
 # Precedence rules for the operators
 precedence = (
     ('right', 'EQUALS'),
+    ('left', 'OR'),
+    ('left', 'AND'),
+    ('left', 'IS_EQ', 'NOT_EQ'),
+    ('left', 'LESS', 'LESS_EQ', 'GREATER', 'GREATER_EQ'),
     ('left', 'PLUS', 'MINUS'),
     ('left', 'TIMES', 'DIVIDE', 'MODULUS'),
     ('right', 'EXPONENT'),
@@ -157,7 +171,7 @@ def p_identifier(p):
 def p_expression_uniop(p):
     '''expression : PLUS expression %prec UMINUS
                   | MINUS expression %prec UMINUS'''
-    p[0] = UniaryOp(p.lineno(2), p[1], p[2])
+    p[0] = UnaryOp(p.lineno(2), p[1], p[2])
 
 
 # Binary operator expression
@@ -168,6 +182,14 @@ def p_expression_binop(p):
                   | expression TIMES expression
                   | expression DIVIDE expression
                   | expression MODULUS expression
+                  | expression LESS expression
+                  | expression LESS_EQ expression
+                  | expression GREATER expression
+                  | expression GREATER_EQ expression
+                  | expression IS_EQ expression
+                  | expression NOT_EQ expression
+                  | expression AND expression
+                  | expression OR expression
                   | identifier EQUALS expression'''
     p[0] = BinaryOp(p.lineno(1), p[2], p[1], p[3])
 

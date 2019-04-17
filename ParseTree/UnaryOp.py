@@ -8,9 +8,9 @@ from .common import *
 
 
 # ---------#---------#---------#---------#---------#--------#
-class UniaryOp():
+class UnaryOp():
     def __init__(self, lineNum, op, right):
-        self.m_NodeType = 'UniaryOp'
+        self.m_NodeType = 'UnaryOp'
 
         self.m_LineNum = lineNum
         self.m_Op = op
@@ -20,7 +20,7 @@ class UniaryOp():
     # ---------------------------------------
     def dump(self, indent=0, fp=sys.stdout):
         dumpHeaderLine(indent, self.m_LineNum,
-                       f'UNIARY_OP {self.m_Op!r}', fp)
+                       f'UNARY_OP {self.m_Op!r}', fp)
 
         # self.m_Left.dump( indent+1, fp = fp )
         self.m_Right.dump(indent + 1, fp=fp)

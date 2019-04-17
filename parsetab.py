@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'programrightEQUALSleftPLUSMINUSleftTIMESDIVIDEMODULUSrightEXPONENTleftUMINUSDIVIDE EQUALS EXPONENT ID INT_LITERAL LBRACE LPAREN MINUS MODULUS PLUS RBRACE RPAREN SEMICOLON TIMESprogram : block_statementsemicolon_opt : epsilon\n                     | SEMICOLONblock_statement : LBRACE statement_list semicolon_opt RBRACEstatement : expressionstatement_list : statement_list SEMICOLON statementstatement_list : statementstatement_list : epsilonidentifier : IDexpression : PLUS expression %prec UMINUS\n                  | MINUS expression %prec UMINUSexpression : expression PLUS expression\n                  | expression MINUS expression\n                  | expression EXPONENT expression\n                  | expression TIMES expression\n                  | expression DIVIDE expression\n                  | expression MODULUS expression\n                  | identifier EQUALS expressionexpression : LPAREN expression RPARENexpression : INT_LITERALexpression : identifierepsilon :'
+_lr_signature = 'programrightEQUALSleftORleftANDleftIS_EQNOT_EQleftLESSLESS_EQGREATERGREATER_EQleftPLUSMINUSleftTIMESDIVIDEMODULUSrightEXPONENTleftUMINUSAND DIVIDE EQUALS EXPONENT GREATER GREATER_EQ ID INT_LITERAL IS_EQ LBRACE LESS LESS_EQ LPAREN MINUS MODULUS NOT_EQ OR PLUS RBRACE RPAREN SEMICOLON TIMESprogram : block_statementsemicolon_opt : epsilon\n                     | SEMICOLONblock_statement : LBRACE statement_list semicolon_opt RBRACEstatement : expressionstatement_list : statement_list SEMICOLON statementstatement_list : statementstatement_list : epsilonidentifier : IDexpression : PLUS expression %prec UMINUS\n                  | MINUS expression %prec UMINUSexpression : expression PLUS expression\n                  | expression MINUS expression\n                  | expression EXPONENT expression\n                  | expression TIMES expression\n                  | expression DIVIDE expression\n                  | expression MODULUS expression\n                  | expression LESS expression\n                  | expression LESS_EQ expression\n                  | expression GREATER expression\n                  | expression GREATER_EQ expression\n                  | expression IS_EQ expression\n                  | expression NOT_EQ expression\n                  | expression AND expression\n                  | expression OR expression\n                  | identifier EQUALS expressionexpression : LPAREN expression RPARENexpression : INT_LITERALexpression : identifierepsilon :'
     
-_lr_action_items = {'LBRACE':([0,],[3,]),'$end':([1,2,27,],[0,-1,-4,]),'SEMICOLON':([3,4,5,6,7,10,12,13,23,24,28,29,30,31,32,33,34,35,36,],[-22,15,-7,-8,-5,-21,-20,-9,-10,-11,-6,-12,-13,-14,-15,-16,-17,-18,-19,]),'RBRACE':([3,4,5,6,7,10,12,13,14,15,16,23,24,28,29,30,31,32,33,34,35,36,],[-22,-22,-7,-8,-5,-21,-20,-9,27,-3,-2,-10,-11,-6,-12,-13,-14,-15,-16,-17,-18,-19,]),'PLUS':([3,7,8,9,10,11,12,13,15,17,18,19,20,21,22,23,24,25,26,29,30,31,32,33,34,35,36,],[8,17,8,8,-21,8,-20,-9,8,8,8,8,8,8,8,-10,-11,8,17,-12,-13,-14,-15,-16,-17,17,-19,]),'MINUS':([3,7,8,9,10,11,12,13,15,17,18,19,20,21,22,23,24,25,26,29,30,31,32,33,34,35,36,],[9,18,9,9,-21,9,-20,-9,9,9,9,9,9,9,9,-10,-11,9,18,-12,-13,-14,-15,-16,-17,18,-19,]),'LPAREN':([3,8,9,11,15,17,18,19,20,21,22,25,],[11,11,11,11,11,11,11,11,11,11,11,11,]),'INT_LITERAL':([3,8,9,11,15,17,18,19,20,21,22,25,],[12,12,12,12,12,12,12,12,12,12,12,12,]),'ID':([3,8,9,11,15,17,18,19,20,21,22,25,],[13,13,13,13,13,13,13,13,13,13,13,13,]),'EXPONENT':([7,10,12,13,23,24,26,29,30,31,32,33,34,35,36,],[19,-21,-20,-9,-10,-11,19,19,19,19,19,19,19,19,-19,]),'TIMES':([7,10,12,13,23,24,26,29,30,31,32,33,34,35,36,],[20,-21,-20,-9,-10,-11,20,20,20,-14,-15,-16,-17,20,-19,]),'DIVIDE':([7,10,12,13,23,24,26,29,30,31,32,33,34,35,36,],[21,-21,-20,-9,-10,-11,21,21,21,-14,-15,-16,-17,21,-19,]),'MODULUS':([7,10,12,13,23,24,26,29,30,31,32,33,34,35,36,],[22,-21,-20,-9,-10,-11,22,22,22,-14,-15,-16,-17,22,-19,]),'EQUALS':([10,13,],[25,-9,]),'RPAREN':([10,12,13,23,24,26,29,30,31,32,33,34,35,36,],[-21,-20,-9,-10,-11,36,-12,-13,-14,-15,-16,-17,-18,-19,]),}
+_lr_action_items = {'LBRACE':([0,],[3,]),'$end':([1,2,35,],[0,-1,-4,]),'SEMICOLON':([3,4,5,6,7,10,12,13,31,32,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,],[-30,15,-7,-8,-5,-29,-28,-9,-10,-11,-6,-12,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,-25,-26,-27,]),'RBRACE':([3,4,5,6,7,10,12,13,14,15,16,31,32,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,],[-30,-30,-7,-8,-5,-29,-28,-9,35,-3,-2,-10,-11,-6,-12,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,-25,-26,-27,]),'PLUS':([3,7,8,9,10,11,12,13,15,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,],[8,17,8,8,-29,8,-28,-9,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,-10,-11,8,17,-12,-13,-14,-15,-16,-17,17,17,17,17,17,17,17,17,17,-27,]),'MINUS':([3,7,8,9,10,11,12,13,15,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,],[9,18,9,9,-29,9,-28,-9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,-10,-11,9,18,-12,-13,-14,-15,-16,-17,18,18,18,18,18,18,18,18,18,-27,]),'LPAREN':([3,8,9,11,15,17,18,19,20,21,22,23,24,25,26,27,28,29,30,33,],[11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,]),'INT_LITERAL':([3,8,9,11,15,17,18,19,20,21,22,23,24,25,26,27,28,29,30,33,],[12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,]),'ID':([3,8,9,11,15,17,18,19,20,21,22,23,24,25,26,27,28,29,30,33,],[13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,]),'EXPONENT':([7,10,12,13,31,32,34,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,],[19,-29,-28,-9,-10,-11,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,-27,]),'TIMES':([7,10,12,13,31,32,34,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,],[20,-29,-28,-9,-10,-11,20,20,20,-14,-15,-16,-17,20,20,20,20,20,20,20,20,20,-27,]),'DIVIDE':([7,10,12,13,31,32,34,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,],[21,-29,-28,-9,-10,-11,21,21,21,-14,-15,-16,-17,21,21,21,21,21,21,21,21,21,-27,]),'MODULUS':([7,10,12,13,31,32,34,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,],[22,-29,-28,-9,-10,-11,22,22,22,-14,-15,-16,-17,22,22,22,22,22,22,22,22,22,-27,]),'LESS':([7,10,12,13,31,32,34,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,],[23,-29,-28,-9,-10,-11,23,-12,-13,-14,-15,-16,-17,-18,-19,-20,-21,23,23,23,23,23,-27,]),'LESS_EQ':([7,10,12,13,31,32,34,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,],[24,-29,-28,-9,-10,-11,24,-12,-13,-14,-15,-16,-17,-18,-19,-20,-21,24,24,24,24,24,-27,]),'GREATER':([7,10,12,13,31,32,34,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,],[25,-29,-28,-9,-10,-11,25,-12,-13,-14,-15,-16,-17,-18,-19,-20,-21,25,25,25,25,25,-27,]),'GREATER_EQ':([7,10,12,13,31,32,34,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,],[26,-29,-28,-9,-10,-11,26,-12,-13,-14,-15,-16,-17,-18,-19,-20,-21,26,26,26,26,26,-27,]),'IS_EQ':([7,10,12,13,31,32,34,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,],[27,-29,-28,-9,-10,-11,27,-12,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,27,27,27,-27,]),'NOT_EQ':([7,10,12,13,31,32,34,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,],[28,-29,-28,-9,-10,-11,28,-12,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,28,28,28,-27,]),'AND':([7,10,12,13,31,32,34,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,],[29,-29,-28,-9,-10,-11,29,-12,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,29,29,-27,]),'OR':([7,10,12,13,31,32,34,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,],[30,-29,-28,-9,-10,-11,30,-12,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,-25,30,-27,]),'EQUALS':([10,13,],[33,-9,]),'RPAREN':([10,12,13,31,32,34,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,],[-29,-28,-9,-10,-11,52,-12,-13,-14,-15,-16,-17,-18,-19,-20,-21,-22,-23,-24,-25,-26,-27,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'program':([0,],[1,]),'block_statement':([0,],[2,]),'statement_list':([3,],[4,]),'statement':([3,15,],[5,28,]),'epsilon':([3,4,],[6,16,]),'expression':([3,8,9,11,15,17,18,19,20,21,22,25,],[7,23,24,26,7,29,30,31,32,33,34,35,]),'identifier':([3,8,9,11,15,17,18,19,20,21,22,25,],[10,10,10,10,10,10,10,10,10,10,10,10,]),'semicolon_opt':([4,],[14,]),}
+_lr_goto_items = {'program':([0,],[1,]),'block_statement':([0,],[2,]),'statement_list':([3,],[4,]),'statement':([3,15,],[5,36,]),'epsilon':([3,4,],[6,16,]),'expression':([3,8,9,11,15,17,18,19,20,21,22,23,24,25,26,27,28,29,30,33,],[7,31,32,34,7,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,]),'identifier':([3,8,9,11,15,17,18,19,20,21,22,23,24,25,26,27,28,29,30,33,],[10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,]),'semicolon_opt':([4,],[14,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,26 +27,34 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
-  ('program -> block_statement','program',1,'p_program','miniFrontEnd.py',109),
-  ('semicolon_opt -> epsilon','semicolon_opt',1,'p_semicolon_opt','miniFrontEnd.py',115),
-  ('semicolon_opt -> SEMICOLON','semicolon_opt',1,'p_semicolon_opt','miniFrontEnd.py',116),
-  ('block_statement -> LBRACE statement_list semicolon_opt RBRACE','block_statement',4,'p_block_statement','miniFrontEnd.py',122),
-  ('statement -> expression','statement',1,'p_statement_expr','miniFrontEnd.py',127),
-  ('statement_list -> statement_list SEMICOLON statement','statement_list',3,'p_statement_list_A','miniFrontEnd.py',132),
-  ('statement_list -> statement','statement_list',1,'p_statement_list_B','miniFrontEnd.py',137),
-  ('statement_list -> epsilon','statement_list',1,'p_statement_list_C','miniFrontEnd.py',141),
-  ('identifier -> ID','identifier',1,'p_identifier','miniFrontEnd.py',149),
-  ('expression -> PLUS expression','expression',2,'p_expression_uniop','miniFrontEnd.py',158),
-  ('expression -> MINUS expression','expression',2,'p_expression_uniop','miniFrontEnd.py',159),
-  ('expression -> expression PLUS expression','expression',3,'p_expression_binop','miniFrontEnd.py',165),
-  ('expression -> expression MINUS expression','expression',3,'p_expression_binop','miniFrontEnd.py',166),
-  ('expression -> expression EXPONENT expression','expression',3,'p_expression_binop','miniFrontEnd.py',167),
-  ('expression -> expression TIMES expression','expression',3,'p_expression_binop','miniFrontEnd.py',168),
-  ('expression -> expression DIVIDE expression','expression',3,'p_expression_binop','miniFrontEnd.py',169),
-  ('expression -> expression MODULUS expression','expression',3,'p_expression_binop','miniFrontEnd.py',170),
-  ('expression -> identifier EQUALS expression','expression',3,'p_expression_binop','miniFrontEnd.py',171),
-  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression_group','miniFrontEnd.py',177),
-  ('expression -> INT_LITERAL','expression',1,'p_expression_int_literal','miniFrontEnd.py',183),
-  ('expression -> identifier','expression',1,'p_expression_id','miniFrontEnd.py',189),
-  ('epsilon -> <empty>','epsilon',0,'p_epsilon','miniFrontEnd.py',198),
+  ('program -> block_statement','program',1,'p_program','miniFrontEnd.py',123),
+  ('semicolon_opt -> epsilon','semicolon_opt',1,'p_semicolon_opt','miniFrontEnd.py',129),
+  ('semicolon_opt -> SEMICOLON','semicolon_opt',1,'p_semicolon_opt','miniFrontEnd.py',130),
+  ('block_statement -> LBRACE statement_list semicolon_opt RBRACE','block_statement',4,'p_block_statement','miniFrontEnd.py',136),
+  ('statement -> expression','statement',1,'p_statement_expr','miniFrontEnd.py',141),
+  ('statement_list -> statement_list SEMICOLON statement','statement_list',3,'p_statement_list_A','miniFrontEnd.py',146),
+  ('statement_list -> statement','statement_list',1,'p_statement_list_B','miniFrontEnd.py',151),
+  ('statement_list -> epsilon','statement_list',1,'p_statement_list_C','miniFrontEnd.py',155),
+  ('identifier -> ID','identifier',1,'p_identifier','miniFrontEnd.py',163),
+  ('expression -> PLUS expression','expression',2,'p_expression_uniop','miniFrontEnd.py',172),
+  ('expression -> MINUS expression','expression',2,'p_expression_uniop','miniFrontEnd.py',173),
+  ('expression -> expression PLUS expression','expression',3,'p_expression_binop','miniFrontEnd.py',179),
+  ('expression -> expression MINUS expression','expression',3,'p_expression_binop','miniFrontEnd.py',180),
+  ('expression -> expression EXPONENT expression','expression',3,'p_expression_binop','miniFrontEnd.py',181),
+  ('expression -> expression TIMES expression','expression',3,'p_expression_binop','miniFrontEnd.py',182),
+  ('expression -> expression DIVIDE expression','expression',3,'p_expression_binop','miniFrontEnd.py',183),
+  ('expression -> expression MODULUS expression','expression',3,'p_expression_binop','miniFrontEnd.py',184),
+  ('expression -> expression LESS expression','expression',3,'p_expression_binop','miniFrontEnd.py',185),
+  ('expression -> expression LESS_EQ expression','expression',3,'p_expression_binop','miniFrontEnd.py',186),
+  ('expression -> expression GREATER expression','expression',3,'p_expression_binop','miniFrontEnd.py',187),
+  ('expression -> expression GREATER_EQ expression','expression',3,'p_expression_binop','miniFrontEnd.py',188),
+  ('expression -> expression IS_EQ expression','expression',3,'p_expression_binop','miniFrontEnd.py',189),
+  ('expression -> expression NOT_EQ expression','expression',3,'p_expression_binop','miniFrontEnd.py',190),
+  ('expression -> expression AND expression','expression',3,'p_expression_binop','miniFrontEnd.py',191),
+  ('expression -> expression OR expression','expression',3,'p_expression_binop','miniFrontEnd.py',192),
+  ('expression -> identifier EQUALS expression','expression',3,'p_expression_binop','miniFrontEnd.py',193),
+  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression_group','miniFrontEnd.py',199),
+  ('expression -> INT_LITERAL','expression',1,'p_expression_int_literal','miniFrontEnd.py',205),
+  ('expression -> identifier','expression',1,'p_expression_id','miniFrontEnd.py',211),
+  ('epsilon -> <empty>','epsilon',0,'p_epsilon','miniFrontEnd.py',220),
 ]
