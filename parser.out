@@ -1,0 +1,821 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> block_statement
+Rule 2     semicolon_opt -> epsilon
+Rule 3     semicolon_opt -> SEMICOLON
+Rule 4     block_statement -> LBRACE statement_list semicolon_opt RBRACE
+Rule 5     statement -> expression
+Rule 6     statement_list -> statement_list SEMICOLON statement
+Rule 7     statement_list -> statement
+Rule 8     statement_list -> epsilon
+Rule 9     identifier -> ID
+Rule 10    expression -> PLUS expression
+Rule 11    expression -> MINUS expression
+Rule 12    expression -> expression PLUS expression
+Rule 13    expression -> expression MINUS expression
+Rule 14    expression -> expression EXPONENT expression
+Rule 15    expression -> expression TIMES expression
+Rule 16    expression -> expression DIVIDE expression
+Rule 17    expression -> expression MODULUS expression
+Rule 18    expression -> identifier EQUALS expression
+Rule 19    expression -> LPAREN expression RPAREN
+Rule 20    expression -> INT_LITERAL
+Rule 21    expression -> identifier
+Rule 22    epsilon -> <empty>
+
+Terminals, with rules where they appear
+
+DIVIDE               : 16
+EQUALS               : 18
+EXPONENT             : 14
+ID                   : 9
+INT_LITERAL          : 20
+LBRACE               : 4
+LPAREN               : 19
+MINUS                : 11 13
+MODULUS              : 17
+PLUS                 : 10 12
+RBRACE               : 4
+RPAREN               : 19
+SEMICOLON            : 3 6
+TIMES                : 15
+error                : 
+
+Nonterminals, with rules where they appear
+
+block_statement      : 1
+epsilon              : 2 8
+expression           : 5 10 11 12 12 13 13 14 14 15 15 16 16 17 17 18 19
+identifier           : 18 21
+program              : 0
+semicolon_opt        : 4
+statement            : 6 7
+statement_list       : 4 6
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . block_statement
+    (4) block_statement -> . LBRACE statement_list semicolon_opt RBRACE
+
+    LBRACE          shift and go to state 3
+
+    program                        shift and go to state 1
+    block_statement                shift and go to state 2
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> block_statement .
+
+    $end            reduce using rule 1 (program -> block_statement .)
+
+
+state 3
+
+    (4) block_statement -> LBRACE . statement_list semicolon_opt RBRACE
+    (6) statement_list -> . statement_list SEMICOLON statement
+    (7) statement_list -> . statement
+    (8) statement_list -> . epsilon
+    (5) statement -> . expression
+    (22) epsilon -> .
+    (10) expression -> . PLUS expression
+    (11) expression -> . MINUS expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression EXPONENT expression
+    (15) expression -> . expression TIMES expression
+    (16) expression -> . expression DIVIDE expression
+    (17) expression -> . expression MODULUS expression
+    (18) expression -> . identifier EQUALS expression
+    (19) expression -> . LPAREN expression RPAREN
+    (20) expression -> . INT_LITERAL
+    (21) expression -> . identifier
+    (9) identifier -> . ID
+
+    SEMICOLON       reduce using rule 22 (epsilon -> .)
+    RBRACE          reduce using rule 22 (epsilon -> .)
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    LPAREN          shift and go to state 11
+    INT_LITERAL     shift and go to state 12
+    ID              shift and go to state 13
+
+    statement_list                 shift and go to state 4
+    statement                      shift and go to state 5
+    epsilon                        shift and go to state 6
+    expression                     shift and go to state 7
+    identifier                     shift and go to state 10
+
+state 4
+
+    (4) block_statement -> LBRACE statement_list . semicolon_opt RBRACE
+    (6) statement_list -> statement_list . SEMICOLON statement
+    (2) semicolon_opt -> . epsilon
+    (3) semicolon_opt -> . SEMICOLON
+    (22) epsilon -> .
+
+    SEMICOLON       shift and go to state 15
+    RBRACE          reduce using rule 22 (epsilon -> .)
+
+    semicolon_opt                  shift and go to state 14
+    epsilon                        shift and go to state 16
+
+state 5
+
+    (7) statement_list -> statement .
+
+    SEMICOLON       reduce using rule 7 (statement_list -> statement .)
+    RBRACE          reduce using rule 7 (statement_list -> statement .)
+
+
+state 6
+
+    (8) statement_list -> epsilon .
+
+    SEMICOLON       reduce using rule 8 (statement_list -> epsilon .)
+    RBRACE          reduce using rule 8 (statement_list -> epsilon .)
+
+
+state 7
+
+    (5) statement -> expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . EXPONENT expression
+    (15) expression -> expression . TIMES expression
+    (16) expression -> expression . DIVIDE expression
+    (17) expression -> expression . MODULUS expression
+
+    SEMICOLON       reduce using rule 5 (statement -> expression .)
+    RBRACE          reduce using rule 5 (statement -> expression .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    EXPONENT        shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 21
+    MODULUS         shift and go to state 22
+
+
+state 8
+
+    (10) expression -> PLUS . expression
+    (10) expression -> . PLUS expression
+    (11) expression -> . MINUS expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression EXPONENT expression
+    (15) expression -> . expression TIMES expression
+    (16) expression -> . expression DIVIDE expression
+    (17) expression -> . expression MODULUS expression
+    (18) expression -> . identifier EQUALS expression
+    (19) expression -> . LPAREN expression RPAREN
+    (20) expression -> . INT_LITERAL
+    (21) expression -> . identifier
+    (9) identifier -> . ID
+
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    LPAREN          shift and go to state 11
+    INT_LITERAL     shift and go to state 12
+    ID              shift and go to state 13
+
+    expression                     shift and go to state 23
+    identifier                     shift and go to state 10
+
+state 9
+
+    (11) expression -> MINUS . expression
+    (10) expression -> . PLUS expression
+    (11) expression -> . MINUS expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression EXPONENT expression
+    (15) expression -> . expression TIMES expression
+    (16) expression -> . expression DIVIDE expression
+    (17) expression -> . expression MODULUS expression
+    (18) expression -> . identifier EQUALS expression
+    (19) expression -> . LPAREN expression RPAREN
+    (20) expression -> . INT_LITERAL
+    (21) expression -> . identifier
+    (9) identifier -> . ID
+
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    LPAREN          shift and go to state 11
+    INT_LITERAL     shift and go to state 12
+    ID              shift and go to state 13
+
+    expression                     shift and go to state 24
+    identifier                     shift and go to state 10
+
+state 10
+
+    (18) expression -> identifier . EQUALS expression
+    (21) expression -> identifier .
+
+    EQUALS          shift and go to state 25
+    PLUS            reduce using rule 21 (expression -> identifier .)
+    MINUS           reduce using rule 21 (expression -> identifier .)
+    EXPONENT        reduce using rule 21 (expression -> identifier .)
+    TIMES           reduce using rule 21 (expression -> identifier .)
+    DIVIDE          reduce using rule 21 (expression -> identifier .)
+    MODULUS         reduce using rule 21 (expression -> identifier .)
+    SEMICOLON       reduce using rule 21 (expression -> identifier .)
+    RBRACE          reduce using rule 21 (expression -> identifier .)
+    RPAREN          reduce using rule 21 (expression -> identifier .)
+
+
+state 11
+
+    (19) expression -> LPAREN . expression RPAREN
+    (10) expression -> . PLUS expression
+    (11) expression -> . MINUS expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression EXPONENT expression
+    (15) expression -> . expression TIMES expression
+    (16) expression -> . expression DIVIDE expression
+    (17) expression -> . expression MODULUS expression
+    (18) expression -> . identifier EQUALS expression
+    (19) expression -> . LPAREN expression RPAREN
+    (20) expression -> . INT_LITERAL
+    (21) expression -> . identifier
+    (9) identifier -> . ID
+
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    LPAREN          shift and go to state 11
+    INT_LITERAL     shift and go to state 12
+    ID              shift and go to state 13
+
+    expression                     shift and go to state 26
+    identifier                     shift and go to state 10
+
+state 12
+
+    (20) expression -> INT_LITERAL .
+
+    PLUS            reduce using rule 20 (expression -> INT_LITERAL .)
+    MINUS           reduce using rule 20 (expression -> INT_LITERAL .)
+    EXPONENT        reduce using rule 20 (expression -> INT_LITERAL .)
+    TIMES           reduce using rule 20 (expression -> INT_LITERAL .)
+    DIVIDE          reduce using rule 20 (expression -> INT_LITERAL .)
+    MODULUS         reduce using rule 20 (expression -> INT_LITERAL .)
+    SEMICOLON       reduce using rule 20 (expression -> INT_LITERAL .)
+    RBRACE          reduce using rule 20 (expression -> INT_LITERAL .)
+    RPAREN          reduce using rule 20 (expression -> INT_LITERAL .)
+
+
+state 13
+
+    (9) identifier -> ID .
+
+    EQUALS          reduce using rule 9 (identifier -> ID .)
+    PLUS            reduce using rule 9 (identifier -> ID .)
+    MINUS           reduce using rule 9 (identifier -> ID .)
+    EXPONENT        reduce using rule 9 (identifier -> ID .)
+    TIMES           reduce using rule 9 (identifier -> ID .)
+    DIVIDE          reduce using rule 9 (identifier -> ID .)
+    MODULUS         reduce using rule 9 (identifier -> ID .)
+    SEMICOLON       reduce using rule 9 (identifier -> ID .)
+    RBRACE          reduce using rule 9 (identifier -> ID .)
+    RPAREN          reduce using rule 9 (identifier -> ID .)
+
+
+state 14
+
+    (4) block_statement -> LBRACE statement_list semicolon_opt . RBRACE
+
+    RBRACE          shift and go to state 27
+
+
+state 15
+
+    (6) statement_list -> statement_list SEMICOLON . statement
+    (3) semicolon_opt -> SEMICOLON .
+    (5) statement -> . expression
+    (10) expression -> . PLUS expression
+    (11) expression -> . MINUS expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression EXPONENT expression
+    (15) expression -> . expression TIMES expression
+    (16) expression -> . expression DIVIDE expression
+    (17) expression -> . expression MODULUS expression
+    (18) expression -> . identifier EQUALS expression
+    (19) expression -> . LPAREN expression RPAREN
+    (20) expression -> . INT_LITERAL
+    (21) expression -> . identifier
+    (9) identifier -> . ID
+
+    RBRACE          reduce using rule 3 (semicolon_opt -> SEMICOLON .)
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    LPAREN          shift and go to state 11
+    INT_LITERAL     shift and go to state 12
+    ID              shift and go to state 13
+
+    statement                      shift and go to state 28
+    expression                     shift and go to state 7
+    identifier                     shift and go to state 10
+
+state 16
+
+    (2) semicolon_opt -> epsilon .
+
+    RBRACE          reduce using rule 2 (semicolon_opt -> epsilon .)
+
+
+state 17
+
+    (12) expression -> expression PLUS . expression
+    (10) expression -> . PLUS expression
+    (11) expression -> . MINUS expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression EXPONENT expression
+    (15) expression -> . expression TIMES expression
+    (16) expression -> . expression DIVIDE expression
+    (17) expression -> . expression MODULUS expression
+    (18) expression -> . identifier EQUALS expression
+    (19) expression -> . LPAREN expression RPAREN
+    (20) expression -> . INT_LITERAL
+    (21) expression -> . identifier
+    (9) identifier -> . ID
+
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    LPAREN          shift and go to state 11
+    INT_LITERAL     shift and go to state 12
+    ID              shift and go to state 13
+
+    expression                     shift and go to state 29
+    identifier                     shift and go to state 10
+
+state 18
+
+    (13) expression -> expression MINUS . expression
+    (10) expression -> . PLUS expression
+    (11) expression -> . MINUS expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression EXPONENT expression
+    (15) expression -> . expression TIMES expression
+    (16) expression -> . expression DIVIDE expression
+    (17) expression -> . expression MODULUS expression
+    (18) expression -> . identifier EQUALS expression
+    (19) expression -> . LPAREN expression RPAREN
+    (20) expression -> . INT_LITERAL
+    (21) expression -> . identifier
+    (9) identifier -> . ID
+
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    LPAREN          shift and go to state 11
+    INT_LITERAL     shift and go to state 12
+    ID              shift and go to state 13
+
+    expression                     shift and go to state 30
+    identifier                     shift and go to state 10
+
+state 19
+
+    (14) expression -> expression EXPONENT . expression
+    (10) expression -> . PLUS expression
+    (11) expression -> . MINUS expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression EXPONENT expression
+    (15) expression -> . expression TIMES expression
+    (16) expression -> . expression DIVIDE expression
+    (17) expression -> . expression MODULUS expression
+    (18) expression -> . identifier EQUALS expression
+    (19) expression -> . LPAREN expression RPAREN
+    (20) expression -> . INT_LITERAL
+    (21) expression -> . identifier
+    (9) identifier -> . ID
+
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    LPAREN          shift and go to state 11
+    INT_LITERAL     shift and go to state 12
+    ID              shift and go to state 13
+
+    expression                     shift and go to state 31
+    identifier                     shift and go to state 10
+
+state 20
+
+    (15) expression -> expression TIMES . expression
+    (10) expression -> . PLUS expression
+    (11) expression -> . MINUS expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression EXPONENT expression
+    (15) expression -> . expression TIMES expression
+    (16) expression -> . expression DIVIDE expression
+    (17) expression -> . expression MODULUS expression
+    (18) expression -> . identifier EQUALS expression
+    (19) expression -> . LPAREN expression RPAREN
+    (20) expression -> . INT_LITERAL
+    (21) expression -> . identifier
+    (9) identifier -> . ID
+
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    LPAREN          shift and go to state 11
+    INT_LITERAL     shift and go to state 12
+    ID              shift and go to state 13
+
+    expression                     shift and go to state 32
+    identifier                     shift and go to state 10
+
+state 21
+
+    (16) expression -> expression DIVIDE . expression
+    (10) expression -> . PLUS expression
+    (11) expression -> . MINUS expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression EXPONENT expression
+    (15) expression -> . expression TIMES expression
+    (16) expression -> . expression DIVIDE expression
+    (17) expression -> . expression MODULUS expression
+    (18) expression -> . identifier EQUALS expression
+    (19) expression -> . LPAREN expression RPAREN
+    (20) expression -> . INT_LITERAL
+    (21) expression -> . identifier
+    (9) identifier -> . ID
+
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    LPAREN          shift and go to state 11
+    INT_LITERAL     shift and go to state 12
+    ID              shift and go to state 13
+
+    expression                     shift and go to state 33
+    identifier                     shift and go to state 10
+
+state 22
+
+    (17) expression -> expression MODULUS . expression
+    (10) expression -> . PLUS expression
+    (11) expression -> . MINUS expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression EXPONENT expression
+    (15) expression -> . expression TIMES expression
+    (16) expression -> . expression DIVIDE expression
+    (17) expression -> . expression MODULUS expression
+    (18) expression -> . identifier EQUALS expression
+    (19) expression -> . LPAREN expression RPAREN
+    (20) expression -> . INT_LITERAL
+    (21) expression -> . identifier
+    (9) identifier -> . ID
+
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    LPAREN          shift and go to state 11
+    INT_LITERAL     shift and go to state 12
+    ID              shift and go to state 13
+
+    expression                     shift and go to state 34
+    identifier                     shift and go to state 10
+
+state 23
+
+    (10) expression -> PLUS expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . EXPONENT expression
+    (15) expression -> expression . TIMES expression
+    (16) expression -> expression . DIVIDE expression
+    (17) expression -> expression . MODULUS expression
+
+    PLUS            reduce using rule 10 (expression -> PLUS expression .)
+    MINUS           reduce using rule 10 (expression -> PLUS expression .)
+    EXPONENT        reduce using rule 10 (expression -> PLUS expression .)
+    TIMES           reduce using rule 10 (expression -> PLUS expression .)
+    DIVIDE          reduce using rule 10 (expression -> PLUS expression .)
+    MODULUS         reduce using rule 10 (expression -> PLUS expression .)
+    SEMICOLON       reduce using rule 10 (expression -> PLUS expression .)
+    RBRACE          reduce using rule 10 (expression -> PLUS expression .)
+    RPAREN          reduce using rule 10 (expression -> PLUS expression .)
+
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 18 ]
+  ! EXPONENT        [ shift and go to state 19 ]
+  ! TIMES           [ shift and go to state 20 ]
+  ! DIVIDE          [ shift and go to state 21 ]
+  ! MODULUS         [ shift and go to state 22 ]
+
+
+state 24
+
+    (11) expression -> MINUS expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . EXPONENT expression
+    (15) expression -> expression . TIMES expression
+    (16) expression -> expression . DIVIDE expression
+    (17) expression -> expression . MODULUS expression
+
+    PLUS            reduce using rule 11 (expression -> MINUS expression .)
+    MINUS           reduce using rule 11 (expression -> MINUS expression .)
+    EXPONENT        reduce using rule 11 (expression -> MINUS expression .)
+    TIMES           reduce using rule 11 (expression -> MINUS expression .)
+    DIVIDE          reduce using rule 11 (expression -> MINUS expression .)
+    MODULUS         reduce using rule 11 (expression -> MINUS expression .)
+    SEMICOLON       reduce using rule 11 (expression -> MINUS expression .)
+    RBRACE          reduce using rule 11 (expression -> MINUS expression .)
+    RPAREN          reduce using rule 11 (expression -> MINUS expression .)
+
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 18 ]
+  ! EXPONENT        [ shift and go to state 19 ]
+  ! TIMES           [ shift and go to state 20 ]
+  ! DIVIDE          [ shift and go to state 21 ]
+  ! MODULUS         [ shift and go to state 22 ]
+
+
+state 25
+
+    (18) expression -> identifier EQUALS . expression
+    (10) expression -> . PLUS expression
+    (11) expression -> . MINUS expression
+    (12) expression -> . expression PLUS expression
+    (13) expression -> . expression MINUS expression
+    (14) expression -> . expression EXPONENT expression
+    (15) expression -> . expression TIMES expression
+    (16) expression -> . expression DIVIDE expression
+    (17) expression -> . expression MODULUS expression
+    (18) expression -> . identifier EQUALS expression
+    (19) expression -> . LPAREN expression RPAREN
+    (20) expression -> . INT_LITERAL
+    (21) expression -> . identifier
+    (9) identifier -> . ID
+
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    LPAREN          shift and go to state 11
+    INT_LITERAL     shift and go to state 12
+    ID              shift and go to state 13
+
+    identifier                     shift and go to state 10
+    expression                     shift and go to state 35
+
+state 26
+
+    (19) expression -> LPAREN expression . RPAREN
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . EXPONENT expression
+    (15) expression -> expression . TIMES expression
+    (16) expression -> expression . DIVIDE expression
+    (17) expression -> expression . MODULUS expression
+
+    RPAREN          shift and go to state 36
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    EXPONENT        shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 21
+    MODULUS         shift and go to state 22
+
+
+state 27
+
+    (4) block_statement -> LBRACE statement_list semicolon_opt RBRACE .
+
+    $end            reduce using rule 4 (block_statement -> LBRACE statement_list semicolon_opt RBRACE .)
+
+
+state 28
+
+    (6) statement_list -> statement_list SEMICOLON statement .
+
+    SEMICOLON       reduce using rule 6 (statement_list -> statement_list SEMICOLON statement .)
+    RBRACE          reduce using rule 6 (statement_list -> statement_list SEMICOLON statement .)
+
+
+state 29
+
+    (12) expression -> expression PLUS expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . EXPONENT expression
+    (15) expression -> expression . TIMES expression
+    (16) expression -> expression . DIVIDE expression
+    (17) expression -> expression . MODULUS expression
+
+    PLUS            reduce using rule 12 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 12 (expression -> expression PLUS expression .)
+    SEMICOLON       reduce using rule 12 (expression -> expression PLUS expression .)
+    RBRACE          reduce using rule 12 (expression -> expression PLUS expression .)
+    RPAREN          reduce using rule 12 (expression -> expression PLUS expression .)
+    EXPONENT        shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 21
+    MODULUS         shift and go to state 22
+
+  ! EXPONENT        [ reduce using rule 12 (expression -> expression PLUS expression .) ]
+  ! TIMES           [ reduce using rule 12 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 12 (expression -> expression PLUS expression .) ]
+  ! MODULUS         [ reduce using rule 12 (expression -> expression PLUS expression .) ]
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 18 ]
+
+
+state 30
+
+    (13) expression -> expression MINUS expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . EXPONENT expression
+    (15) expression -> expression . TIMES expression
+    (16) expression -> expression . DIVIDE expression
+    (17) expression -> expression . MODULUS expression
+
+    PLUS            reduce using rule 13 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 13 (expression -> expression MINUS expression .)
+    SEMICOLON       reduce using rule 13 (expression -> expression MINUS expression .)
+    RBRACE          reduce using rule 13 (expression -> expression MINUS expression .)
+    RPAREN          reduce using rule 13 (expression -> expression MINUS expression .)
+    EXPONENT        shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 21
+    MODULUS         shift and go to state 22
+
+  ! EXPONENT        [ reduce using rule 13 (expression -> expression MINUS expression .) ]
+  ! TIMES           [ reduce using rule 13 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 13 (expression -> expression MINUS expression .) ]
+  ! MODULUS         [ reduce using rule 13 (expression -> expression MINUS expression .) ]
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 18 ]
+
+
+state 31
+
+    (14) expression -> expression EXPONENT expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . EXPONENT expression
+    (15) expression -> expression . TIMES expression
+    (16) expression -> expression . DIVIDE expression
+    (17) expression -> expression . MODULUS expression
+
+    PLUS            reduce using rule 14 (expression -> expression EXPONENT expression .)
+    MINUS           reduce using rule 14 (expression -> expression EXPONENT expression .)
+    TIMES           reduce using rule 14 (expression -> expression EXPONENT expression .)
+    DIVIDE          reduce using rule 14 (expression -> expression EXPONENT expression .)
+    MODULUS         reduce using rule 14 (expression -> expression EXPONENT expression .)
+    SEMICOLON       reduce using rule 14 (expression -> expression EXPONENT expression .)
+    RBRACE          reduce using rule 14 (expression -> expression EXPONENT expression .)
+    RPAREN          reduce using rule 14 (expression -> expression EXPONENT expression .)
+    EXPONENT        shift and go to state 19
+
+  ! EXPONENT        [ reduce using rule 14 (expression -> expression EXPONENT expression .) ]
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 18 ]
+  ! TIMES           [ shift and go to state 20 ]
+  ! DIVIDE          [ shift and go to state 21 ]
+  ! MODULUS         [ shift and go to state 22 ]
+
+
+state 32
+
+    (15) expression -> expression TIMES expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . EXPONENT expression
+    (15) expression -> expression . TIMES expression
+    (16) expression -> expression . DIVIDE expression
+    (17) expression -> expression . MODULUS expression
+
+    PLUS            reduce using rule 15 (expression -> expression TIMES expression .)
+    MINUS           reduce using rule 15 (expression -> expression TIMES expression .)
+    TIMES           reduce using rule 15 (expression -> expression TIMES expression .)
+    DIVIDE          reduce using rule 15 (expression -> expression TIMES expression .)
+    MODULUS         reduce using rule 15 (expression -> expression TIMES expression .)
+    SEMICOLON       reduce using rule 15 (expression -> expression TIMES expression .)
+    RBRACE          reduce using rule 15 (expression -> expression TIMES expression .)
+    RPAREN          reduce using rule 15 (expression -> expression TIMES expression .)
+    EXPONENT        shift and go to state 19
+
+  ! EXPONENT        [ reduce using rule 15 (expression -> expression TIMES expression .) ]
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 18 ]
+  ! TIMES           [ shift and go to state 20 ]
+  ! DIVIDE          [ shift and go to state 21 ]
+  ! MODULUS         [ shift and go to state 22 ]
+
+
+state 33
+
+    (16) expression -> expression DIVIDE expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . EXPONENT expression
+    (15) expression -> expression . TIMES expression
+    (16) expression -> expression . DIVIDE expression
+    (17) expression -> expression . MODULUS expression
+
+    PLUS            reduce using rule 16 (expression -> expression DIVIDE expression .)
+    MINUS           reduce using rule 16 (expression -> expression DIVIDE expression .)
+    TIMES           reduce using rule 16 (expression -> expression DIVIDE expression .)
+    DIVIDE          reduce using rule 16 (expression -> expression DIVIDE expression .)
+    MODULUS         reduce using rule 16 (expression -> expression DIVIDE expression .)
+    SEMICOLON       reduce using rule 16 (expression -> expression DIVIDE expression .)
+    RBRACE          reduce using rule 16 (expression -> expression DIVIDE expression .)
+    RPAREN          reduce using rule 16 (expression -> expression DIVIDE expression .)
+    EXPONENT        shift and go to state 19
+
+  ! EXPONENT        [ reduce using rule 16 (expression -> expression DIVIDE expression .) ]
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 18 ]
+  ! TIMES           [ shift and go to state 20 ]
+  ! DIVIDE          [ shift and go to state 21 ]
+  ! MODULUS         [ shift and go to state 22 ]
+
+
+state 34
+
+    (17) expression -> expression MODULUS expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . EXPONENT expression
+    (15) expression -> expression . TIMES expression
+    (16) expression -> expression . DIVIDE expression
+    (17) expression -> expression . MODULUS expression
+
+    PLUS            reduce using rule 17 (expression -> expression MODULUS expression .)
+    MINUS           reduce using rule 17 (expression -> expression MODULUS expression .)
+    TIMES           reduce using rule 17 (expression -> expression MODULUS expression .)
+    DIVIDE          reduce using rule 17 (expression -> expression MODULUS expression .)
+    MODULUS         reduce using rule 17 (expression -> expression MODULUS expression .)
+    SEMICOLON       reduce using rule 17 (expression -> expression MODULUS expression .)
+    RBRACE          reduce using rule 17 (expression -> expression MODULUS expression .)
+    RPAREN          reduce using rule 17 (expression -> expression MODULUS expression .)
+    EXPONENT        shift and go to state 19
+
+  ! EXPONENT        [ reduce using rule 17 (expression -> expression MODULUS expression .) ]
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 18 ]
+  ! TIMES           [ shift and go to state 20 ]
+  ! DIVIDE          [ shift and go to state 21 ]
+  ! MODULUS         [ shift and go to state 22 ]
+
+
+state 35
+
+    (18) expression -> identifier EQUALS expression .
+    (12) expression -> expression . PLUS expression
+    (13) expression -> expression . MINUS expression
+    (14) expression -> expression . EXPONENT expression
+    (15) expression -> expression . TIMES expression
+    (16) expression -> expression . DIVIDE expression
+    (17) expression -> expression . MODULUS expression
+
+    SEMICOLON       reduce using rule 18 (expression -> identifier EQUALS expression .)
+    RBRACE          reduce using rule 18 (expression -> identifier EQUALS expression .)
+    RPAREN          reduce using rule 18 (expression -> identifier EQUALS expression .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    EXPONENT        shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 21
+    MODULUS         shift and go to state 22
+
+  ! PLUS            [ reduce using rule 18 (expression -> identifier EQUALS expression .) ]
+  ! MINUS           [ reduce using rule 18 (expression -> identifier EQUALS expression .) ]
+  ! EXPONENT        [ reduce using rule 18 (expression -> identifier EQUALS expression .) ]
+  ! TIMES           [ reduce using rule 18 (expression -> identifier EQUALS expression .) ]
+  ! DIVIDE          [ reduce using rule 18 (expression -> identifier EQUALS expression .) ]
+  ! MODULUS         [ reduce using rule 18 (expression -> identifier EQUALS expression .) ]
+
+
+state 36
+
+    (19) expression -> LPAREN expression RPAREN .
+
+    PLUS            reduce using rule 19 (expression -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 19 (expression -> LPAREN expression RPAREN .)
+    EXPONENT        reduce using rule 19 (expression -> LPAREN expression RPAREN .)
+    TIMES           reduce using rule 19 (expression -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 19 (expression -> LPAREN expression RPAREN .)
+    MODULUS         reduce using rule 19 (expression -> LPAREN expression RPAREN .)
+    SEMICOLON       reduce using rule 19 (expression -> LPAREN expression RPAREN .)
+    RBRACE          reduce using rule 19 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 19 (expression -> LPAREN expression RPAREN .)
+

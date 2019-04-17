@@ -1,0 +1,7 @@
+Homework 01, 2019 February 27
+
+* Add the (binary) -, *, /, %, and ^ operators and the (unary) - and + operators to the mini Front End.
+
+* Read the HMWK_01.txt file and follow the instructions.
+
+* Get started now!
