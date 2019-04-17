@@ -26,7 +26,7 @@ tokens = (
     'ID', 'INT_LITERAL',
     'PLUS', 'EQUALS', 'MINUS', 'TIMES', 'DIVIDE', 'MODULUS', 'EXPONENT',
     'LPAREN', 'RPAREN', 'SEMICOLON', 'LBRACE','RBRACE', 'LESS', 'LESS_EQ', 'GREATER', 'GREATER_EQ',
-    'IS_EQ', 'NOT_EQ', 'AND', 'OR'
+    'IS_EQ', 'NOT_EQ', 'AND', 'OR', 'NOT'
 )
 
 # Tokens
@@ -51,6 +51,7 @@ t_IS_EQ = r'=='
 t_NOT_EQ = r'!='
 t_AND = r'&&'
 t_OR = r'\|\|'
+t_NOT = r'!'
 
 
 t_ID = r'[a-zA-Z_][a-zA-Z0-9_]*'
@@ -112,7 +113,7 @@ precedence = (
     ('left', 'PLUS', 'MINUS'),
     ('left', 'TIMES', 'DIVIDE', 'MODULUS'),
     ('right', 'EXPONENT'),
-    ('left', 'UMINUS')
+    ('left', 'UMINUS', 'NOT')
 )
 
 
@@ -170,7 +171,8 @@ def p_identifier(p):
 # Uniary operator expression
 def p_expression_uniop(p):
     '''expression : PLUS expression %prec UMINUS
-                  | MINUS expression %prec UMINUS'''
+                  | MINUS expression %prec UMINUS
+                  | NOT expression'''
     p[0] = UnaryOp(p.lineno(2), p[1], p[2])
 
 
@@ -203,7 +205,7 @@ def p_expression_group(p):
 # Integer literal
 def p_expression_int_literal(p):
     'expression : INT_LITERAL'
-    p[0] = Literal(p.lineno(1), 'Integer', p[1])
+    p[0] = Literal(p.lineno(1), 'int', p[1])
 
 
 # Name
