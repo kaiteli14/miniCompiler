@@ -149,6 +149,9 @@ def p_statement_expr(p):
     'statement : expression'
     p[0] = Statement_Expression(p.lineno(1), p[1])
 
+def p_statement_block_statement(p):
+    'statement : block_statement'
+    p[0] = p[1]
 
 # List of statements separated by semicolons
 def p_statement_decl_list_A(p):

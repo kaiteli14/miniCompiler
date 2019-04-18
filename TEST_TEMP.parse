@@ -1,5 +1,5 @@
 (   1) PROGRAM
-(   1)   STATEMENT (BLOCK) <5>
+(   1)   STATEMENT (BLOCK) <6>
 (   2)     STATEMENT (EXPRESSION)
 (   2)       BINARY_OP '-'
 (   2)         BINARY_OP '+'
@@ -52,3 +52,8 @@
 (   8)       LITERAL 'int' 23
 (   9)     DECLARATION (VARIABLE-NO-INIT) ID('b')
 (   9)       TYPE (NAME)'int'
+(  11)     STATEMENT (BLOCK) <1>
+(  12)       STATEMENT (EXPRESSION)
+(  12)         BINARY_OP '%'
+(  12)           LVALUE(NAME) ID('a')
+(  12)           LVALUE(NAME) ID('b')

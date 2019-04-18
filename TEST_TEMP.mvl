@@ -8,9 +8,9 @@
   a : int = 23;
   b : int;
 
-  // { // A block inside a block
-  //   a % b;
-  // };
+  { // A block inside a block
+    a % b;
+  };
 
   // if a != b {
   //   // Then side
