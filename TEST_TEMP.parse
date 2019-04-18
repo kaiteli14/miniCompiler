@@ -1,4 +1,7 @@
 (   1) PROGRAM
-(   1)   STATEMENT (BLOCK) <1>
+(   1)   STATEMENT (BLOCK) <2>
 (   4)     DECLARATION (VARIABLE-NO-INIT) ID('a')
 (   4)       TYPE (NAME)'int'
+(   5)     DECLARATION (VARIABLE) ID('b')
+(   5)       TYPE (NAME)'int'
+(   5)       LITERAL 'int' 7

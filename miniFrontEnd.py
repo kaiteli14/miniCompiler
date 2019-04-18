@@ -141,7 +141,7 @@ def p_semicolon_opt(p):
 # -------------------
 # STATEMENTS ...
 def p_block_statement(p):
-    '''block_statement : LBRACE statement_list semicolon_opt RBRACE'''
+    '''block_statement : LBRACE statement_decl_list semicolon_opt RBRACE'''
     p[0] = Statement_Block(p.lineno(1), p[2])
 
 # Expression statement
@@ -150,33 +150,28 @@ def p_statement_expr(p):
     p[0] = Statement_Expression(p.lineno(1), p[1])
 
 # List of statements separated by semicolons
-def p_statement_list_A(p):
-    'statement_list : statement_list SEMICOLON statement'
+def p_statement_decl_list_A(p):
+    '''statement_decl_list : statement_decl_list SEMICOLON statement_decl'''
     p[1].append(p[3])
     p[0] = p[1]
 
-def p_statement_list_B(p):
-    'statement_list : statement'
+def p_statement_decl_list_B(p):
+    'statement_decl_list : statement_decl'
     p[0] = [p[1]]
 
-def p_statement_list_C(p):
-    'statement_list : epsilon'
+def p_statement_decl_list_C(p):
+    'statement_decl_list : epsilon'
     p[0] = [p[1]]
 
-def p_statement_list_D(p):
-    'statement_list : decl'
-    p[0] = [p[1]]
 
-def p_statement_list_E(p):
-    'statement_list : statement_list SEMICOLON decl'
-    p[1].append(p[3])
+def p_statement_decl(p) :
+    '''statement_decl : statement
+                      | decl'''
     p[0] = p[1]
 
-
-
-# # Declaration
+ # Declaration
 def p_decl(p):
-    'decl : ID COLON type Initiation SEMICOLON'
+    'decl : ID COLON type Initiation'
     if(p[4] == None):
         p[0] = decl_no_init(p.lineno(1), p[1], p[3], "(VARIABLE-NO-INIT)")
     else:

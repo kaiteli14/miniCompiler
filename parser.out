@@ -6,14 +6,14 @@ Rule 0     S' -> program
 Rule 1     program -> block_statement
 Rule 2     semicolon_opt -> epsilon
 Rule 3     semicolon_opt -> SEMICOLON
-Rule 4     block_statement -> LBRACE statement_list semicolon_opt RBRACE
+Rule 4     block_statement -> LBRACE statement_decl_list semicolon_opt RBRACE
 Rule 5     statement -> expression
-Rule 6     statement_list -> statement_list SEMICOLON statement
-Rule 7     statement_list -> statement
-Rule 8     statement_list -> epsilon
-Rule 9     statement_list -> decl
-Rule 10    statement_list -> statement_list SEMICOLON decl
-Rule 11    decl -> ID COLON type Initiation SEMICOLON
+Rule 6     statement_decl_list -> statement_decl_list SEMICOLON statement_decl
+Rule 7     statement_decl_list -> statement_decl
+Rule 8     statement_decl_list -> epsilon
+Rule 9     statement_decl -> statement
+Rule 10    statement_decl -> decl
+Rule 11    decl -> ID COLON type Initiation
 Rule 12    Initiation -> EQUALS expression
 Rule 13    Initiation -> epsilon
 Rule 14    identifier -> ID
@@ -66,7 +66,7 @@ OR                   : 32
 PLUS                 : 16 19
 RBRACE               : 4
 RPAREN               : 34
-SEMICOLON            : 3 6 10 11
+SEMICOLON            : 3 6
 TIMES                : 22
 error                : 
 
@@ -74,14 +74,15 @@ Nonterminals, with rules where they appear
 
 Initiation           : 11
 block_statement      : 1
-decl                 : 9 10
+decl                 : 10
 epsilon              : 2 8 13
 expression           : 5 12 16 17 18 19 19 20 20 21 21 22 22 23 23 24 24 25 25 26 26 27 27 28 28 29 29 30 30 31 31 32 32 33 34
 identifier           : 33 36
 program              : 0
 semicolon_opt        : 4
-statement            : 6 7
-statement_list       : 4 6 10
+statement            : 9
+statement_decl       : 6 7
+statement_decl_list  : 4 6
 type                 : 11
 
 Parsing method: LALR
@@ -90,7 +91,7 @@ state 0
 
     (0) S' -> . program
     (1) program -> . block_statement
-    (4) block_statement -> . LBRACE statement_list semicolon_opt RBRACE
+    (4) block_statement -> . LBRACE statement_decl_list semicolon_opt RBRACE
 
     LBRACE          shift and go to state 3
 
@@ -112,15 +113,15 @@ state 2
 
 state 3
 
-    (4) block_statement -> LBRACE . statement_list semicolon_opt RBRACE
-    (6) statement_list -> . statement_list SEMICOLON statement
-    (7) statement_list -> . statement
-    (8) statement_list -> . epsilon
-    (9) statement_list -> . decl
-    (10) statement_list -> . statement_list SEMICOLON decl
-    (5) statement -> . expression
+    (4) block_statement -> LBRACE . statement_decl_list semicolon_opt RBRACE
+    (6) statement_decl_list -> . statement_decl_list SEMICOLON statement_decl
+    (7) statement_decl_list -> . statement_decl
+    (8) statement_decl_list -> . epsilon
+    (9) statement_decl -> . statement
+    (10) statement_decl -> . decl
     (37) epsilon -> .
-    (11) decl -> . ID COLON type Initiation SEMICOLON
+    (5) statement -> . expression
+    (11) decl -> . ID COLON type Initiation
     (16) expression -> . PLUS expression
     (17) expression -> . MINUS expression
     (18) expression -> . NOT expression
@@ -146,60 +147,68 @@ state 3
 
     SEMICOLON       reduce using rule 37 (epsilon -> .)
     RBRACE          reduce using rule 37 (epsilon -> .)
-    ID              shift and go to state 9
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
+    ID              shift and go to state 10
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
 
-    statement_list                 shift and go to state 4
-    statement                      shift and go to state 5
+    statement_decl_list            shift and go to state 4
+    statement_decl                 shift and go to state 5
     epsilon                        shift and go to state 6
-    decl                           shift and go to state 7
-    expression                     shift and go to state 8
-    identifier                     shift and go to state 13
+    statement                      shift and go to state 7
+    decl                           shift and go to state 8
+    expression                     shift and go to state 9
+    identifier                     shift and go to state 14
 
 state 4
 
-    (4) block_statement -> LBRACE statement_list . semicolon_opt RBRACE
-    (6) statement_list -> statement_list . SEMICOLON statement
-    (10) statement_list -> statement_list . SEMICOLON decl
+    (4) block_statement -> LBRACE statement_decl_list . semicolon_opt RBRACE
+    (6) statement_decl_list -> statement_decl_list . SEMICOLON statement_decl
     (2) semicolon_opt -> . epsilon
     (3) semicolon_opt -> . SEMICOLON
     (37) epsilon -> .
 
-    SEMICOLON       shift and go to state 17
+    SEMICOLON       shift and go to state 18
     RBRACE          reduce using rule 37 (epsilon -> .)
 
-    semicolon_opt                  shift and go to state 16
-    epsilon                        shift and go to state 18
+    semicolon_opt                  shift and go to state 17
+    epsilon                        shift and go to state 19
 
 state 5
 
-    (7) statement_list -> statement .
+    (7) statement_decl_list -> statement_decl .
 
-    SEMICOLON       reduce using rule 7 (statement_list -> statement .)
-    RBRACE          reduce using rule 7 (statement_list -> statement .)
+    SEMICOLON       reduce using rule 7 (statement_decl_list -> statement_decl .)
+    RBRACE          reduce using rule 7 (statement_decl_list -> statement_decl .)
 
 
 state 6
 
-    (8) statement_list -> epsilon .
+    (8) statement_decl_list -> epsilon .
 
-    SEMICOLON       reduce using rule 8 (statement_list -> epsilon .)
-    RBRACE          reduce using rule 8 (statement_list -> epsilon .)
+    SEMICOLON       reduce using rule 8 (statement_decl_list -> epsilon .)
+    RBRACE          reduce using rule 8 (statement_decl_list -> epsilon .)
 
 
 state 7
 
-    (9) statement_list -> decl .
+    (9) statement_decl -> statement .
 
-    SEMICOLON       reduce using rule 9 (statement_list -> decl .)
-    RBRACE          reduce using rule 9 (statement_list -> decl .)
+    SEMICOLON       reduce using rule 9 (statement_decl -> statement .)
+    RBRACE          reduce using rule 9 (statement_decl -> statement .)
 
 
 state 8
+
+    (10) statement_decl -> decl .
+
+    SEMICOLON       reduce using rule 10 (statement_decl -> decl .)
+    RBRACE          reduce using rule 10 (statement_decl -> decl .)
+
+
+state 9
 
     (5) statement -> expression .
     (19) expression -> expression . PLUS expression
@@ -219,28 +228,28 @@ state 8
 
     SEMICOLON       reduce using rule 5 (statement -> expression .)
     RBRACE          reduce using rule 5 (statement -> expression .)
-    PLUS            shift and go to state 19
-    MINUS           shift and go to state 20
-    EXPONENT        shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULUS         shift and go to state 24
-    LESS            shift and go to state 25
-    LESS_EQ         shift and go to state 26
-    GREATER         shift and go to state 27
-    GREATER_EQ      shift and go to state 28
-    IS_EQ           shift and go to state 29
-    NOT_EQ          shift and go to state 30
-    AND             shift and go to state 31
-    OR              shift and go to state 32
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    EXPONENT        shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    MODULUS         shift and go to state 25
+    LESS            shift and go to state 26
+    LESS_EQ         shift and go to state 27
+    GREATER         shift and go to state 28
+    GREATER_EQ      shift and go to state 29
+    IS_EQ           shift and go to state 30
+    NOT_EQ          shift and go to state 31
+    AND             shift and go to state 32
+    OR              shift and go to state 33
 
 
-state 9
+state 10
 
-    (11) decl -> ID . COLON type Initiation SEMICOLON
+    (11) decl -> ID . COLON type Initiation
     (14) identifier -> ID .
 
-    COLON           shift and go to state 33
+    COLON           shift and go to state 34
     EQUALS          reduce using rule 14 (identifier -> ID .)
     PLUS            reduce using rule 14 (identifier -> ID .)
     MINUS           reduce using rule 14 (identifier -> ID .)
@@ -260,7 +269,7 @@ state 9
     RBRACE          reduce using rule 14 (identifier -> ID .)
 
 
-state 10
+state 11
 
     (16) expression -> PLUS . expression
     (16) expression -> . PLUS expression
@@ -286,17 +295,17 @@ state 10
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
-    expression                     shift and go to state 34
-    identifier                     shift and go to state 13
+    expression                     shift and go to state 35
+    identifier                     shift and go to state 14
 
-state 11
+state 12
 
     (17) expression -> MINUS . expression
     (16) expression -> . PLUS expression
@@ -322,17 +331,17 @@ state 11
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
-    expression                     shift and go to state 36
-    identifier                     shift and go to state 13
+    expression                     shift and go to state 37
+    identifier                     shift and go to state 14
 
-state 12
+state 13
 
     (18) expression -> NOT . expression
     (16) expression -> . PLUS expression
@@ -358,22 +367,22 @@ state 12
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
-    expression                     shift and go to state 37
-    identifier                     shift and go to state 13
+    expression                     shift and go to state 38
+    identifier                     shift and go to state 14
 
-state 13
+state 14
 
     (33) expression -> identifier . EQUALS expression
     (36) expression -> identifier .
 
-    EQUALS          shift and go to state 38
+    EQUALS          shift and go to state 39
     PLUS            reduce using rule 36 (expression -> identifier .)
     MINUS           reduce using rule 36 (expression -> identifier .)
     EXPONENT        reduce using rule 36 (expression -> identifier .)
@@ -393,7 +402,7 @@ state 13
     RPAREN          reduce using rule 36 (expression -> identifier .)
 
 
-state 14
+state 15
 
     (34) expression -> LPAREN . expression RPAREN
     (16) expression -> . PLUS expression
@@ -419,17 +428,17 @@ state 14
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
-    expression                     shift and go to state 39
-    identifier                     shift and go to state 13
+    expression                     shift and go to state 40
+    identifier                     shift and go to state 14
 
-state 15
+state 16
 
     (35) expression -> INT_LITERAL .
 
@@ -452,20 +461,21 @@ state 15
     RPAREN          reduce using rule 35 (expression -> INT_LITERAL .)
 
 
-state 16
-
-    (4) block_statement -> LBRACE statement_list semicolon_opt . RBRACE
-
-    RBRACE          shift and go to state 40
-
-
 state 17
 
-    (6) statement_list -> statement_list SEMICOLON . statement
-    (10) statement_list -> statement_list SEMICOLON . decl
+    (4) block_statement -> LBRACE statement_decl_list semicolon_opt . RBRACE
+
+    RBRACE          shift and go to state 41
+
+
+state 18
+
+    (6) statement_decl_list -> statement_decl_list SEMICOLON . statement_decl
     (3) semicolon_opt -> SEMICOLON .
+    (9) statement_decl -> . statement
+    (10) statement_decl -> . decl
     (5) statement -> . expression
-    (11) decl -> . ID COLON type Initiation SEMICOLON
+    (11) decl -> . ID COLON type Initiation
     (16) expression -> . PLUS expression
     (17) expression -> . MINUS expression
     (18) expression -> . NOT expression
@@ -490,26 +500,27 @@ state 17
     (14) identifier -> . ID
 
     RBRACE          reduce using rule 3 (semicolon_opt -> SEMICOLON .)
-    ID              shift and go to state 9
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
+    ID              shift and go to state 10
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
 
-    statement                      shift and go to state 41
-    decl                           shift and go to state 42
-    expression                     shift and go to state 8
-    identifier                     shift and go to state 13
+    statement_decl                 shift and go to state 42
+    statement                      shift and go to state 7
+    decl                           shift and go to state 8
+    expression                     shift and go to state 9
+    identifier                     shift and go to state 14
 
-state 18
+state 19
 
     (2) semicolon_opt -> epsilon .
 
     RBRACE          reduce using rule 2 (semicolon_opt -> epsilon .)
 
 
-state 19
+state 20
 
     (19) expression -> expression PLUS . expression
     (16) expression -> . PLUS expression
@@ -535,17 +546,17 @@ state 19
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
     expression                     shift and go to state 43
-    identifier                     shift and go to state 13
+    identifier                     shift and go to state 14
 
-state 20
+state 21
 
     (20) expression -> expression MINUS . expression
     (16) expression -> . PLUS expression
@@ -571,17 +582,17 @@ state 20
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
     expression                     shift and go to state 44
-    identifier                     shift and go to state 13
+    identifier                     shift and go to state 14
 
-state 21
+state 22
 
     (21) expression -> expression EXPONENT . expression
     (16) expression -> . PLUS expression
@@ -607,17 +618,17 @@ state 21
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
     expression                     shift and go to state 45
-    identifier                     shift and go to state 13
+    identifier                     shift and go to state 14
 
-state 22
+state 23
 
     (22) expression -> expression TIMES . expression
     (16) expression -> . PLUS expression
@@ -643,17 +654,17 @@ state 22
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
     expression                     shift and go to state 46
-    identifier                     shift and go to state 13
+    identifier                     shift and go to state 14
 
-state 23
+state 24
 
     (23) expression -> expression DIVIDE . expression
     (16) expression -> . PLUS expression
@@ -679,17 +690,17 @@ state 23
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
     expression                     shift and go to state 47
-    identifier                     shift and go to state 13
+    identifier                     shift and go to state 14
 
-state 24
+state 25
 
     (24) expression -> expression MODULUS . expression
     (16) expression -> . PLUS expression
@@ -715,17 +726,17 @@ state 24
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
     expression                     shift and go to state 48
-    identifier                     shift and go to state 13
+    identifier                     shift and go to state 14
 
-state 25
+state 26
 
     (25) expression -> expression LESS . expression
     (16) expression -> . PLUS expression
@@ -751,17 +762,17 @@ state 25
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
     expression                     shift and go to state 49
-    identifier                     shift and go to state 13
+    identifier                     shift and go to state 14
 
-state 26
+state 27
 
     (26) expression -> expression LESS_EQ . expression
     (16) expression -> . PLUS expression
@@ -787,17 +798,17 @@ state 26
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
     expression                     shift and go to state 50
-    identifier                     shift and go to state 13
+    identifier                     shift and go to state 14
 
-state 27
+state 28
 
     (27) expression -> expression GREATER . expression
     (16) expression -> . PLUS expression
@@ -823,17 +834,17 @@ state 27
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
     expression                     shift and go to state 51
-    identifier                     shift and go to state 13
+    identifier                     shift and go to state 14
 
-state 28
+state 29
 
     (28) expression -> expression GREATER_EQ . expression
     (16) expression -> . PLUS expression
@@ -859,17 +870,17 @@ state 28
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
     expression                     shift and go to state 52
-    identifier                     shift and go to state 13
+    identifier                     shift and go to state 14
 
-state 29
+state 30
 
     (29) expression -> expression IS_EQ . expression
     (16) expression -> . PLUS expression
@@ -895,17 +906,17 @@ state 29
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
     expression                     shift and go to state 53
-    identifier                     shift and go to state 13
+    identifier                     shift and go to state 14
 
-state 30
+state 31
 
     (30) expression -> expression NOT_EQ . expression
     (16) expression -> . PLUS expression
@@ -931,17 +942,17 @@ state 30
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
     expression                     shift and go to state 54
-    identifier                     shift and go to state 13
+    identifier                     shift and go to state 14
 
-state 31
+state 32
 
     (31) expression -> expression AND . expression
     (16) expression -> . PLUS expression
@@ -967,17 +978,17 @@ state 31
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
     expression                     shift and go to state 55
-    identifier                     shift and go to state 13
+    identifier                     shift and go to state 14
 
-state 32
+state 33
 
     (32) expression -> expression OR . expression
     (16) expression -> . PLUS expression
@@ -1003,26 +1014,26 @@ state 32
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
     expression                     shift and go to state 56
-    identifier                     shift and go to state 13
+    identifier                     shift and go to state 14
 
-state 33
+state 34
 
-    (11) decl -> ID COLON . type Initiation SEMICOLON
+    (11) decl -> ID COLON . type Initiation
     (15) type -> . INT
 
     INT             shift and go to state 58
 
     type                           shift and go to state 57
 
-state 34
+state 35
 
     (16) expression -> PLUS expression .
     (19) expression -> expression . PLUS expression
@@ -1058,23 +1069,23 @@ state 34
     RBRACE          reduce using rule 16 (expression -> PLUS expression .)
     RPAREN          reduce using rule 16 (expression -> PLUS expression .)
 
-  ! PLUS            [ shift and go to state 19 ]
-  ! MINUS           [ shift and go to state 20 ]
-  ! EXPONENT        [ shift and go to state 21 ]
-  ! TIMES           [ shift and go to state 22 ]
-  ! DIVIDE          [ shift and go to state 23 ]
-  ! MODULUS         [ shift and go to state 24 ]
-  ! LESS            [ shift and go to state 25 ]
-  ! LESS_EQ         [ shift and go to state 26 ]
-  ! GREATER         [ shift and go to state 27 ]
-  ! GREATER_EQ      [ shift and go to state 28 ]
-  ! IS_EQ           [ shift and go to state 29 ]
-  ! NOT_EQ          [ shift and go to state 30 ]
-  ! AND             [ shift and go to state 31 ]
-  ! OR              [ shift and go to state 32 ]
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 21 ]
+  ! EXPONENT        [ shift and go to state 22 ]
+  ! TIMES           [ shift and go to state 23 ]
+  ! DIVIDE          [ shift and go to state 24 ]
+  ! MODULUS         [ shift and go to state 25 ]
+  ! LESS            [ shift and go to state 26 ]
+  ! LESS_EQ         [ shift and go to state 27 ]
+  ! GREATER         [ shift and go to state 28 ]
+  ! GREATER_EQ      [ shift and go to state 29 ]
+  ! IS_EQ           [ shift and go to state 30 ]
+  ! NOT_EQ          [ shift and go to state 31 ]
+  ! AND             [ shift and go to state 32 ]
+  ! OR              [ shift and go to state 33 ]
 
 
-state 35
+state 36
 
     (14) identifier -> ID .
 
@@ -1098,7 +1109,7 @@ state 35
     RPAREN          reduce using rule 14 (identifier -> ID .)
 
 
-state 36
+state 37
 
     (17) expression -> MINUS expression .
     (19) expression -> expression . PLUS expression
@@ -1134,23 +1145,23 @@ state 36
     RBRACE          reduce using rule 17 (expression -> MINUS expression .)
     RPAREN          reduce using rule 17 (expression -> MINUS expression .)
 
-  ! PLUS            [ shift and go to state 19 ]
-  ! MINUS           [ shift and go to state 20 ]
-  ! EXPONENT        [ shift and go to state 21 ]
-  ! TIMES           [ shift and go to state 22 ]
-  ! DIVIDE          [ shift and go to state 23 ]
-  ! MODULUS         [ shift and go to state 24 ]
-  ! LESS            [ shift and go to state 25 ]
-  ! LESS_EQ         [ shift and go to state 26 ]
-  ! GREATER         [ shift and go to state 27 ]
-  ! GREATER_EQ      [ shift and go to state 28 ]
-  ! IS_EQ           [ shift and go to state 29 ]
-  ! NOT_EQ          [ shift and go to state 30 ]
-  ! AND             [ shift and go to state 31 ]
-  ! OR              [ shift and go to state 32 ]
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 21 ]
+  ! EXPONENT        [ shift and go to state 22 ]
+  ! TIMES           [ shift and go to state 23 ]
+  ! DIVIDE          [ shift and go to state 24 ]
+  ! MODULUS         [ shift and go to state 25 ]
+  ! LESS            [ shift and go to state 26 ]
+  ! LESS_EQ         [ shift and go to state 27 ]
+  ! GREATER         [ shift and go to state 28 ]
+  ! GREATER_EQ      [ shift and go to state 29 ]
+  ! IS_EQ           [ shift and go to state 30 ]
+  ! NOT_EQ          [ shift and go to state 31 ]
+  ! AND             [ shift and go to state 32 ]
+  ! OR              [ shift and go to state 33 ]
 
 
-state 37
+state 38
 
     (18) expression -> NOT expression .
     (19) expression -> expression . PLUS expression
@@ -1186,23 +1197,23 @@ state 37
     RBRACE          reduce using rule 18 (expression -> NOT expression .)
     RPAREN          reduce using rule 18 (expression -> NOT expression .)
 
-  ! PLUS            [ shift and go to state 19 ]
-  ! MINUS           [ shift and go to state 20 ]
-  ! EXPONENT        [ shift and go to state 21 ]
-  ! TIMES           [ shift and go to state 22 ]
-  ! DIVIDE          [ shift and go to state 23 ]
-  ! MODULUS         [ shift and go to state 24 ]
-  ! LESS            [ shift and go to state 25 ]
-  ! LESS_EQ         [ shift and go to state 26 ]
-  ! GREATER         [ shift and go to state 27 ]
-  ! GREATER_EQ      [ shift and go to state 28 ]
-  ! IS_EQ           [ shift and go to state 29 ]
-  ! NOT_EQ          [ shift and go to state 30 ]
-  ! AND             [ shift and go to state 31 ]
-  ! OR              [ shift and go to state 32 ]
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 21 ]
+  ! EXPONENT        [ shift and go to state 22 ]
+  ! TIMES           [ shift and go to state 23 ]
+  ! DIVIDE          [ shift and go to state 24 ]
+  ! MODULUS         [ shift and go to state 25 ]
+  ! LESS            [ shift and go to state 26 ]
+  ! LESS_EQ         [ shift and go to state 27 ]
+  ! GREATER         [ shift and go to state 28 ]
+  ! GREATER_EQ      [ shift and go to state 29 ]
+  ! IS_EQ           [ shift and go to state 30 ]
+  ! NOT_EQ          [ shift and go to state 31 ]
+  ! AND             [ shift and go to state 32 ]
+  ! OR              [ shift and go to state 33 ]
 
 
-state 38
+state 39
 
     (33) expression -> identifier EQUALS . expression
     (16) expression -> . PLUS expression
@@ -1228,17 +1239,17 @@ state 38
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
-    identifier                     shift and go to state 13
+    identifier                     shift and go to state 14
     expression                     shift and go to state 59
 
-state 39
+state 40
 
     (34) expression -> LPAREN expression . RPAREN
     (19) expression -> expression . PLUS expression
@@ -1257,43 +1268,35 @@ state 39
     (32) expression -> expression . OR expression
 
     RPAREN          shift and go to state 60
-    PLUS            shift and go to state 19
-    MINUS           shift and go to state 20
-    EXPONENT        shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULUS         shift and go to state 24
-    LESS            shift and go to state 25
-    LESS_EQ         shift and go to state 26
-    GREATER         shift and go to state 27
-    GREATER_EQ      shift and go to state 28
-    IS_EQ           shift and go to state 29
-    NOT_EQ          shift and go to state 30
-    AND             shift and go to state 31
-    OR              shift and go to state 32
-
-
-state 40
-
-    (4) block_statement -> LBRACE statement_list semicolon_opt RBRACE .
-
-    $end            reduce using rule 4 (block_statement -> LBRACE statement_list semicolon_opt RBRACE .)
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    EXPONENT        shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    MODULUS         shift and go to state 25
+    LESS            shift and go to state 26
+    LESS_EQ         shift and go to state 27
+    GREATER         shift and go to state 28
+    GREATER_EQ      shift and go to state 29
+    IS_EQ           shift and go to state 30
+    NOT_EQ          shift and go to state 31
+    AND             shift and go to state 32
+    OR              shift and go to state 33
 
 
 state 41
 
-    (6) statement_list -> statement_list SEMICOLON statement .
+    (4) block_statement -> LBRACE statement_decl_list semicolon_opt RBRACE .
 
-    SEMICOLON       reduce using rule 6 (statement_list -> statement_list SEMICOLON statement .)
-    RBRACE          reduce using rule 6 (statement_list -> statement_list SEMICOLON statement .)
+    $end            reduce using rule 4 (block_statement -> LBRACE statement_decl_list semicolon_opt RBRACE .)
 
 
 state 42
 
-    (10) statement_list -> statement_list SEMICOLON decl .
+    (6) statement_decl_list -> statement_decl_list SEMICOLON statement_decl .
 
-    SEMICOLON       reduce using rule 10 (statement_list -> statement_list SEMICOLON decl .)
-    RBRACE          reduce using rule 10 (statement_list -> statement_list SEMICOLON decl .)
+    SEMICOLON       reduce using rule 6 (statement_decl_list -> statement_decl_list SEMICOLON statement_decl .)
+    RBRACE          reduce using rule 6 (statement_decl_list -> statement_decl_list SEMICOLON statement_decl .)
 
 
 state 43
@@ -1327,25 +1330,25 @@ state 43
     SEMICOLON       reduce using rule 19 (expression -> expression PLUS expression .)
     RBRACE          reduce using rule 19 (expression -> expression PLUS expression .)
     RPAREN          reduce using rule 19 (expression -> expression PLUS expression .)
-    EXPONENT        shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULUS         shift and go to state 24
+    EXPONENT        shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    MODULUS         shift and go to state 25
 
   ! EXPONENT        [ reduce using rule 19 (expression -> expression PLUS expression .) ]
   ! TIMES           [ reduce using rule 19 (expression -> expression PLUS expression .) ]
   ! DIVIDE          [ reduce using rule 19 (expression -> expression PLUS expression .) ]
   ! MODULUS         [ reduce using rule 19 (expression -> expression PLUS expression .) ]
-  ! PLUS            [ shift and go to state 19 ]
-  ! MINUS           [ shift and go to state 20 ]
-  ! LESS            [ shift and go to state 25 ]
-  ! LESS_EQ         [ shift and go to state 26 ]
-  ! GREATER         [ shift and go to state 27 ]
-  ! GREATER_EQ      [ shift and go to state 28 ]
-  ! IS_EQ           [ shift and go to state 29 ]
-  ! NOT_EQ          [ shift and go to state 30 ]
-  ! AND             [ shift and go to state 31 ]
-  ! OR              [ shift and go to state 32 ]
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 21 ]
+  ! LESS            [ shift and go to state 26 ]
+  ! LESS_EQ         [ shift and go to state 27 ]
+  ! GREATER         [ shift and go to state 28 ]
+  ! GREATER_EQ      [ shift and go to state 29 ]
+  ! IS_EQ           [ shift and go to state 30 ]
+  ! NOT_EQ          [ shift and go to state 31 ]
+  ! AND             [ shift and go to state 32 ]
+  ! OR              [ shift and go to state 33 ]
 
 
 state 44
@@ -1379,25 +1382,25 @@ state 44
     SEMICOLON       reduce using rule 20 (expression -> expression MINUS expression .)
     RBRACE          reduce using rule 20 (expression -> expression MINUS expression .)
     RPAREN          reduce using rule 20 (expression -> expression MINUS expression .)
-    EXPONENT        shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULUS         shift and go to state 24
+    EXPONENT        shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    MODULUS         shift and go to state 25
 
   ! EXPONENT        [ reduce using rule 20 (expression -> expression MINUS expression .) ]
   ! TIMES           [ reduce using rule 20 (expression -> expression MINUS expression .) ]
   ! DIVIDE          [ reduce using rule 20 (expression -> expression MINUS expression .) ]
   ! MODULUS         [ reduce using rule 20 (expression -> expression MINUS expression .) ]
-  ! PLUS            [ shift and go to state 19 ]
-  ! MINUS           [ shift and go to state 20 ]
-  ! LESS            [ shift and go to state 25 ]
-  ! LESS_EQ         [ shift and go to state 26 ]
-  ! GREATER         [ shift and go to state 27 ]
-  ! GREATER_EQ      [ shift and go to state 28 ]
-  ! IS_EQ           [ shift and go to state 29 ]
-  ! NOT_EQ          [ shift and go to state 30 ]
-  ! AND             [ shift and go to state 31 ]
-  ! OR              [ shift and go to state 32 ]
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 21 ]
+  ! LESS            [ shift and go to state 26 ]
+  ! LESS_EQ         [ shift and go to state 27 ]
+  ! GREATER         [ shift and go to state 28 ]
+  ! GREATER_EQ      [ shift and go to state 29 ]
+  ! IS_EQ           [ shift and go to state 30 ]
+  ! NOT_EQ          [ shift and go to state 31 ]
+  ! AND             [ shift and go to state 32 ]
+  ! OR              [ shift and go to state 33 ]
 
 
 state 45
@@ -1434,22 +1437,22 @@ state 45
     SEMICOLON       reduce using rule 21 (expression -> expression EXPONENT expression .)
     RBRACE          reduce using rule 21 (expression -> expression EXPONENT expression .)
     RPAREN          reduce using rule 21 (expression -> expression EXPONENT expression .)
-    EXPONENT        shift and go to state 21
+    EXPONENT        shift and go to state 22
 
   ! EXPONENT        [ reduce using rule 21 (expression -> expression EXPONENT expression .) ]
-  ! PLUS            [ shift and go to state 19 ]
-  ! MINUS           [ shift and go to state 20 ]
-  ! TIMES           [ shift and go to state 22 ]
-  ! DIVIDE          [ shift and go to state 23 ]
-  ! MODULUS         [ shift and go to state 24 ]
-  ! LESS            [ shift and go to state 25 ]
-  ! LESS_EQ         [ shift and go to state 26 ]
-  ! GREATER         [ shift and go to state 27 ]
-  ! GREATER_EQ      [ shift and go to state 28 ]
-  ! IS_EQ           [ shift and go to state 29 ]
-  ! NOT_EQ          [ shift and go to state 30 ]
-  ! AND             [ shift and go to state 31 ]
-  ! OR              [ shift and go to state 32 ]
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 21 ]
+  ! TIMES           [ shift and go to state 23 ]
+  ! DIVIDE          [ shift and go to state 24 ]
+  ! MODULUS         [ shift and go to state 25 ]
+  ! LESS            [ shift and go to state 26 ]
+  ! LESS_EQ         [ shift and go to state 27 ]
+  ! GREATER         [ shift and go to state 28 ]
+  ! GREATER_EQ      [ shift and go to state 29 ]
+  ! IS_EQ           [ shift and go to state 30 ]
+  ! NOT_EQ          [ shift and go to state 31 ]
+  ! AND             [ shift and go to state 32 ]
+  ! OR              [ shift and go to state 33 ]
 
 
 state 46
@@ -1486,22 +1489,22 @@ state 46
     SEMICOLON       reduce using rule 22 (expression -> expression TIMES expression .)
     RBRACE          reduce using rule 22 (expression -> expression TIMES expression .)
     RPAREN          reduce using rule 22 (expression -> expression TIMES expression .)
-    EXPONENT        shift and go to state 21
+    EXPONENT        shift and go to state 22
 
   ! EXPONENT        [ reduce using rule 22 (expression -> expression TIMES expression .) ]
-  ! PLUS            [ shift and go to state 19 ]
-  ! MINUS           [ shift and go to state 20 ]
-  ! TIMES           [ shift and go to state 22 ]
-  ! DIVIDE          [ shift and go to state 23 ]
-  ! MODULUS         [ shift and go to state 24 ]
-  ! LESS            [ shift and go to state 25 ]
-  ! LESS_EQ         [ shift and go to state 26 ]
-  ! GREATER         [ shift and go to state 27 ]
-  ! GREATER_EQ      [ shift and go to state 28 ]
-  ! IS_EQ           [ shift and go to state 29 ]
-  ! NOT_EQ          [ shift and go to state 30 ]
-  ! AND             [ shift and go to state 31 ]
-  ! OR              [ shift and go to state 32 ]
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 21 ]
+  ! TIMES           [ shift and go to state 23 ]
+  ! DIVIDE          [ shift and go to state 24 ]
+  ! MODULUS         [ shift and go to state 25 ]
+  ! LESS            [ shift and go to state 26 ]
+  ! LESS_EQ         [ shift and go to state 27 ]
+  ! GREATER         [ shift and go to state 28 ]
+  ! GREATER_EQ      [ shift and go to state 29 ]
+  ! IS_EQ           [ shift and go to state 30 ]
+  ! NOT_EQ          [ shift and go to state 31 ]
+  ! AND             [ shift and go to state 32 ]
+  ! OR              [ shift and go to state 33 ]
 
 
 state 47
@@ -1538,22 +1541,22 @@ state 47
     SEMICOLON       reduce using rule 23 (expression -> expression DIVIDE expression .)
     RBRACE          reduce using rule 23 (expression -> expression DIVIDE expression .)
     RPAREN          reduce using rule 23 (expression -> expression DIVIDE expression .)
-    EXPONENT        shift and go to state 21
+    EXPONENT        shift and go to state 22
 
   ! EXPONENT        [ reduce using rule 23 (expression -> expression DIVIDE expression .) ]
-  ! PLUS            [ shift and go to state 19 ]
-  ! MINUS           [ shift and go to state 20 ]
-  ! TIMES           [ shift and go to state 22 ]
-  ! DIVIDE          [ shift and go to state 23 ]
-  ! MODULUS         [ shift and go to state 24 ]
-  ! LESS            [ shift and go to state 25 ]
-  ! LESS_EQ         [ shift and go to state 26 ]
-  ! GREATER         [ shift and go to state 27 ]
-  ! GREATER_EQ      [ shift and go to state 28 ]
-  ! IS_EQ           [ shift and go to state 29 ]
-  ! NOT_EQ          [ shift and go to state 30 ]
-  ! AND             [ shift and go to state 31 ]
-  ! OR              [ shift and go to state 32 ]
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 21 ]
+  ! TIMES           [ shift and go to state 23 ]
+  ! DIVIDE          [ shift and go to state 24 ]
+  ! MODULUS         [ shift and go to state 25 ]
+  ! LESS            [ shift and go to state 26 ]
+  ! LESS_EQ         [ shift and go to state 27 ]
+  ! GREATER         [ shift and go to state 28 ]
+  ! GREATER_EQ      [ shift and go to state 29 ]
+  ! IS_EQ           [ shift and go to state 30 ]
+  ! NOT_EQ          [ shift and go to state 31 ]
+  ! AND             [ shift and go to state 32 ]
+  ! OR              [ shift and go to state 33 ]
 
 
 state 48
@@ -1590,22 +1593,22 @@ state 48
     SEMICOLON       reduce using rule 24 (expression -> expression MODULUS expression .)
     RBRACE          reduce using rule 24 (expression -> expression MODULUS expression .)
     RPAREN          reduce using rule 24 (expression -> expression MODULUS expression .)
-    EXPONENT        shift and go to state 21
+    EXPONENT        shift and go to state 22
 
   ! EXPONENT        [ reduce using rule 24 (expression -> expression MODULUS expression .) ]
-  ! PLUS            [ shift and go to state 19 ]
-  ! MINUS           [ shift and go to state 20 ]
-  ! TIMES           [ shift and go to state 22 ]
-  ! DIVIDE          [ shift and go to state 23 ]
-  ! MODULUS         [ shift and go to state 24 ]
-  ! LESS            [ shift and go to state 25 ]
-  ! LESS_EQ         [ shift and go to state 26 ]
-  ! GREATER         [ shift and go to state 27 ]
-  ! GREATER_EQ      [ shift and go to state 28 ]
-  ! IS_EQ           [ shift and go to state 29 ]
-  ! NOT_EQ          [ shift and go to state 30 ]
-  ! AND             [ shift and go to state 31 ]
-  ! OR              [ shift and go to state 32 ]
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 21 ]
+  ! TIMES           [ shift and go to state 23 ]
+  ! DIVIDE          [ shift and go to state 24 ]
+  ! MODULUS         [ shift and go to state 25 ]
+  ! LESS            [ shift and go to state 26 ]
+  ! LESS_EQ         [ shift and go to state 27 ]
+  ! GREATER         [ shift and go to state 28 ]
+  ! GREATER_EQ      [ shift and go to state 29 ]
+  ! IS_EQ           [ shift and go to state 30 ]
+  ! NOT_EQ          [ shift and go to state 31 ]
+  ! AND             [ shift and go to state 32 ]
+  ! OR              [ shift and go to state 33 ]
 
 
 state 49
@@ -1637,12 +1640,12 @@ state 49
     SEMICOLON       reduce using rule 25 (expression -> expression LESS expression .)
     RBRACE          reduce using rule 25 (expression -> expression LESS expression .)
     RPAREN          reduce using rule 25 (expression -> expression LESS expression .)
-    PLUS            shift and go to state 19
-    MINUS           shift and go to state 20
-    EXPONENT        shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULUS         shift and go to state 24
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    EXPONENT        shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    MODULUS         shift and go to state 25
 
   ! PLUS            [ reduce using rule 25 (expression -> expression LESS expression .) ]
   ! MINUS           [ reduce using rule 25 (expression -> expression LESS expression .) ]
@@ -1650,14 +1653,14 @@ state 49
   ! TIMES           [ reduce using rule 25 (expression -> expression LESS expression .) ]
   ! DIVIDE          [ reduce using rule 25 (expression -> expression LESS expression .) ]
   ! MODULUS         [ reduce using rule 25 (expression -> expression LESS expression .) ]
-  ! LESS            [ shift and go to state 25 ]
-  ! LESS_EQ         [ shift and go to state 26 ]
-  ! GREATER         [ shift and go to state 27 ]
-  ! GREATER_EQ      [ shift and go to state 28 ]
-  ! IS_EQ           [ shift and go to state 29 ]
-  ! NOT_EQ          [ shift and go to state 30 ]
-  ! AND             [ shift and go to state 31 ]
-  ! OR              [ shift and go to state 32 ]
+  ! LESS            [ shift and go to state 26 ]
+  ! LESS_EQ         [ shift and go to state 27 ]
+  ! GREATER         [ shift and go to state 28 ]
+  ! GREATER_EQ      [ shift and go to state 29 ]
+  ! IS_EQ           [ shift and go to state 30 ]
+  ! NOT_EQ          [ shift and go to state 31 ]
+  ! AND             [ shift and go to state 32 ]
+  ! OR              [ shift and go to state 33 ]
 
 
 state 50
@@ -1689,12 +1692,12 @@ state 50
     SEMICOLON       reduce using rule 26 (expression -> expression LESS_EQ expression .)
     RBRACE          reduce using rule 26 (expression -> expression LESS_EQ expression .)
     RPAREN          reduce using rule 26 (expression -> expression LESS_EQ expression .)
-    PLUS            shift and go to state 19
-    MINUS           shift and go to state 20
-    EXPONENT        shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULUS         shift and go to state 24
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    EXPONENT        shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    MODULUS         shift and go to state 25
 
   ! PLUS            [ reduce using rule 26 (expression -> expression LESS_EQ expression .) ]
   ! MINUS           [ reduce using rule 26 (expression -> expression LESS_EQ expression .) ]
@@ -1702,14 +1705,14 @@ state 50
   ! TIMES           [ reduce using rule 26 (expression -> expression LESS_EQ expression .) ]
   ! DIVIDE          [ reduce using rule 26 (expression -> expression LESS_EQ expression .) ]
   ! MODULUS         [ reduce using rule 26 (expression -> expression LESS_EQ expression .) ]
-  ! LESS            [ shift and go to state 25 ]
-  ! LESS_EQ         [ shift and go to state 26 ]
-  ! GREATER         [ shift and go to state 27 ]
-  ! GREATER_EQ      [ shift and go to state 28 ]
-  ! IS_EQ           [ shift and go to state 29 ]
-  ! NOT_EQ          [ shift and go to state 30 ]
-  ! AND             [ shift and go to state 31 ]
-  ! OR              [ shift and go to state 32 ]
+  ! LESS            [ shift and go to state 26 ]
+  ! LESS_EQ         [ shift and go to state 27 ]
+  ! GREATER         [ shift and go to state 28 ]
+  ! GREATER_EQ      [ shift and go to state 29 ]
+  ! IS_EQ           [ shift and go to state 30 ]
+  ! NOT_EQ          [ shift and go to state 31 ]
+  ! AND             [ shift and go to state 32 ]
+  ! OR              [ shift and go to state 33 ]
 
 
 state 51
@@ -1741,12 +1744,12 @@ state 51
     SEMICOLON       reduce using rule 27 (expression -> expression GREATER expression .)
     RBRACE          reduce using rule 27 (expression -> expression GREATER expression .)
     RPAREN          reduce using rule 27 (expression -> expression GREATER expression .)
-    PLUS            shift and go to state 19
-    MINUS           shift and go to state 20
-    EXPONENT        shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULUS         shift and go to state 24
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    EXPONENT        shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    MODULUS         shift and go to state 25
 
   ! PLUS            [ reduce using rule 27 (expression -> expression GREATER expression .) ]
   ! MINUS           [ reduce using rule 27 (expression -> expression GREATER expression .) ]
@@ -1754,14 +1757,14 @@ state 51
   ! TIMES           [ reduce using rule 27 (expression -> expression GREATER expression .) ]
   ! DIVIDE          [ reduce using rule 27 (expression -> expression GREATER expression .) ]
   ! MODULUS         [ reduce using rule 27 (expression -> expression GREATER expression .) ]
-  ! LESS            [ shift and go to state 25 ]
-  ! LESS_EQ         [ shift and go to state 26 ]
-  ! GREATER         [ shift and go to state 27 ]
-  ! GREATER_EQ      [ shift and go to state 28 ]
-  ! IS_EQ           [ shift and go to state 29 ]
-  ! NOT_EQ          [ shift and go to state 30 ]
-  ! AND             [ shift and go to state 31 ]
-  ! OR              [ shift and go to state 32 ]
+  ! LESS            [ shift and go to state 26 ]
+  ! LESS_EQ         [ shift and go to state 27 ]
+  ! GREATER         [ shift and go to state 28 ]
+  ! GREATER_EQ      [ shift and go to state 29 ]
+  ! IS_EQ           [ shift and go to state 30 ]
+  ! NOT_EQ          [ shift and go to state 31 ]
+  ! AND             [ shift and go to state 32 ]
+  ! OR              [ shift and go to state 33 ]
 
 
 state 52
@@ -1793,12 +1796,12 @@ state 52
     SEMICOLON       reduce using rule 28 (expression -> expression GREATER_EQ expression .)
     RBRACE          reduce using rule 28 (expression -> expression GREATER_EQ expression .)
     RPAREN          reduce using rule 28 (expression -> expression GREATER_EQ expression .)
-    PLUS            shift and go to state 19
-    MINUS           shift and go to state 20
-    EXPONENT        shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULUS         shift and go to state 24
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    EXPONENT        shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    MODULUS         shift and go to state 25
 
   ! PLUS            [ reduce using rule 28 (expression -> expression GREATER_EQ expression .) ]
   ! MINUS           [ reduce using rule 28 (expression -> expression GREATER_EQ expression .) ]
@@ -1806,14 +1809,14 @@ state 52
   ! TIMES           [ reduce using rule 28 (expression -> expression GREATER_EQ expression .) ]
   ! DIVIDE          [ reduce using rule 28 (expression -> expression GREATER_EQ expression .) ]
   ! MODULUS         [ reduce using rule 28 (expression -> expression GREATER_EQ expression .) ]
-  ! LESS            [ shift and go to state 25 ]
-  ! LESS_EQ         [ shift and go to state 26 ]
-  ! GREATER         [ shift and go to state 27 ]
-  ! GREATER_EQ      [ shift and go to state 28 ]
-  ! IS_EQ           [ shift and go to state 29 ]
-  ! NOT_EQ          [ shift and go to state 30 ]
-  ! AND             [ shift and go to state 31 ]
-  ! OR              [ shift and go to state 32 ]
+  ! LESS            [ shift and go to state 26 ]
+  ! LESS_EQ         [ shift and go to state 27 ]
+  ! GREATER         [ shift and go to state 28 ]
+  ! GREATER_EQ      [ shift and go to state 29 ]
+  ! IS_EQ           [ shift and go to state 30 ]
+  ! NOT_EQ          [ shift and go to state 31 ]
+  ! AND             [ shift and go to state 32 ]
+  ! OR              [ shift and go to state 33 ]
 
 
 state 53
@@ -1841,16 +1844,16 @@ state 53
     SEMICOLON       reduce using rule 29 (expression -> expression IS_EQ expression .)
     RBRACE          reduce using rule 29 (expression -> expression IS_EQ expression .)
     RPAREN          reduce using rule 29 (expression -> expression IS_EQ expression .)
-    PLUS            shift and go to state 19
-    MINUS           shift and go to state 20
-    EXPONENT        shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULUS         shift and go to state 24
-    LESS            shift and go to state 25
-    LESS_EQ         shift and go to state 26
-    GREATER         shift and go to state 27
-    GREATER_EQ      shift and go to state 28
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    EXPONENT        shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    MODULUS         shift and go to state 25
+    LESS            shift and go to state 26
+    LESS_EQ         shift and go to state 27
+    GREATER         shift and go to state 28
+    GREATER_EQ      shift and go to state 29
 
   ! PLUS            [ reduce using rule 29 (expression -> expression IS_EQ expression .) ]
   ! MINUS           [ reduce using rule 29 (expression -> expression IS_EQ expression .) ]
@@ -1862,10 +1865,10 @@ state 53
   ! LESS_EQ         [ reduce using rule 29 (expression -> expression IS_EQ expression .) ]
   ! GREATER         [ reduce using rule 29 (expression -> expression IS_EQ expression .) ]
   ! GREATER_EQ      [ reduce using rule 29 (expression -> expression IS_EQ expression .) ]
-  ! IS_EQ           [ shift and go to state 29 ]
-  ! NOT_EQ          [ shift and go to state 30 ]
-  ! AND             [ shift and go to state 31 ]
-  ! OR              [ shift and go to state 32 ]
+  ! IS_EQ           [ shift and go to state 30 ]
+  ! NOT_EQ          [ shift and go to state 31 ]
+  ! AND             [ shift and go to state 32 ]
+  ! OR              [ shift and go to state 33 ]
 
 
 state 54
@@ -1893,16 +1896,16 @@ state 54
     SEMICOLON       reduce using rule 30 (expression -> expression NOT_EQ expression .)
     RBRACE          reduce using rule 30 (expression -> expression NOT_EQ expression .)
     RPAREN          reduce using rule 30 (expression -> expression NOT_EQ expression .)
-    PLUS            shift and go to state 19
-    MINUS           shift and go to state 20
-    EXPONENT        shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULUS         shift and go to state 24
-    LESS            shift and go to state 25
-    LESS_EQ         shift and go to state 26
-    GREATER         shift and go to state 27
-    GREATER_EQ      shift and go to state 28
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    EXPONENT        shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    MODULUS         shift and go to state 25
+    LESS            shift and go to state 26
+    LESS_EQ         shift and go to state 27
+    GREATER         shift and go to state 28
+    GREATER_EQ      shift and go to state 29
 
   ! PLUS            [ reduce using rule 30 (expression -> expression NOT_EQ expression .) ]
   ! MINUS           [ reduce using rule 30 (expression -> expression NOT_EQ expression .) ]
@@ -1914,10 +1917,10 @@ state 54
   ! LESS_EQ         [ reduce using rule 30 (expression -> expression NOT_EQ expression .) ]
   ! GREATER         [ reduce using rule 30 (expression -> expression NOT_EQ expression .) ]
   ! GREATER_EQ      [ reduce using rule 30 (expression -> expression NOT_EQ expression .) ]
-  ! IS_EQ           [ shift and go to state 29 ]
-  ! NOT_EQ          [ shift and go to state 30 ]
-  ! AND             [ shift and go to state 31 ]
-  ! OR              [ shift and go to state 32 ]
+  ! IS_EQ           [ shift and go to state 30 ]
+  ! NOT_EQ          [ shift and go to state 31 ]
+  ! AND             [ shift and go to state 32 ]
+  ! OR              [ shift and go to state 33 ]
 
 
 state 55
@@ -1943,18 +1946,18 @@ state 55
     SEMICOLON       reduce using rule 31 (expression -> expression AND expression .)
     RBRACE          reduce using rule 31 (expression -> expression AND expression .)
     RPAREN          reduce using rule 31 (expression -> expression AND expression .)
-    PLUS            shift and go to state 19
-    MINUS           shift and go to state 20
-    EXPONENT        shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULUS         shift and go to state 24
-    LESS            shift and go to state 25
-    LESS_EQ         shift and go to state 26
-    GREATER         shift and go to state 27
-    GREATER_EQ      shift and go to state 28
-    IS_EQ           shift and go to state 29
-    NOT_EQ          shift and go to state 30
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    EXPONENT        shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    MODULUS         shift and go to state 25
+    LESS            shift and go to state 26
+    LESS_EQ         shift and go to state 27
+    GREATER         shift and go to state 28
+    GREATER_EQ      shift and go to state 29
+    IS_EQ           shift and go to state 30
+    NOT_EQ          shift and go to state 31
 
   ! PLUS            [ reduce using rule 31 (expression -> expression AND expression .) ]
   ! MINUS           [ reduce using rule 31 (expression -> expression AND expression .) ]
@@ -1968,8 +1971,8 @@ state 55
   ! GREATER_EQ      [ reduce using rule 31 (expression -> expression AND expression .) ]
   ! IS_EQ           [ reduce using rule 31 (expression -> expression AND expression .) ]
   ! NOT_EQ          [ reduce using rule 31 (expression -> expression AND expression .) ]
-  ! AND             [ shift and go to state 31 ]
-  ! OR              [ shift and go to state 32 ]
+  ! AND             [ shift and go to state 32 ]
+  ! OR              [ shift and go to state 33 ]
 
 
 state 56
@@ -1994,19 +1997,19 @@ state 56
     SEMICOLON       reduce using rule 32 (expression -> expression OR expression .)
     RBRACE          reduce using rule 32 (expression -> expression OR expression .)
     RPAREN          reduce using rule 32 (expression -> expression OR expression .)
-    PLUS            shift and go to state 19
-    MINUS           shift and go to state 20
-    EXPONENT        shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULUS         shift and go to state 24
-    LESS            shift and go to state 25
-    LESS_EQ         shift and go to state 26
-    GREATER         shift and go to state 27
-    GREATER_EQ      shift and go to state 28
-    IS_EQ           shift and go to state 29
-    NOT_EQ          shift and go to state 30
-    AND             shift and go to state 31
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    EXPONENT        shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    MODULUS         shift and go to state 25
+    LESS            shift and go to state 26
+    LESS_EQ         shift and go to state 27
+    GREATER         shift and go to state 28
+    GREATER_EQ      shift and go to state 29
+    IS_EQ           shift and go to state 30
+    NOT_EQ          shift and go to state 31
+    AND             shift and go to state 32
 
   ! PLUS            [ reduce using rule 32 (expression -> expression OR expression .) ]
   ! MINUS           [ reduce using rule 32 (expression -> expression OR expression .) ]
@@ -2021,18 +2024,19 @@ state 56
   ! IS_EQ           [ reduce using rule 32 (expression -> expression OR expression .) ]
   ! NOT_EQ          [ reduce using rule 32 (expression -> expression OR expression .) ]
   ! AND             [ reduce using rule 32 (expression -> expression OR expression .) ]
-  ! OR              [ shift and go to state 32 ]
+  ! OR              [ shift and go to state 33 ]
 
 
 state 57
 
-    (11) decl -> ID COLON type . Initiation SEMICOLON
+    (11) decl -> ID COLON type . Initiation
     (12) Initiation -> . EQUALS expression
     (13) Initiation -> . epsilon
     (37) epsilon -> .
 
     EQUALS          shift and go to state 62
     SEMICOLON       reduce using rule 37 (epsilon -> .)
+    RBRACE          reduce using rule 37 (epsilon -> .)
 
     Initiation                     shift and go to state 61
     epsilon                        shift and go to state 63
@@ -2043,6 +2047,7 @@ state 58
 
     EQUALS          reduce using rule 15 (type -> INT .)
     SEMICOLON       reduce using rule 15 (type -> INT .)
+    RBRACE          reduce using rule 15 (type -> INT .)
 
 
 state 59
@@ -2066,20 +2071,20 @@ state 59
     SEMICOLON       reduce using rule 33 (expression -> identifier EQUALS expression .)
     RBRACE          reduce using rule 33 (expression -> identifier EQUALS expression .)
     RPAREN          reduce using rule 33 (expression -> identifier EQUALS expression .)
-    PLUS            shift and go to state 19
-    MINUS           shift and go to state 20
-    EXPONENT        shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULUS         shift and go to state 24
-    LESS            shift and go to state 25
-    LESS_EQ         shift and go to state 26
-    GREATER         shift and go to state 27
-    GREATER_EQ      shift and go to state 28
-    IS_EQ           shift and go to state 29
-    NOT_EQ          shift and go to state 30
-    AND             shift and go to state 31
-    OR              shift and go to state 32
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    EXPONENT        shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    MODULUS         shift and go to state 25
+    LESS            shift and go to state 26
+    LESS_EQ         shift and go to state 27
+    GREATER         shift and go to state 28
+    GREATER_EQ      shift and go to state 29
+    IS_EQ           shift and go to state 30
+    NOT_EQ          shift and go to state 31
+    AND             shift and go to state 32
+    OR              shift and go to state 33
 
   ! PLUS            [ reduce using rule 33 (expression -> identifier EQUALS expression .) ]
   ! MINUS           [ reduce using rule 33 (expression -> identifier EQUALS expression .) ]
@@ -2122,9 +2127,10 @@ state 60
 
 state 61
 
-    (11) decl -> ID COLON type Initiation . SEMICOLON
+    (11) decl -> ID COLON type Initiation .
 
-    SEMICOLON       shift and go to state 64
+    SEMICOLON       reduce using rule 11 (decl -> ID COLON type Initiation .)
+    RBRACE          reduce using rule 11 (decl -> ID COLON type Initiation .)
 
 
 state 62
@@ -2153,32 +2159,25 @@ state 62
     (36) expression -> . identifier
     (14) identifier -> . ID
 
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    NOT             shift and go to state 12
-    LPAREN          shift and go to state 14
-    INT_LITERAL     shift and go to state 15
-    ID              shift and go to state 35
+    PLUS            shift and go to state 11
+    MINUS           shift and go to state 12
+    NOT             shift and go to state 13
+    LPAREN          shift and go to state 15
+    INT_LITERAL     shift and go to state 16
+    ID              shift and go to state 36
 
-    expression                     shift and go to state 65
-    identifier                     shift and go to state 13
+    expression                     shift and go to state 64
+    identifier                     shift and go to state 14
 
 state 63
 
     (13) Initiation -> epsilon .
 
     SEMICOLON       reduce using rule 13 (Initiation -> epsilon .)
+    RBRACE          reduce using rule 13 (Initiation -> epsilon .)
 
 
 state 64
-
-    (11) decl -> ID COLON type Initiation SEMICOLON .
-
-    SEMICOLON       reduce using rule 11 (decl -> ID COLON type Initiation SEMICOLON .)
-    RBRACE          reduce using rule 11 (decl -> ID COLON type Initiation SEMICOLON .)
-
-
-state 65
 
     (12) Initiation -> EQUALS expression .
     (19) expression -> expression . PLUS expression
@@ -2197,18 +2196,19 @@ state 65
     (32) expression -> expression . OR expression
 
     SEMICOLON       reduce using rule 12 (Initiation -> EQUALS expression .)
-    PLUS            shift and go to state 19
-    MINUS           shift and go to state 20
-    EXPONENT        shift and go to state 21
-    TIMES           shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULUS         shift and go to state 24
-    LESS            shift and go to state 25
-    LESS_EQ         shift and go to state 26
-    GREATER         shift and go to state 27
-    GREATER_EQ      shift and go to state 28
-    IS_EQ           shift and go to state 29
-    NOT_EQ          shift and go to state 30
-    AND             shift and go to state 31
-    OR              shift and go to state 32
+    RBRACE          reduce using rule 12 (Initiation -> EQUALS expression .)
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    EXPONENT        shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    MODULUS         shift and go to state 25
+    LESS            shift and go to state 26
+    LESS_EQ         shift and go to state 27
+    GREATER         shift and go to state 28
+    GREATER_EQ      shift and go to state 29
+    IS_EQ           shift and go to state 30
+    NOT_EQ          shift and go to state 31
+    AND             shift and go to state 32
+    OR              shift and go to state 33
 
