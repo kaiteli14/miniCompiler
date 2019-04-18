@@ -14,8 +14,7 @@
 
   if a != b {
     // Then side
-    a%b;
-    // write( "Then!" )
+    write( "Then!" )
   };
 
   if a % b {
@@ -23,8 +22,7 @@
     read( a );
   } else {
     //An else side
-    // write( "b =", b )
-    b = 3;
+    write( "b =", b )
   };
 
   while a > b {

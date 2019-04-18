@@ -164,7 +164,8 @@ def p_statement_A(p):
     '''statement : block_statement
                  | if_then_statement
                  | while_statement
-                 | read_statement'''
+                 | read_statement
+                 | write_statement'''
     p[0] = p[1]
 
 def p_read_statement(p):
@@ -180,6 +181,25 @@ def p_lvalue_list_A(p):
 def p_lvalue_list_B(p):
     '''lvalue_list : epsilon'''
     p[0] = []
+
+def p_write_statement(p):
+    '''write_statement : WRITE LPAREN expr_string expr_string_list RPAREN'''
+    p[4].insert(0, p[3])
+    p[0] = write_statement(p.lineno(1), p[4]);
+
+
+def p_expr_string_list_A(p):
+    '''expr_string_list : expr_string_list COMMA expr_string'''
+    p[1].append(p[3])
+    p[0] = p[1]
+
+def p_expr_string_list_B(p):
+    '''expr_string_list : epsilon'''
+    p[0] = []
+
+def p_expr_string_B(p):
+    '''expr_string : expression'''
+    p[0] = p[1]
 
 
 
@@ -287,7 +307,7 @@ def p_expression_int_literal(p):
 
 # String literal
 def p_expression_string_literal(p):
-    '''expression : STRING_LITERAL'''
+    '''expr_string : STRING_LITERAL'''
     p[0] = Literal(p.lineno(1), 'String', p[1][1:-1])
 
 # Lvlue
