@@ -28,7 +28,7 @@ reserved = {
 tokens = [
     'ID', 'INT_LITERAL',
     'PLUS', 'EQUALS', 'MINUS', 'TIMES', 'DIVIDE', 'MODULUS', 'EXPONENT',
-    'LPAREN', 'RPAREN', 'SEMICOLON', 'LBRACE','RBRACE', 'LESS', 'LESS_EQ', 'GREATER', 'GREATER_EQ',
+    'LPAREN', 'RPAREN', 'SEMICOLON', 'COLON', 'LBRACE', 'RBRACE', 'LESS', 'LESS_EQ', 'GREATER', 'GREATER_EQ',
     'IS_EQ', 'NOT_EQ', 'AND', 'OR', 'NOT',
 ] + list(reserved.values())
 
@@ -49,6 +49,7 @@ t_DIVIDE = r'/'
 t_MODULUS = r'%'
 t_RPAREN = r'\)'
 t_SEMICOLON = r';'
+t_COLON = r':'
 t_EXPONENT = r'\^'
 t_LBRACE = r'\{'
 t_RBRACE = r'\}'
@@ -162,7 +163,18 @@ def p_statement_list_C(p):
     'statement_list : epsilon'
     p[0] = [p[1]]
 
+# # Declaration
+def p_decl(p):
+    'decl : ID COLON type Initiation'
+    p[0] = decl(p.lineno(1), p[1], p[3], "(VARIABLE-NO-INIT)")
 
+def p_with_initiation(p):
+    'Initiation : EQUALS expression'
+    p[0] = p[2]
+
+def p_no_initiation(p):
+    'Initiation : epsilon'
+    p[0] = None
 # -------------------
 # IDENTIFIER ...
 
@@ -172,7 +184,7 @@ def p_identifier(p):
 
 def p_type(p):
     'type : INT'
-    p[0] = type(p.lineno(1))
+    p[0] = type(p.lineno(1), p[1])
 
 
 # -------------------

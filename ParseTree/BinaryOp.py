@@ -19,9 +19,9 @@ class BinaryOp() :
   #---------------------------------------
   def dump( self, indent = 0, fp = sys.stdout ) :
     dumpHeaderLine( indent, self.m_LineNum,
-      f'BINARY_OP {self.m_Op!r}', fp )
+      f'BINARY_OP {self.m_Op!r}', fp)
 
-    self.m_Left.dump( indent+1, fp = fp )
-    self.m_Right.dump( indent+1, fp = fp )
+    self.m_Left.dump(indent+1, fp = fp)
+    self.m_Right.dump(indent+1, fp = fp)
 
 #---------#---------#---------#---------#---------#--------#

@@ -11,70 +11,76 @@ Rule 5     statement -> expression
 Rule 6     statement_list -> statement_list SEMICOLON statement
 Rule 7     statement_list -> statement
 Rule 8     statement_list -> epsilon
-Rule 9     identifier -> ID
-Rule 10    type -> INT
-Rule 11    expression -> PLUS expression
-Rule 12    expression -> MINUS expression
-Rule 13    expression -> NOT expression
-Rule 14    expression -> expression PLUS expression
-Rule 15    expression -> expression MINUS expression
-Rule 16    expression -> expression EXPONENT expression
-Rule 17    expression -> expression TIMES expression
-Rule 18    expression -> expression DIVIDE expression
-Rule 19    expression -> expression MODULUS expression
-Rule 20    expression -> expression LESS expression
-Rule 21    expression -> expression LESS_EQ expression
-Rule 22    expression -> expression GREATER expression
-Rule 23    expression -> expression GREATER_EQ expression
-Rule 24    expression -> expression IS_EQ expression
-Rule 25    expression -> expression NOT_EQ expression
-Rule 26    expression -> expression AND expression
-Rule 27    expression -> expression OR expression
-Rule 28    expression -> identifier EQUALS expression
-Rule 29    expression -> LPAREN expression RPAREN
-Rule 30    expression -> INT_LITERAL
-Rule 31    expression -> identifier
-Rule 32    epsilon -> <empty>
+Rule 9     decl -> ID COLON type Initiation
+Rule 10    Initiation -> EQUALS expression
+Rule 11    Initiation -> epsilon
+Rule 12    identifier -> ID
+Rule 13    type -> INT
+Rule 14    expression -> PLUS expression
+Rule 15    expression -> MINUS expression
+Rule 16    expression -> NOT expression
+Rule 17    expression -> expression PLUS expression
+Rule 18    expression -> expression MINUS expression
+Rule 19    expression -> expression EXPONENT expression
+Rule 20    expression -> expression TIMES expression
+Rule 21    expression -> expression DIVIDE expression
+Rule 22    expression -> expression MODULUS expression
+Rule 23    expression -> expression LESS expression
+Rule 24    expression -> expression LESS_EQ expression
+Rule 25    expression -> expression GREATER expression
+Rule 26    expression -> expression GREATER_EQ expression
+Rule 27    expression -> expression IS_EQ expression
+Rule 28    expression -> expression NOT_EQ expression
+Rule 29    expression -> expression AND expression
+Rule 30    expression -> expression OR expression
+Rule 31    expression -> identifier EQUALS expression
+Rule 32    expression -> LPAREN expression RPAREN
+Rule 33    expression -> INT_LITERAL
+Rule 34    expression -> identifier
+Rule 35    epsilon -> <empty>
 
 Terminals, with rules where they appear
 
-AND                  : 26
-DIVIDE               : 18
-EQUALS               : 28
-EXPONENT             : 16
-GREATER              : 22
-GREATER_EQ           : 23
-ID                   : 9
-INT                  : 10
-INT_LITERAL          : 30
-IS_EQ                : 24
+AND                  : 29
+COLON                : 9
+DIVIDE               : 21
+EQUALS               : 10 31
+EXPONENT             : 19
+GREATER              : 25
+GREATER_EQ           : 26
+ID                   : 9 12
+INT                  : 13
+INT_LITERAL          : 33
+IS_EQ                : 27
 LBRACE               : 4
-LESS                 : 20
-LESS_EQ              : 21
-LPAREN               : 29
-MINUS                : 12 15
-MODULUS              : 19
-NOT                  : 13
-NOT_EQ               : 25
-OR                   : 27
-PLUS                 : 11 14
+LESS                 : 23
+LESS_EQ              : 24
+LPAREN               : 32
+MINUS                : 15 18
+MODULUS              : 22
+NOT                  : 16
+NOT_EQ               : 28
+OR                   : 30
+PLUS                 : 14 17
 RBRACE               : 4
-RPAREN               : 29
+RPAREN               : 32
 SEMICOLON            : 3 6
-TIMES                : 17
+TIMES                : 20
 error                : 
 
 Nonterminals, with rules where they appear
 
+Initiation           : 9
 block_statement      : 1
-epsilon              : 2 8
-expression           : 5 11 12 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 23 24 24 25 25 26 26 27 27 28 29
-identifier           : 28 31
+decl                 : 
+epsilon              : 2 8 11
+expression           : 5 10 14 15 16 17 17 18 18 19 19 20 20 21 21 22 22 23 23 24 24 25 25 26 26 27 27 28 28 29 29 30 30 31 32
+identifier           : 31 34
 program              : 0
 semicolon_opt        : 4
 statement            : 6 7
 statement_list       : 4 6
-type                 : 
+type                 : 9
 
 Parsing method: LALR
 
@@ -109,32 +115,32 @@ state 3
     (7) statement_list -> . statement
     (8) statement_list -> . epsilon
     (5) statement -> . expression
-    (32) epsilon -> .
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (35) epsilon -> .
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
-    SEMICOLON       reduce using rule 32 (epsilon -> .)
-    RBRACE          reduce using rule 32 (epsilon -> .)
+    SEMICOLON       reduce using rule 35 (epsilon -> .)
+    RBRACE          reduce using rule 35 (epsilon -> .)
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
     NOT             shift and go to state 10
@@ -154,10 +160,10 @@ state 4
     (6) statement_list -> statement_list . SEMICOLON statement
     (2) semicolon_opt -> . epsilon
     (3) semicolon_opt -> . SEMICOLON
-    (32) epsilon -> .
+    (35) epsilon -> .
 
     SEMICOLON       shift and go to state 16
-    RBRACE          reduce using rule 32 (epsilon -> .)
+    RBRACE          reduce using rule 35 (epsilon -> .)
 
     semicolon_opt                  shift and go to state 15
     epsilon                        shift and go to state 17
@@ -181,20 +187,20 @@ state 6
 state 7
 
     (5) statement -> expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
     SEMICOLON       reduce using rule 5 (statement -> expression .)
     RBRACE          reduce using rule 5 (statement -> expression .)
@@ -216,29 +222,29 @@ state 7
 
 state 8
 
-    (11) expression -> PLUS . expression
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (14) expression -> PLUS . expression
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
@@ -252,29 +258,29 @@ state 8
 
 state 9
 
-    (12) expression -> MINUS . expression
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (15) expression -> MINUS . expression
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
@@ -288,29 +294,29 @@ state 9
 
 state 10
 
-    (13) expression -> NOT . expression
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (16) expression -> NOT . expression
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
@@ -324,54 +330,54 @@ state 10
 
 state 11
 
-    (28) expression -> identifier . EQUALS expression
-    (31) expression -> identifier .
+    (31) expression -> identifier . EQUALS expression
+    (34) expression -> identifier .
 
     EQUALS          shift and go to state 35
-    PLUS            reduce using rule 31 (expression -> identifier .)
-    MINUS           reduce using rule 31 (expression -> identifier .)
-    EXPONENT        reduce using rule 31 (expression -> identifier .)
-    TIMES           reduce using rule 31 (expression -> identifier .)
-    DIVIDE          reduce using rule 31 (expression -> identifier .)
-    MODULUS         reduce using rule 31 (expression -> identifier .)
-    LESS            reduce using rule 31 (expression -> identifier .)
-    LESS_EQ         reduce using rule 31 (expression -> identifier .)
-    GREATER         reduce using rule 31 (expression -> identifier .)
-    GREATER_EQ      reduce using rule 31 (expression -> identifier .)
-    IS_EQ           reduce using rule 31 (expression -> identifier .)
-    NOT_EQ          reduce using rule 31 (expression -> identifier .)
-    AND             reduce using rule 31 (expression -> identifier .)
-    OR              reduce using rule 31 (expression -> identifier .)
-    SEMICOLON       reduce using rule 31 (expression -> identifier .)
-    RBRACE          reduce using rule 31 (expression -> identifier .)
-    RPAREN          reduce using rule 31 (expression -> identifier .)
+    PLUS            reduce using rule 34 (expression -> identifier .)
+    MINUS           reduce using rule 34 (expression -> identifier .)
+    EXPONENT        reduce using rule 34 (expression -> identifier .)
+    TIMES           reduce using rule 34 (expression -> identifier .)
+    DIVIDE          reduce using rule 34 (expression -> identifier .)
+    MODULUS         reduce using rule 34 (expression -> identifier .)
+    LESS            reduce using rule 34 (expression -> identifier .)
+    LESS_EQ         reduce using rule 34 (expression -> identifier .)
+    GREATER         reduce using rule 34 (expression -> identifier .)
+    GREATER_EQ      reduce using rule 34 (expression -> identifier .)
+    IS_EQ           reduce using rule 34 (expression -> identifier .)
+    NOT_EQ          reduce using rule 34 (expression -> identifier .)
+    AND             reduce using rule 34 (expression -> identifier .)
+    OR              reduce using rule 34 (expression -> identifier .)
+    SEMICOLON       reduce using rule 34 (expression -> identifier .)
+    RBRACE          reduce using rule 34 (expression -> identifier .)
+    RPAREN          reduce using rule 34 (expression -> identifier .)
 
 
 state 12
 
-    (29) expression -> LPAREN . expression RPAREN
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (32) expression -> LPAREN . expression RPAREN
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
@@ -385,49 +391,49 @@ state 12
 
 state 13
 
-    (30) expression -> INT_LITERAL .
+    (33) expression -> INT_LITERAL .
 
-    PLUS            reduce using rule 30 (expression -> INT_LITERAL .)
-    MINUS           reduce using rule 30 (expression -> INT_LITERAL .)
-    EXPONENT        reduce using rule 30 (expression -> INT_LITERAL .)
-    TIMES           reduce using rule 30 (expression -> INT_LITERAL .)
-    DIVIDE          reduce using rule 30 (expression -> INT_LITERAL .)
-    MODULUS         reduce using rule 30 (expression -> INT_LITERAL .)
-    LESS            reduce using rule 30 (expression -> INT_LITERAL .)
-    LESS_EQ         reduce using rule 30 (expression -> INT_LITERAL .)
-    GREATER         reduce using rule 30 (expression -> INT_LITERAL .)
-    GREATER_EQ      reduce using rule 30 (expression -> INT_LITERAL .)
-    IS_EQ           reduce using rule 30 (expression -> INT_LITERAL .)
-    NOT_EQ          reduce using rule 30 (expression -> INT_LITERAL .)
-    AND             reduce using rule 30 (expression -> INT_LITERAL .)
-    OR              reduce using rule 30 (expression -> INT_LITERAL .)
-    SEMICOLON       reduce using rule 30 (expression -> INT_LITERAL .)
-    RBRACE          reduce using rule 30 (expression -> INT_LITERAL .)
-    RPAREN          reduce using rule 30 (expression -> INT_LITERAL .)
+    PLUS            reduce using rule 33 (expression -> INT_LITERAL .)
+    MINUS           reduce using rule 33 (expression -> INT_LITERAL .)
+    EXPONENT        reduce using rule 33 (expression -> INT_LITERAL .)
+    TIMES           reduce using rule 33 (expression -> INT_LITERAL .)
+    DIVIDE          reduce using rule 33 (expression -> INT_LITERAL .)
+    MODULUS         reduce using rule 33 (expression -> INT_LITERAL .)
+    LESS            reduce using rule 33 (expression -> INT_LITERAL .)
+    LESS_EQ         reduce using rule 33 (expression -> INT_LITERAL .)
+    GREATER         reduce using rule 33 (expression -> INT_LITERAL .)
+    GREATER_EQ      reduce using rule 33 (expression -> INT_LITERAL .)
+    IS_EQ           reduce using rule 33 (expression -> INT_LITERAL .)
+    NOT_EQ          reduce using rule 33 (expression -> INT_LITERAL .)
+    AND             reduce using rule 33 (expression -> INT_LITERAL .)
+    OR              reduce using rule 33 (expression -> INT_LITERAL .)
+    SEMICOLON       reduce using rule 33 (expression -> INT_LITERAL .)
+    RBRACE          reduce using rule 33 (expression -> INT_LITERAL .)
+    RPAREN          reduce using rule 33 (expression -> INT_LITERAL .)
 
 
 state 14
 
-    (9) identifier -> ID .
+    (12) identifier -> ID .
 
-    EQUALS          reduce using rule 9 (identifier -> ID .)
-    PLUS            reduce using rule 9 (identifier -> ID .)
-    MINUS           reduce using rule 9 (identifier -> ID .)
-    EXPONENT        reduce using rule 9 (identifier -> ID .)
-    TIMES           reduce using rule 9 (identifier -> ID .)
-    DIVIDE          reduce using rule 9 (identifier -> ID .)
-    MODULUS         reduce using rule 9 (identifier -> ID .)
-    LESS            reduce using rule 9 (identifier -> ID .)
-    LESS_EQ         reduce using rule 9 (identifier -> ID .)
-    GREATER         reduce using rule 9 (identifier -> ID .)
-    GREATER_EQ      reduce using rule 9 (identifier -> ID .)
-    IS_EQ           reduce using rule 9 (identifier -> ID .)
-    NOT_EQ          reduce using rule 9 (identifier -> ID .)
-    AND             reduce using rule 9 (identifier -> ID .)
-    OR              reduce using rule 9 (identifier -> ID .)
-    SEMICOLON       reduce using rule 9 (identifier -> ID .)
-    RBRACE          reduce using rule 9 (identifier -> ID .)
-    RPAREN          reduce using rule 9 (identifier -> ID .)
+    EQUALS          reduce using rule 12 (identifier -> ID .)
+    PLUS            reduce using rule 12 (identifier -> ID .)
+    MINUS           reduce using rule 12 (identifier -> ID .)
+    EXPONENT        reduce using rule 12 (identifier -> ID .)
+    TIMES           reduce using rule 12 (identifier -> ID .)
+    DIVIDE          reduce using rule 12 (identifier -> ID .)
+    MODULUS         reduce using rule 12 (identifier -> ID .)
+    LESS            reduce using rule 12 (identifier -> ID .)
+    LESS_EQ         reduce using rule 12 (identifier -> ID .)
+    GREATER         reduce using rule 12 (identifier -> ID .)
+    GREATER_EQ      reduce using rule 12 (identifier -> ID .)
+    IS_EQ           reduce using rule 12 (identifier -> ID .)
+    NOT_EQ          reduce using rule 12 (identifier -> ID .)
+    AND             reduce using rule 12 (identifier -> ID .)
+    OR              reduce using rule 12 (identifier -> ID .)
+    SEMICOLON       reduce using rule 12 (identifier -> ID .)
+    RBRACE          reduce using rule 12 (identifier -> ID .)
+    RPAREN          reduce using rule 12 (identifier -> ID .)
 
 
 state 15
@@ -442,28 +448,28 @@ state 16
     (6) statement_list -> statement_list SEMICOLON . statement
     (3) semicolon_opt -> SEMICOLON .
     (5) statement -> . expression
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     RBRACE          reduce using rule 3 (semicolon_opt -> SEMICOLON .)
     PLUS            shift and go to state 8
@@ -486,29 +492,29 @@ state 17
 
 state 18
 
-    (14) expression -> expression PLUS . expression
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (17) expression -> expression PLUS . expression
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
@@ -522,29 +528,29 @@ state 18
 
 state 19
 
-    (15) expression -> expression MINUS . expression
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (18) expression -> expression MINUS . expression
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
@@ -558,29 +564,29 @@ state 19
 
 state 20
 
-    (16) expression -> expression EXPONENT . expression
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (19) expression -> expression EXPONENT . expression
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
@@ -594,29 +600,29 @@ state 20
 
 state 21
 
-    (17) expression -> expression TIMES . expression
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (20) expression -> expression TIMES . expression
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
@@ -630,29 +636,29 @@ state 21
 
 state 22
 
-    (18) expression -> expression DIVIDE . expression
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (21) expression -> expression DIVIDE . expression
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
@@ -666,29 +672,29 @@ state 22
 
 state 23
 
-    (19) expression -> expression MODULUS . expression
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (22) expression -> expression MODULUS . expression
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
@@ -702,29 +708,29 @@ state 23
 
 state 24
 
-    (20) expression -> expression LESS . expression
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (23) expression -> expression LESS . expression
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
@@ -738,29 +744,29 @@ state 24
 
 state 25
 
-    (21) expression -> expression LESS_EQ . expression
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (24) expression -> expression LESS_EQ . expression
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
@@ -774,29 +780,29 @@ state 25
 
 state 26
 
-    (22) expression -> expression GREATER . expression
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (25) expression -> expression GREATER . expression
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
@@ -810,29 +816,29 @@ state 26
 
 state 27
 
-    (23) expression -> expression GREATER_EQ . expression
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (26) expression -> expression GREATER_EQ . expression
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
@@ -846,29 +852,29 @@ state 27
 
 state 28
 
-    (24) expression -> expression IS_EQ . expression
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (27) expression -> expression IS_EQ . expression
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
@@ -882,29 +888,29 @@ state 28
 
 state 29
 
-    (25) expression -> expression NOT_EQ . expression
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (28) expression -> expression NOT_EQ . expression
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
@@ -918,29 +924,29 @@ state 29
 
 state 30
 
-    (26) expression -> expression AND . expression
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (29) expression -> expression AND . expression
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
@@ -954,29 +960,29 @@ state 30
 
 state 31
 
-    (27) expression -> expression OR . expression
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (30) expression -> expression OR . expression
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
@@ -990,39 +996,39 @@ state 31
 
 state 32
 
-    (11) expression -> PLUS expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (14) expression -> PLUS expression .
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
-    PLUS            reduce using rule 11 (expression -> PLUS expression .)
-    MINUS           reduce using rule 11 (expression -> PLUS expression .)
-    EXPONENT        reduce using rule 11 (expression -> PLUS expression .)
-    TIMES           reduce using rule 11 (expression -> PLUS expression .)
-    DIVIDE          reduce using rule 11 (expression -> PLUS expression .)
-    MODULUS         reduce using rule 11 (expression -> PLUS expression .)
-    LESS            reduce using rule 11 (expression -> PLUS expression .)
-    LESS_EQ         reduce using rule 11 (expression -> PLUS expression .)
-    GREATER         reduce using rule 11 (expression -> PLUS expression .)
-    GREATER_EQ      reduce using rule 11 (expression -> PLUS expression .)
-    IS_EQ           reduce using rule 11 (expression -> PLUS expression .)
-    NOT_EQ          reduce using rule 11 (expression -> PLUS expression .)
-    AND             reduce using rule 11 (expression -> PLUS expression .)
-    OR              reduce using rule 11 (expression -> PLUS expression .)
-    SEMICOLON       reduce using rule 11 (expression -> PLUS expression .)
-    RBRACE          reduce using rule 11 (expression -> PLUS expression .)
-    RPAREN          reduce using rule 11 (expression -> PLUS expression .)
+    PLUS            reduce using rule 14 (expression -> PLUS expression .)
+    MINUS           reduce using rule 14 (expression -> PLUS expression .)
+    EXPONENT        reduce using rule 14 (expression -> PLUS expression .)
+    TIMES           reduce using rule 14 (expression -> PLUS expression .)
+    DIVIDE          reduce using rule 14 (expression -> PLUS expression .)
+    MODULUS         reduce using rule 14 (expression -> PLUS expression .)
+    LESS            reduce using rule 14 (expression -> PLUS expression .)
+    LESS_EQ         reduce using rule 14 (expression -> PLUS expression .)
+    GREATER         reduce using rule 14 (expression -> PLUS expression .)
+    GREATER_EQ      reduce using rule 14 (expression -> PLUS expression .)
+    IS_EQ           reduce using rule 14 (expression -> PLUS expression .)
+    NOT_EQ          reduce using rule 14 (expression -> PLUS expression .)
+    AND             reduce using rule 14 (expression -> PLUS expression .)
+    OR              reduce using rule 14 (expression -> PLUS expression .)
+    SEMICOLON       reduce using rule 14 (expression -> PLUS expression .)
+    RBRACE          reduce using rule 14 (expression -> PLUS expression .)
+    RPAREN          reduce using rule 14 (expression -> PLUS expression .)
 
   ! PLUS            [ shift and go to state 18 ]
   ! MINUS           [ shift and go to state 19 ]
@@ -1042,39 +1048,39 @@ state 32
 
 state 33
 
-    (12) expression -> MINUS expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (15) expression -> MINUS expression .
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
-    PLUS            reduce using rule 12 (expression -> MINUS expression .)
-    MINUS           reduce using rule 12 (expression -> MINUS expression .)
-    EXPONENT        reduce using rule 12 (expression -> MINUS expression .)
-    TIMES           reduce using rule 12 (expression -> MINUS expression .)
-    DIVIDE          reduce using rule 12 (expression -> MINUS expression .)
-    MODULUS         reduce using rule 12 (expression -> MINUS expression .)
-    LESS            reduce using rule 12 (expression -> MINUS expression .)
-    LESS_EQ         reduce using rule 12 (expression -> MINUS expression .)
-    GREATER         reduce using rule 12 (expression -> MINUS expression .)
-    GREATER_EQ      reduce using rule 12 (expression -> MINUS expression .)
-    IS_EQ           reduce using rule 12 (expression -> MINUS expression .)
-    NOT_EQ          reduce using rule 12 (expression -> MINUS expression .)
-    AND             reduce using rule 12 (expression -> MINUS expression .)
-    OR              reduce using rule 12 (expression -> MINUS expression .)
-    SEMICOLON       reduce using rule 12 (expression -> MINUS expression .)
-    RBRACE          reduce using rule 12 (expression -> MINUS expression .)
-    RPAREN          reduce using rule 12 (expression -> MINUS expression .)
+    PLUS            reduce using rule 15 (expression -> MINUS expression .)
+    MINUS           reduce using rule 15 (expression -> MINUS expression .)
+    EXPONENT        reduce using rule 15 (expression -> MINUS expression .)
+    TIMES           reduce using rule 15 (expression -> MINUS expression .)
+    DIVIDE          reduce using rule 15 (expression -> MINUS expression .)
+    MODULUS         reduce using rule 15 (expression -> MINUS expression .)
+    LESS            reduce using rule 15 (expression -> MINUS expression .)
+    LESS_EQ         reduce using rule 15 (expression -> MINUS expression .)
+    GREATER         reduce using rule 15 (expression -> MINUS expression .)
+    GREATER_EQ      reduce using rule 15 (expression -> MINUS expression .)
+    IS_EQ           reduce using rule 15 (expression -> MINUS expression .)
+    NOT_EQ          reduce using rule 15 (expression -> MINUS expression .)
+    AND             reduce using rule 15 (expression -> MINUS expression .)
+    OR              reduce using rule 15 (expression -> MINUS expression .)
+    SEMICOLON       reduce using rule 15 (expression -> MINUS expression .)
+    RBRACE          reduce using rule 15 (expression -> MINUS expression .)
+    RPAREN          reduce using rule 15 (expression -> MINUS expression .)
 
   ! PLUS            [ shift and go to state 18 ]
   ! MINUS           [ shift and go to state 19 ]
@@ -1094,39 +1100,39 @@ state 33
 
 state 34
 
-    (13) expression -> NOT expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (16) expression -> NOT expression .
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
-    PLUS            reduce using rule 13 (expression -> NOT expression .)
-    MINUS           reduce using rule 13 (expression -> NOT expression .)
-    EXPONENT        reduce using rule 13 (expression -> NOT expression .)
-    TIMES           reduce using rule 13 (expression -> NOT expression .)
-    DIVIDE          reduce using rule 13 (expression -> NOT expression .)
-    MODULUS         reduce using rule 13 (expression -> NOT expression .)
-    LESS            reduce using rule 13 (expression -> NOT expression .)
-    LESS_EQ         reduce using rule 13 (expression -> NOT expression .)
-    GREATER         reduce using rule 13 (expression -> NOT expression .)
-    GREATER_EQ      reduce using rule 13 (expression -> NOT expression .)
-    IS_EQ           reduce using rule 13 (expression -> NOT expression .)
-    NOT_EQ          reduce using rule 13 (expression -> NOT expression .)
-    AND             reduce using rule 13 (expression -> NOT expression .)
-    OR              reduce using rule 13 (expression -> NOT expression .)
-    SEMICOLON       reduce using rule 13 (expression -> NOT expression .)
-    RBRACE          reduce using rule 13 (expression -> NOT expression .)
-    RPAREN          reduce using rule 13 (expression -> NOT expression .)
+    PLUS            reduce using rule 16 (expression -> NOT expression .)
+    MINUS           reduce using rule 16 (expression -> NOT expression .)
+    EXPONENT        reduce using rule 16 (expression -> NOT expression .)
+    TIMES           reduce using rule 16 (expression -> NOT expression .)
+    DIVIDE          reduce using rule 16 (expression -> NOT expression .)
+    MODULUS         reduce using rule 16 (expression -> NOT expression .)
+    LESS            reduce using rule 16 (expression -> NOT expression .)
+    LESS_EQ         reduce using rule 16 (expression -> NOT expression .)
+    GREATER         reduce using rule 16 (expression -> NOT expression .)
+    GREATER_EQ      reduce using rule 16 (expression -> NOT expression .)
+    IS_EQ           reduce using rule 16 (expression -> NOT expression .)
+    NOT_EQ          reduce using rule 16 (expression -> NOT expression .)
+    AND             reduce using rule 16 (expression -> NOT expression .)
+    OR              reduce using rule 16 (expression -> NOT expression .)
+    SEMICOLON       reduce using rule 16 (expression -> NOT expression .)
+    RBRACE          reduce using rule 16 (expression -> NOT expression .)
+    RPAREN          reduce using rule 16 (expression -> NOT expression .)
 
   ! PLUS            [ shift and go to state 18 ]
   ! MINUS           [ shift and go to state 19 ]
@@ -1146,29 +1152,29 @@ state 34
 
 state 35
 
-    (28) expression -> identifier EQUALS . expression
-    (11) expression -> . PLUS expression
-    (12) expression -> . MINUS expression
-    (13) expression -> . NOT expression
-    (14) expression -> . expression PLUS expression
-    (15) expression -> . expression MINUS expression
-    (16) expression -> . expression EXPONENT expression
-    (17) expression -> . expression TIMES expression
-    (18) expression -> . expression DIVIDE expression
-    (19) expression -> . expression MODULUS expression
-    (20) expression -> . expression LESS expression
-    (21) expression -> . expression LESS_EQ expression
-    (22) expression -> . expression GREATER expression
-    (23) expression -> . expression GREATER_EQ expression
-    (24) expression -> . expression IS_EQ expression
-    (25) expression -> . expression NOT_EQ expression
-    (26) expression -> . expression AND expression
-    (27) expression -> . expression OR expression
-    (28) expression -> . identifier EQUALS expression
-    (29) expression -> . LPAREN expression RPAREN
-    (30) expression -> . INT_LITERAL
-    (31) expression -> . identifier
-    (9) identifier -> . ID
+    (31) expression -> identifier EQUALS . expression
+    (14) expression -> . PLUS expression
+    (15) expression -> . MINUS expression
+    (16) expression -> . NOT expression
+    (17) expression -> . expression PLUS expression
+    (18) expression -> . expression MINUS expression
+    (19) expression -> . expression EXPONENT expression
+    (20) expression -> . expression TIMES expression
+    (21) expression -> . expression DIVIDE expression
+    (22) expression -> . expression MODULUS expression
+    (23) expression -> . expression LESS expression
+    (24) expression -> . expression LESS_EQ expression
+    (25) expression -> . expression GREATER expression
+    (26) expression -> . expression GREATER_EQ expression
+    (27) expression -> . expression IS_EQ expression
+    (28) expression -> . expression NOT_EQ expression
+    (29) expression -> . expression AND expression
+    (30) expression -> . expression OR expression
+    (31) expression -> . identifier EQUALS expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . INT_LITERAL
+    (34) expression -> . identifier
+    (12) identifier -> . ID
 
     PLUS            shift and go to state 8
     MINUS           shift and go to state 9
@@ -1182,21 +1188,21 @@ state 35
 
 state 36
 
-    (29) expression -> LPAREN expression . RPAREN
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (32) expression -> LPAREN expression . RPAREN
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
     RPAREN          shift and go to state 54
     PLUS            shift and go to state 18
@@ -1232,44 +1238,44 @@ state 38
 
 state 39
 
-    (14) expression -> expression PLUS expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (17) expression -> expression PLUS expression .
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
-    PLUS            reduce using rule 14 (expression -> expression PLUS expression .)
-    MINUS           reduce using rule 14 (expression -> expression PLUS expression .)
-    LESS            reduce using rule 14 (expression -> expression PLUS expression .)
-    LESS_EQ         reduce using rule 14 (expression -> expression PLUS expression .)
-    GREATER         reduce using rule 14 (expression -> expression PLUS expression .)
-    GREATER_EQ      reduce using rule 14 (expression -> expression PLUS expression .)
-    IS_EQ           reduce using rule 14 (expression -> expression PLUS expression .)
-    NOT_EQ          reduce using rule 14 (expression -> expression PLUS expression .)
-    AND             reduce using rule 14 (expression -> expression PLUS expression .)
-    OR              reduce using rule 14 (expression -> expression PLUS expression .)
-    SEMICOLON       reduce using rule 14 (expression -> expression PLUS expression .)
-    RBRACE          reduce using rule 14 (expression -> expression PLUS expression .)
-    RPAREN          reduce using rule 14 (expression -> expression PLUS expression .)
+    PLUS            reduce using rule 17 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 17 (expression -> expression PLUS expression .)
+    LESS            reduce using rule 17 (expression -> expression PLUS expression .)
+    LESS_EQ         reduce using rule 17 (expression -> expression PLUS expression .)
+    GREATER         reduce using rule 17 (expression -> expression PLUS expression .)
+    GREATER_EQ      reduce using rule 17 (expression -> expression PLUS expression .)
+    IS_EQ           reduce using rule 17 (expression -> expression PLUS expression .)
+    NOT_EQ          reduce using rule 17 (expression -> expression PLUS expression .)
+    AND             reduce using rule 17 (expression -> expression PLUS expression .)
+    OR              reduce using rule 17 (expression -> expression PLUS expression .)
+    SEMICOLON       reduce using rule 17 (expression -> expression PLUS expression .)
+    RBRACE          reduce using rule 17 (expression -> expression PLUS expression .)
+    RPAREN          reduce using rule 17 (expression -> expression PLUS expression .)
     EXPONENT        shift and go to state 20
     TIMES           shift and go to state 21
     DIVIDE          shift and go to state 22
     MODULUS         shift and go to state 23
 
-  ! EXPONENT        [ reduce using rule 14 (expression -> expression PLUS expression .) ]
-  ! TIMES           [ reduce using rule 14 (expression -> expression PLUS expression .) ]
-  ! DIVIDE          [ reduce using rule 14 (expression -> expression PLUS expression .) ]
-  ! MODULUS         [ reduce using rule 14 (expression -> expression PLUS expression .) ]
+  ! EXPONENT        [ reduce using rule 17 (expression -> expression PLUS expression .) ]
+  ! TIMES           [ reduce using rule 17 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 17 (expression -> expression PLUS expression .) ]
+  ! MODULUS         [ reduce using rule 17 (expression -> expression PLUS expression .) ]
   ! PLUS            [ shift and go to state 18 ]
   ! MINUS           [ shift and go to state 19 ]
   ! LESS            [ shift and go to state 24 ]
@@ -1284,44 +1290,44 @@ state 39
 
 state 40
 
-    (15) expression -> expression MINUS expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (18) expression -> expression MINUS expression .
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
-    PLUS            reduce using rule 15 (expression -> expression MINUS expression .)
-    MINUS           reduce using rule 15 (expression -> expression MINUS expression .)
-    LESS            reduce using rule 15 (expression -> expression MINUS expression .)
-    LESS_EQ         reduce using rule 15 (expression -> expression MINUS expression .)
-    GREATER         reduce using rule 15 (expression -> expression MINUS expression .)
-    GREATER_EQ      reduce using rule 15 (expression -> expression MINUS expression .)
-    IS_EQ           reduce using rule 15 (expression -> expression MINUS expression .)
-    NOT_EQ          reduce using rule 15 (expression -> expression MINUS expression .)
-    AND             reduce using rule 15 (expression -> expression MINUS expression .)
-    OR              reduce using rule 15 (expression -> expression MINUS expression .)
-    SEMICOLON       reduce using rule 15 (expression -> expression MINUS expression .)
-    RBRACE          reduce using rule 15 (expression -> expression MINUS expression .)
-    RPAREN          reduce using rule 15 (expression -> expression MINUS expression .)
+    PLUS            reduce using rule 18 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 18 (expression -> expression MINUS expression .)
+    LESS            reduce using rule 18 (expression -> expression MINUS expression .)
+    LESS_EQ         reduce using rule 18 (expression -> expression MINUS expression .)
+    GREATER         reduce using rule 18 (expression -> expression MINUS expression .)
+    GREATER_EQ      reduce using rule 18 (expression -> expression MINUS expression .)
+    IS_EQ           reduce using rule 18 (expression -> expression MINUS expression .)
+    NOT_EQ          reduce using rule 18 (expression -> expression MINUS expression .)
+    AND             reduce using rule 18 (expression -> expression MINUS expression .)
+    OR              reduce using rule 18 (expression -> expression MINUS expression .)
+    SEMICOLON       reduce using rule 18 (expression -> expression MINUS expression .)
+    RBRACE          reduce using rule 18 (expression -> expression MINUS expression .)
+    RPAREN          reduce using rule 18 (expression -> expression MINUS expression .)
     EXPONENT        shift and go to state 20
     TIMES           shift and go to state 21
     DIVIDE          shift and go to state 22
     MODULUS         shift and go to state 23
 
-  ! EXPONENT        [ reduce using rule 15 (expression -> expression MINUS expression .) ]
-  ! TIMES           [ reduce using rule 15 (expression -> expression MINUS expression .) ]
-  ! DIVIDE          [ reduce using rule 15 (expression -> expression MINUS expression .) ]
-  ! MODULUS         [ reduce using rule 15 (expression -> expression MINUS expression .) ]
+  ! EXPONENT        [ reduce using rule 18 (expression -> expression MINUS expression .) ]
+  ! TIMES           [ reduce using rule 18 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 18 (expression -> expression MINUS expression .) ]
+  ! MODULUS         [ reduce using rule 18 (expression -> expression MINUS expression .) ]
   ! PLUS            [ shift and go to state 18 ]
   ! MINUS           [ shift and go to state 19 ]
   ! LESS            [ shift and go to state 24 ]
@@ -1336,41 +1342,41 @@ state 40
 
 state 41
 
-    (16) expression -> expression EXPONENT expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (19) expression -> expression EXPONENT expression .
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
-    PLUS            reduce using rule 16 (expression -> expression EXPONENT expression .)
-    MINUS           reduce using rule 16 (expression -> expression EXPONENT expression .)
-    TIMES           reduce using rule 16 (expression -> expression EXPONENT expression .)
-    DIVIDE          reduce using rule 16 (expression -> expression EXPONENT expression .)
-    MODULUS         reduce using rule 16 (expression -> expression EXPONENT expression .)
-    LESS            reduce using rule 16 (expression -> expression EXPONENT expression .)
-    LESS_EQ         reduce using rule 16 (expression -> expression EXPONENT expression .)
-    GREATER         reduce using rule 16 (expression -> expression EXPONENT expression .)
-    GREATER_EQ      reduce using rule 16 (expression -> expression EXPONENT expression .)
-    IS_EQ           reduce using rule 16 (expression -> expression EXPONENT expression .)
-    NOT_EQ          reduce using rule 16 (expression -> expression EXPONENT expression .)
-    AND             reduce using rule 16 (expression -> expression EXPONENT expression .)
-    OR              reduce using rule 16 (expression -> expression EXPONENT expression .)
-    SEMICOLON       reduce using rule 16 (expression -> expression EXPONENT expression .)
-    RBRACE          reduce using rule 16 (expression -> expression EXPONENT expression .)
-    RPAREN          reduce using rule 16 (expression -> expression EXPONENT expression .)
+    PLUS            reduce using rule 19 (expression -> expression EXPONENT expression .)
+    MINUS           reduce using rule 19 (expression -> expression EXPONENT expression .)
+    TIMES           reduce using rule 19 (expression -> expression EXPONENT expression .)
+    DIVIDE          reduce using rule 19 (expression -> expression EXPONENT expression .)
+    MODULUS         reduce using rule 19 (expression -> expression EXPONENT expression .)
+    LESS            reduce using rule 19 (expression -> expression EXPONENT expression .)
+    LESS_EQ         reduce using rule 19 (expression -> expression EXPONENT expression .)
+    GREATER         reduce using rule 19 (expression -> expression EXPONENT expression .)
+    GREATER_EQ      reduce using rule 19 (expression -> expression EXPONENT expression .)
+    IS_EQ           reduce using rule 19 (expression -> expression EXPONENT expression .)
+    NOT_EQ          reduce using rule 19 (expression -> expression EXPONENT expression .)
+    AND             reduce using rule 19 (expression -> expression EXPONENT expression .)
+    OR              reduce using rule 19 (expression -> expression EXPONENT expression .)
+    SEMICOLON       reduce using rule 19 (expression -> expression EXPONENT expression .)
+    RBRACE          reduce using rule 19 (expression -> expression EXPONENT expression .)
+    RPAREN          reduce using rule 19 (expression -> expression EXPONENT expression .)
     EXPONENT        shift and go to state 20
 
-  ! EXPONENT        [ reduce using rule 16 (expression -> expression EXPONENT expression .) ]
+  ! EXPONENT        [ reduce using rule 19 (expression -> expression EXPONENT expression .) ]
   ! PLUS            [ shift and go to state 18 ]
   ! MINUS           [ shift and go to state 19 ]
   ! TIMES           [ shift and go to state 21 ]
@@ -1388,41 +1394,41 @@ state 41
 
 state 42
 
-    (17) expression -> expression TIMES expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (20) expression -> expression TIMES expression .
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
-    PLUS            reduce using rule 17 (expression -> expression TIMES expression .)
-    MINUS           reduce using rule 17 (expression -> expression TIMES expression .)
-    TIMES           reduce using rule 17 (expression -> expression TIMES expression .)
-    DIVIDE          reduce using rule 17 (expression -> expression TIMES expression .)
-    MODULUS         reduce using rule 17 (expression -> expression TIMES expression .)
-    LESS            reduce using rule 17 (expression -> expression TIMES expression .)
-    LESS_EQ         reduce using rule 17 (expression -> expression TIMES expression .)
-    GREATER         reduce using rule 17 (expression -> expression TIMES expression .)
-    GREATER_EQ      reduce using rule 17 (expression -> expression TIMES expression .)
-    IS_EQ           reduce using rule 17 (expression -> expression TIMES expression .)
-    NOT_EQ          reduce using rule 17 (expression -> expression TIMES expression .)
-    AND             reduce using rule 17 (expression -> expression TIMES expression .)
-    OR              reduce using rule 17 (expression -> expression TIMES expression .)
-    SEMICOLON       reduce using rule 17 (expression -> expression TIMES expression .)
-    RBRACE          reduce using rule 17 (expression -> expression TIMES expression .)
-    RPAREN          reduce using rule 17 (expression -> expression TIMES expression .)
+    PLUS            reduce using rule 20 (expression -> expression TIMES expression .)
+    MINUS           reduce using rule 20 (expression -> expression TIMES expression .)
+    TIMES           reduce using rule 20 (expression -> expression TIMES expression .)
+    DIVIDE          reduce using rule 20 (expression -> expression TIMES expression .)
+    MODULUS         reduce using rule 20 (expression -> expression TIMES expression .)
+    LESS            reduce using rule 20 (expression -> expression TIMES expression .)
+    LESS_EQ         reduce using rule 20 (expression -> expression TIMES expression .)
+    GREATER         reduce using rule 20 (expression -> expression TIMES expression .)
+    GREATER_EQ      reduce using rule 20 (expression -> expression TIMES expression .)
+    IS_EQ           reduce using rule 20 (expression -> expression TIMES expression .)
+    NOT_EQ          reduce using rule 20 (expression -> expression TIMES expression .)
+    AND             reduce using rule 20 (expression -> expression TIMES expression .)
+    OR              reduce using rule 20 (expression -> expression TIMES expression .)
+    SEMICOLON       reduce using rule 20 (expression -> expression TIMES expression .)
+    RBRACE          reduce using rule 20 (expression -> expression TIMES expression .)
+    RPAREN          reduce using rule 20 (expression -> expression TIMES expression .)
     EXPONENT        shift and go to state 20
 
-  ! EXPONENT        [ reduce using rule 17 (expression -> expression TIMES expression .) ]
+  ! EXPONENT        [ reduce using rule 20 (expression -> expression TIMES expression .) ]
   ! PLUS            [ shift and go to state 18 ]
   ! MINUS           [ shift and go to state 19 ]
   ! TIMES           [ shift and go to state 21 ]
@@ -1440,41 +1446,41 @@ state 42
 
 state 43
 
-    (18) expression -> expression DIVIDE expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (21) expression -> expression DIVIDE expression .
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
-    PLUS            reduce using rule 18 (expression -> expression DIVIDE expression .)
-    MINUS           reduce using rule 18 (expression -> expression DIVIDE expression .)
-    TIMES           reduce using rule 18 (expression -> expression DIVIDE expression .)
-    DIVIDE          reduce using rule 18 (expression -> expression DIVIDE expression .)
-    MODULUS         reduce using rule 18 (expression -> expression DIVIDE expression .)
-    LESS            reduce using rule 18 (expression -> expression DIVIDE expression .)
-    LESS_EQ         reduce using rule 18 (expression -> expression DIVIDE expression .)
-    GREATER         reduce using rule 18 (expression -> expression DIVIDE expression .)
-    GREATER_EQ      reduce using rule 18 (expression -> expression DIVIDE expression .)
-    IS_EQ           reduce using rule 18 (expression -> expression DIVIDE expression .)
-    NOT_EQ          reduce using rule 18 (expression -> expression DIVIDE expression .)
-    AND             reduce using rule 18 (expression -> expression DIVIDE expression .)
-    OR              reduce using rule 18 (expression -> expression DIVIDE expression .)
-    SEMICOLON       reduce using rule 18 (expression -> expression DIVIDE expression .)
-    RBRACE          reduce using rule 18 (expression -> expression DIVIDE expression .)
-    RPAREN          reduce using rule 18 (expression -> expression DIVIDE expression .)
+    PLUS            reduce using rule 21 (expression -> expression DIVIDE expression .)
+    MINUS           reduce using rule 21 (expression -> expression DIVIDE expression .)
+    TIMES           reduce using rule 21 (expression -> expression DIVIDE expression .)
+    DIVIDE          reduce using rule 21 (expression -> expression DIVIDE expression .)
+    MODULUS         reduce using rule 21 (expression -> expression DIVIDE expression .)
+    LESS            reduce using rule 21 (expression -> expression DIVIDE expression .)
+    LESS_EQ         reduce using rule 21 (expression -> expression DIVIDE expression .)
+    GREATER         reduce using rule 21 (expression -> expression DIVIDE expression .)
+    GREATER_EQ      reduce using rule 21 (expression -> expression DIVIDE expression .)
+    IS_EQ           reduce using rule 21 (expression -> expression DIVIDE expression .)
+    NOT_EQ          reduce using rule 21 (expression -> expression DIVIDE expression .)
+    AND             reduce using rule 21 (expression -> expression DIVIDE expression .)
+    OR              reduce using rule 21 (expression -> expression DIVIDE expression .)
+    SEMICOLON       reduce using rule 21 (expression -> expression DIVIDE expression .)
+    RBRACE          reduce using rule 21 (expression -> expression DIVIDE expression .)
+    RPAREN          reduce using rule 21 (expression -> expression DIVIDE expression .)
     EXPONENT        shift and go to state 20
 
-  ! EXPONENT        [ reduce using rule 18 (expression -> expression DIVIDE expression .) ]
+  ! EXPONENT        [ reduce using rule 21 (expression -> expression DIVIDE expression .) ]
   ! PLUS            [ shift and go to state 18 ]
   ! MINUS           [ shift and go to state 19 ]
   ! TIMES           [ shift and go to state 21 ]
@@ -1492,41 +1498,41 @@ state 43
 
 state 44
 
-    (19) expression -> expression MODULUS expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (22) expression -> expression MODULUS expression .
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
-    PLUS            reduce using rule 19 (expression -> expression MODULUS expression .)
-    MINUS           reduce using rule 19 (expression -> expression MODULUS expression .)
-    TIMES           reduce using rule 19 (expression -> expression MODULUS expression .)
-    DIVIDE          reduce using rule 19 (expression -> expression MODULUS expression .)
-    MODULUS         reduce using rule 19 (expression -> expression MODULUS expression .)
-    LESS            reduce using rule 19 (expression -> expression MODULUS expression .)
-    LESS_EQ         reduce using rule 19 (expression -> expression MODULUS expression .)
-    GREATER         reduce using rule 19 (expression -> expression MODULUS expression .)
-    GREATER_EQ      reduce using rule 19 (expression -> expression MODULUS expression .)
-    IS_EQ           reduce using rule 19 (expression -> expression MODULUS expression .)
-    NOT_EQ          reduce using rule 19 (expression -> expression MODULUS expression .)
-    AND             reduce using rule 19 (expression -> expression MODULUS expression .)
-    OR              reduce using rule 19 (expression -> expression MODULUS expression .)
-    SEMICOLON       reduce using rule 19 (expression -> expression MODULUS expression .)
-    RBRACE          reduce using rule 19 (expression -> expression MODULUS expression .)
-    RPAREN          reduce using rule 19 (expression -> expression MODULUS expression .)
+    PLUS            reduce using rule 22 (expression -> expression MODULUS expression .)
+    MINUS           reduce using rule 22 (expression -> expression MODULUS expression .)
+    TIMES           reduce using rule 22 (expression -> expression MODULUS expression .)
+    DIVIDE          reduce using rule 22 (expression -> expression MODULUS expression .)
+    MODULUS         reduce using rule 22 (expression -> expression MODULUS expression .)
+    LESS            reduce using rule 22 (expression -> expression MODULUS expression .)
+    LESS_EQ         reduce using rule 22 (expression -> expression MODULUS expression .)
+    GREATER         reduce using rule 22 (expression -> expression MODULUS expression .)
+    GREATER_EQ      reduce using rule 22 (expression -> expression MODULUS expression .)
+    IS_EQ           reduce using rule 22 (expression -> expression MODULUS expression .)
+    NOT_EQ          reduce using rule 22 (expression -> expression MODULUS expression .)
+    AND             reduce using rule 22 (expression -> expression MODULUS expression .)
+    OR              reduce using rule 22 (expression -> expression MODULUS expression .)
+    SEMICOLON       reduce using rule 22 (expression -> expression MODULUS expression .)
+    RBRACE          reduce using rule 22 (expression -> expression MODULUS expression .)
+    RPAREN          reduce using rule 22 (expression -> expression MODULUS expression .)
     EXPONENT        shift and go to state 20
 
-  ! EXPONENT        [ reduce using rule 19 (expression -> expression MODULUS expression .) ]
+  ! EXPONENT        [ reduce using rule 22 (expression -> expression MODULUS expression .) ]
   ! PLUS            [ shift and go to state 18 ]
   ! MINUS           [ shift and go to state 19 ]
   ! TIMES           [ shift and go to state 21 ]
@@ -1544,33 +1550,33 @@ state 44
 
 state 45
 
-    (20) expression -> expression LESS expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (23) expression -> expression LESS expression .
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
-    LESS            reduce using rule 20 (expression -> expression LESS expression .)
-    LESS_EQ         reduce using rule 20 (expression -> expression LESS expression .)
-    GREATER         reduce using rule 20 (expression -> expression LESS expression .)
-    GREATER_EQ      reduce using rule 20 (expression -> expression LESS expression .)
-    IS_EQ           reduce using rule 20 (expression -> expression LESS expression .)
-    NOT_EQ          reduce using rule 20 (expression -> expression LESS expression .)
-    AND             reduce using rule 20 (expression -> expression LESS expression .)
-    OR              reduce using rule 20 (expression -> expression LESS expression .)
-    SEMICOLON       reduce using rule 20 (expression -> expression LESS expression .)
-    RBRACE          reduce using rule 20 (expression -> expression LESS expression .)
-    RPAREN          reduce using rule 20 (expression -> expression LESS expression .)
+    LESS            reduce using rule 23 (expression -> expression LESS expression .)
+    LESS_EQ         reduce using rule 23 (expression -> expression LESS expression .)
+    GREATER         reduce using rule 23 (expression -> expression LESS expression .)
+    GREATER_EQ      reduce using rule 23 (expression -> expression LESS expression .)
+    IS_EQ           reduce using rule 23 (expression -> expression LESS expression .)
+    NOT_EQ          reduce using rule 23 (expression -> expression LESS expression .)
+    AND             reduce using rule 23 (expression -> expression LESS expression .)
+    OR              reduce using rule 23 (expression -> expression LESS expression .)
+    SEMICOLON       reduce using rule 23 (expression -> expression LESS expression .)
+    RBRACE          reduce using rule 23 (expression -> expression LESS expression .)
+    RPAREN          reduce using rule 23 (expression -> expression LESS expression .)
     PLUS            shift and go to state 18
     MINUS           shift and go to state 19
     EXPONENT        shift and go to state 20
@@ -1578,12 +1584,12 @@ state 45
     DIVIDE          shift and go to state 22
     MODULUS         shift and go to state 23
 
-  ! PLUS            [ reduce using rule 20 (expression -> expression LESS expression .) ]
-  ! MINUS           [ reduce using rule 20 (expression -> expression LESS expression .) ]
-  ! EXPONENT        [ reduce using rule 20 (expression -> expression LESS expression .) ]
-  ! TIMES           [ reduce using rule 20 (expression -> expression LESS expression .) ]
-  ! DIVIDE          [ reduce using rule 20 (expression -> expression LESS expression .) ]
-  ! MODULUS         [ reduce using rule 20 (expression -> expression LESS expression .) ]
+  ! PLUS            [ reduce using rule 23 (expression -> expression LESS expression .) ]
+  ! MINUS           [ reduce using rule 23 (expression -> expression LESS expression .) ]
+  ! EXPONENT        [ reduce using rule 23 (expression -> expression LESS expression .) ]
+  ! TIMES           [ reduce using rule 23 (expression -> expression LESS expression .) ]
+  ! DIVIDE          [ reduce using rule 23 (expression -> expression LESS expression .) ]
+  ! MODULUS         [ reduce using rule 23 (expression -> expression LESS expression .) ]
   ! LESS            [ shift and go to state 24 ]
   ! LESS_EQ         [ shift and go to state 25 ]
   ! GREATER         [ shift and go to state 26 ]
@@ -1596,33 +1602,33 @@ state 45
 
 state 46
 
-    (21) expression -> expression LESS_EQ expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (24) expression -> expression LESS_EQ expression .
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
-    LESS            reduce using rule 21 (expression -> expression LESS_EQ expression .)
-    LESS_EQ         reduce using rule 21 (expression -> expression LESS_EQ expression .)
-    GREATER         reduce using rule 21 (expression -> expression LESS_EQ expression .)
-    GREATER_EQ      reduce using rule 21 (expression -> expression LESS_EQ expression .)
-    IS_EQ           reduce using rule 21 (expression -> expression LESS_EQ expression .)
-    NOT_EQ          reduce using rule 21 (expression -> expression LESS_EQ expression .)
-    AND             reduce using rule 21 (expression -> expression LESS_EQ expression .)
-    OR              reduce using rule 21 (expression -> expression LESS_EQ expression .)
-    SEMICOLON       reduce using rule 21 (expression -> expression LESS_EQ expression .)
-    RBRACE          reduce using rule 21 (expression -> expression LESS_EQ expression .)
-    RPAREN          reduce using rule 21 (expression -> expression LESS_EQ expression .)
+    LESS            reduce using rule 24 (expression -> expression LESS_EQ expression .)
+    LESS_EQ         reduce using rule 24 (expression -> expression LESS_EQ expression .)
+    GREATER         reduce using rule 24 (expression -> expression LESS_EQ expression .)
+    GREATER_EQ      reduce using rule 24 (expression -> expression LESS_EQ expression .)
+    IS_EQ           reduce using rule 24 (expression -> expression LESS_EQ expression .)
+    NOT_EQ          reduce using rule 24 (expression -> expression LESS_EQ expression .)
+    AND             reduce using rule 24 (expression -> expression LESS_EQ expression .)
+    OR              reduce using rule 24 (expression -> expression LESS_EQ expression .)
+    SEMICOLON       reduce using rule 24 (expression -> expression LESS_EQ expression .)
+    RBRACE          reduce using rule 24 (expression -> expression LESS_EQ expression .)
+    RPAREN          reduce using rule 24 (expression -> expression LESS_EQ expression .)
     PLUS            shift and go to state 18
     MINUS           shift and go to state 19
     EXPONENT        shift and go to state 20
@@ -1630,12 +1636,12 @@ state 46
     DIVIDE          shift and go to state 22
     MODULUS         shift and go to state 23
 
-  ! PLUS            [ reduce using rule 21 (expression -> expression LESS_EQ expression .) ]
-  ! MINUS           [ reduce using rule 21 (expression -> expression LESS_EQ expression .) ]
-  ! EXPONENT        [ reduce using rule 21 (expression -> expression LESS_EQ expression .) ]
-  ! TIMES           [ reduce using rule 21 (expression -> expression LESS_EQ expression .) ]
-  ! DIVIDE          [ reduce using rule 21 (expression -> expression LESS_EQ expression .) ]
-  ! MODULUS         [ reduce using rule 21 (expression -> expression LESS_EQ expression .) ]
+  ! PLUS            [ reduce using rule 24 (expression -> expression LESS_EQ expression .) ]
+  ! MINUS           [ reduce using rule 24 (expression -> expression LESS_EQ expression .) ]
+  ! EXPONENT        [ reduce using rule 24 (expression -> expression LESS_EQ expression .) ]
+  ! TIMES           [ reduce using rule 24 (expression -> expression LESS_EQ expression .) ]
+  ! DIVIDE          [ reduce using rule 24 (expression -> expression LESS_EQ expression .) ]
+  ! MODULUS         [ reduce using rule 24 (expression -> expression LESS_EQ expression .) ]
   ! LESS            [ shift and go to state 24 ]
   ! LESS_EQ         [ shift and go to state 25 ]
   ! GREATER         [ shift and go to state 26 ]
@@ -1648,33 +1654,33 @@ state 46
 
 state 47
 
-    (22) expression -> expression GREATER expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (25) expression -> expression GREATER expression .
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
-    LESS            reduce using rule 22 (expression -> expression GREATER expression .)
-    LESS_EQ         reduce using rule 22 (expression -> expression GREATER expression .)
-    GREATER         reduce using rule 22 (expression -> expression GREATER expression .)
-    GREATER_EQ      reduce using rule 22 (expression -> expression GREATER expression .)
-    IS_EQ           reduce using rule 22 (expression -> expression GREATER expression .)
-    NOT_EQ          reduce using rule 22 (expression -> expression GREATER expression .)
-    AND             reduce using rule 22 (expression -> expression GREATER expression .)
-    OR              reduce using rule 22 (expression -> expression GREATER expression .)
-    SEMICOLON       reduce using rule 22 (expression -> expression GREATER expression .)
-    RBRACE          reduce using rule 22 (expression -> expression GREATER expression .)
-    RPAREN          reduce using rule 22 (expression -> expression GREATER expression .)
+    LESS            reduce using rule 25 (expression -> expression GREATER expression .)
+    LESS_EQ         reduce using rule 25 (expression -> expression GREATER expression .)
+    GREATER         reduce using rule 25 (expression -> expression GREATER expression .)
+    GREATER_EQ      reduce using rule 25 (expression -> expression GREATER expression .)
+    IS_EQ           reduce using rule 25 (expression -> expression GREATER expression .)
+    NOT_EQ          reduce using rule 25 (expression -> expression GREATER expression .)
+    AND             reduce using rule 25 (expression -> expression GREATER expression .)
+    OR              reduce using rule 25 (expression -> expression GREATER expression .)
+    SEMICOLON       reduce using rule 25 (expression -> expression GREATER expression .)
+    RBRACE          reduce using rule 25 (expression -> expression GREATER expression .)
+    RPAREN          reduce using rule 25 (expression -> expression GREATER expression .)
     PLUS            shift and go to state 18
     MINUS           shift and go to state 19
     EXPONENT        shift and go to state 20
@@ -1682,12 +1688,12 @@ state 47
     DIVIDE          shift and go to state 22
     MODULUS         shift and go to state 23
 
-  ! PLUS            [ reduce using rule 22 (expression -> expression GREATER expression .) ]
-  ! MINUS           [ reduce using rule 22 (expression -> expression GREATER expression .) ]
-  ! EXPONENT        [ reduce using rule 22 (expression -> expression GREATER expression .) ]
-  ! TIMES           [ reduce using rule 22 (expression -> expression GREATER expression .) ]
-  ! DIVIDE          [ reduce using rule 22 (expression -> expression GREATER expression .) ]
-  ! MODULUS         [ reduce using rule 22 (expression -> expression GREATER expression .) ]
+  ! PLUS            [ reduce using rule 25 (expression -> expression GREATER expression .) ]
+  ! MINUS           [ reduce using rule 25 (expression -> expression GREATER expression .) ]
+  ! EXPONENT        [ reduce using rule 25 (expression -> expression GREATER expression .) ]
+  ! TIMES           [ reduce using rule 25 (expression -> expression GREATER expression .) ]
+  ! DIVIDE          [ reduce using rule 25 (expression -> expression GREATER expression .) ]
+  ! MODULUS         [ reduce using rule 25 (expression -> expression GREATER expression .) ]
   ! LESS            [ shift and go to state 24 ]
   ! LESS_EQ         [ shift and go to state 25 ]
   ! GREATER         [ shift and go to state 26 ]
@@ -1700,33 +1706,33 @@ state 47
 
 state 48
 
-    (23) expression -> expression GREATER_EQ expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (26) expression -> expression GREATER_EQ expression .
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
-    LESS            reduce using rule 23 (expression -> expression GREATER_EQ expression .)
-    LESS_EQ         reduce using rule 23 (expression -> expression GREATER_EQ expression .)
-    GREATER         reduce using rule 23 (expression -> expression GREATER_EQ expression .)
-    GREATER_EQ      reduce using rule 23 (expression -> expression GREATER_EQ expression .)
-    IS_EQ           reduce using rule 23 (expression -> expression GREATER_EQ expression .)
-    NOT_EQ          reduce using rule 23 (expression -> expression GREATER_EQ expression .)
-    AND             reduce using rule 23 (expression -> expression GREATER_EQ expression .)
-    OR              reduce using rule 23 (expression -> expression GREATER_EQ expression .)
-    SEMICOLON       reduce using rule 23 (expression -> expression GREATER_EQ expression .)
-    RBRACE          reduce using rule 23 (expression -> expression GREATER_EQ expression .)
-    RPAREN          reduce using rule 23 (expression -> expression GREATER_EQ expression .)
+    LESS            reduce using rule 26 (expression -> expression GREATER_EQ expression .)
+    LESS_EQ         reduce using rule 26 (expression -> expression GREATER_EQ expression .)
+    GREATER         reduce using rule 26 (expression -> expression GREATER_EQ expression .)
+    GREATER_EQ      reduce using rule 26 (expression -> expression GREATER_EQ expression .)
+    IS_EQ           reduce using rule 26 (expression -> expression GREATER_EQ expression .)
+    NOT_EQ          reduce using rule 26 (expression -> expression GREATER_EQ expression .)
+    AND             reduce using rule 26 (expression -> expression GREATER_EQ expression .)
+    OR              reduce using rule 26 (expression -> expression GREATER_EQ expression .)
+    SEMICOLON       reduce using rule 26 (expression -> expression GREATER_EQ expression .)
+    RBRACE          reduce using rule 26 (expression -> expression GREATER_EQ expression .)
+    RPAREN          reduce using rule 26 (expression -> expression GREATER_EQ expression .)
     PLUS            shift and go to state 18
     MINUS           shift and go to state 19
     EXPONENT        shift and go to state 20
@@ -1734,12 +1740,12 @@ state 48
     DIVIDE          shift and go to state 22
     MODULUS         shift and go to state 23
 
-  ! PLUS            [ reduce using rule 23 (expression -> expression GREATER_EQ expression .) ]
-  ! MINUS           [ reduce using rule 23 (expression -> expression GREATER_EQ expression .) ]
-  ! EXPONENT        [ reduce using rule 23 (expression -> expression GREATER_EQ expression .) ]
-  ! TIMES           [ reduce using rule 23 (expression -> expression GREATER_EQ expression .) ]
-  ! DIVIDE          [ reduce using rule 23 (expression -> expression GREATER_EQ expression .) ]
-  ! MODULUS         [ reduce using rule 23 (expression -> expression GREATER_EQ expression .) ]
+  ! PLUS            [ reduce using rule 26 (expression -> expression GREATER_EQ expression .) ]
+  ! MINUS           [ reduce using rule 26 (expression -> expression GREATER_EQ expression .) ]
+  ! EXPONENT        [ reduce using rule 26 (expression -> expression GREATER_EQ expression .) ]
+  ! TIMES           [ reduce using rule 26 (expression -> expression GREATER_EQ expression .) ]
+  ! DIVIDE          [ reduce using rule 26 (expression -> expression GREATER_EQ expression .) ]
+  ! MODULUS         [ reduce using rule 26 (expression -> expression GREATER_EQ expression .) ]
   ! LESS            [ shift and go to state 24 ]
   ! LESS_EQ         [ shift and go to state 25 ]
   ! GREATER         [ shift and go to state 26 ]
@@ -1752,29 +1758,29 @@ state 48
 
 state 49
 
-    (24) expression -> expression IS_EQ expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (27) expression -> expression IS_EQ expression .
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
-    IS_EQ           reduce using rule 24 (expression -> expression IS_EQ expression .)
-    NOT_EQ          reduce using rule 24 (expression -> expression IS_EQ expression .)
-    AND             reduce using rule 24 (expression -> expression IS_EQ expression .)
-    OR              reduce using rule 24 (expression -> expression IS_EQ expression .)
-    SEMICOLON       reduce using rule 24 (expression -> expression IS_EQ expression .)
-    RBRACE          reduce using rule 24 (expression -> expression IS_EQ expression .)
-    RPAREN          reduce using rule 24 (expression -> expression IS_EQ expression .)
+    IS_EQ           reduce using rule 27 (expression -> expression IS_EQ expression .)
+    NOT_EQ          reduce using rule 27 (expression -> expression IS_EQ expression .)
+    AND             reduce using rule 27 (expression -> expression IS_EQ expression .)
+    OR              reduce using rule 27 (expression -> expression IS_EQ expression .)
+    SEMICOLON       reduce using rule 27 (expression -> expression IS_EQ expression .)
+    RBRACE          reduce using rule 27 (expression -> expression IS_EQ expression .)
+    RPAREN          reduce using rule 27 (expression -> expression IS_EQ expression .)
     PLUS            shift and go to state 18
     MINUS           shift and go to state 19
     EXPONENT        shift and go to state 20
@@ -1786,16 +1792,16 @@ state 49
     GREATER         shift and go to state 26
     GREATER_EQ      shift and go to state 27
 
-  ! PLUS            [ reduce using rule 24 (expression -> expression IS_EQ expression .) ]
-  ! MINUS           [ reduce using rule 24 (expression -> expression IS_EQ expression .) ]
-  ! EXPONENT        [ reduce using rule 24 (expression -> expression IS_EQ expression .) ]
-  ! TIMES           [ reduce using rule 24 (expression -> expression IS_EQ expression .) ]
-  ! DIVIDE          [ reduce using rule 24 (expression -> expression IS_EQ expression .) ]
-  ! MODULUS         [ reduce using rule 24 (expression -> expression IS_EQ expression .) ]
-  ! LESS            [ reduce using rule 24 (expression -> expression IS_EQ expression .) ]
-  ! LESS_EQ         [ reduce using rule 24 (expression -> expression IS_EQ expression .) ]
-  ! GREATER         [ reduce using rule 24 (expression -> expression IS_EQ expression .) ]
-  ! GREATER_EQ      [ reduce using rule 24 (expression -> expression IS_EQ expression .) ]
+  ! PLUS            [ reduce using rule 27 (expression -> expression IS_EQ expression .) ]
+  ! MINUS           [ reduce using rule 27 (expression -> expression IS_EQ expression .) ]
+  ! EXPONENT        [ reduce using rule 27 (expression -> expression IS_EQ expression .) ]
+  ! TIMES           [ reduce using rule 27 (expression -> expression IS_EQ expression .) ]
+  ! DIVIDE          [ reduce using rule 27 (expression -> expression IS_EQ expression .) ]
+  ! MODULUS         [ reduce using rule 27 (expression -> expression IS_EQ expression .) ]
+  ! LESS            [ reduce using rule 27 (expression -> expression IS_EQ expression .) ]
+  ! LESS_EQ         [ reduce using rule 27 (expression -> expression IS_EQ expression .) ]
+  ! GREATER         [ reduce using rule 27 (expression -> expression IS_EQ expression .) ]
+  ! GREATER_EQ      [ reduce using rule 27 (expression -> expression IS_EQ expression .) ]
   ! IS_EQ           [ shift and go to state 28 ]
   ! NOT_EQ          [ shift and go to state 29 ]
   ! AND             [ shift and go to state 30 ]
@@ -1804,29 +1810,29 @@ state 49
 
 state 50
 
-    (25) expression -> expression NOT_EQ expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (28) expression -> expression NOT_EQ expression .
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
-    IS_EQ           reduce using rule 25 (expression -> expression NOT_EQ expression .)
-    NOT_EQ          reduce using rule 25 (expression -> expression NOT_EQ expression .)
-    AND             reduce using rule 25 (expression -> expression NOT_EQ expression .)
-    OR              reduce using rule 25 (expression -> expression NOT_EQ expression .)
-    SEMICOLON       reduce using rule 25 (expression -> expression NOT_EQ expression .)
-    RBRACE          reduce using rule 25 (expression -> expression NOT_EQ expression .)
-    RPAREN          reduce using rule 25 (expression -> expression NOT_EQ expression .)
+    IS_EQ           reduce using rule 28 (expression -> expression NOT_EQ expression .)
+    NOT_EQ          reduce using rule 28 (expression -> expression NOT_EQ expression .)
+    AND             reduce using rule 28 (expression -> expression NOT_EQ expression .)
+    OR              reduce using rule 28 (expression -> expression NOT_EQ expression .)
+    SEMICOLON       reduce using rule 28 (expression -> expression NOT_EQ expression .)
+    RBRACE          reduce using rule 28 (expression -> expression NOT_EQ expression .)
+    RPAREN          reduce using rule 28 (expression -> expression NOT_EQ expression .)
     PLUS            shift and go to state 18
     MINUS           shift and go to state 19
     EXPONENT        shift and go to state 20
@@ -1838,16 +1844,16 @@ state 50
     GREATER         shift and go to state 26
     GREATER_EQ      shift and go to state 27
 
-  ! PLUS            [ reduce using rule 25 (expression -> expression NOT_EQ expression .) ]
-  ! MINUS           [ reduce using rule 25 (expression -> expression NOT_EQ expression .) ]
-  ! EXPONENT        [ reduce using rule 25 (expression -> expression NOT_EQ expression .) ]
-  ! TIMES           [ reduce using rule 25 (expression -> expression NOT_EQ expression .) ]
-  ! DIVIDE          [ reduce using rule 25 (expression -> expression NOT_EQ expression .) ]
-  ! MODULUS         [ reduce using rule 25 (expression -> expression NOT_EQ expression .) ]
-  ! LESS            [ reduce using rule 25 (expression -> expression NOT_EQ expression .) ]
-  ! LESS_EQ         [ reduce using rule 25 (expression -> expression NOT_EQ expression .) ]
-  ! GREATER         [ reduce using rule 25 (expression -> expression NOT_EQ expression .) ]
-  ! GREATER_EQ      [ reduce using rule 25 (expression -> expression NOT_EQ expression .) ]
+  ! PLUS            [ reduce using rule 28 (expression -> expression NOT_EQ expression .) ]
+  ! MINUS           [ reduce using rule 28 (expression -> expression NOT_EQ expression .) ]
+  ! EXPONENT        [ reduce using rule 28 (expression -> expression NOT_EQ expression .) ]
+  ! TIMES           [ reduce using rule 28 (expression -> expression NOT_EQ expression .) ]
+  ! DIVIDE          [ reduce using rule 28 (expression -> expression NOT_EQ expression .) ]
+  ! MODULUS         [ reduce using rule 28 (expression -> expression NOT_EQ expression .) ]
+  ! LESS            [ reduce using rule 28 (expression -> expression NOT_EQ expression .) ]
+  ! LESS_EQ         [ reduce using rule 28 (expression -> expression NOT_EQ expression .) ]
+  ! GREATER         [ reduce using rule 28 (expression -> expression NOT_EQ expression .) ]
+  ! GREATER_EQ      [ reduce using rule 28 (expression -> expression NOT_EQ expression .) ]
   ! IS_EQ           [ shift and go to state 28 ]
   ! NOT_EQ          [ shift and go to state 29 ]
   ! AND             [ shift and go to state 30 ]
@@ -1856,27 +1862,27 @@ state 50
 
 state 51
 
-    (26) expression -> expression AND expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (29) expression -> expression AND expression .
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
-    AND             reduce using rule 26 (expression -> expression AND expression .)
-    OR              reduce using rule 26 (expression -> expression AND expression .)
-    SEMICOLON       reduce using rule 26 (expression -> expression AND expression .)
-    RBRACE          reduce using rule 26 (expression -> expression AND expression .)
-    RPAREN          reduce using rule 26 (expression -> expression AND expression .)
+    AND             reduce using rule 29 (expression -> expression AND expression .)
+    OR              reduce using rule 29 (expression -> expression AND expression .)
+    SEMICOLON       reduce using rule 29 (expression -> expression AND expression .)
+    RBRACE          reduce using rule 29 (expression -> expression AND expression .)
+    RPAREN          reduce using rule 29 (expression -> expression AND expression .)
     PLUS            shift and go to state 18
     MINUS           shift and go to state 19
     EXPONENT        shift and go to state 20
@@ -1890,44 +1896,44 @@ state 51
     IS_EQ           shift and go to state 28
     NOT_EQ          shift and go to state 29
 
-  ! PLUS            [ reduce using rule 26 (expression -> expression AND expression .) ]
-  ! MINUS           [ reduce using rule 26 (expression -> expression AND expression .) ]
-  ! EXPONENT        [ reduce using rule 26 (expression -> expression AND expression .) ]
-  ! TIMES           [ reduce using rule 26 (expression -> expression AND expression .) ]
-  ! DIVIDE          [ reduce using rule 26 (expression -> expression AND expression .) ]
-  ! MODULUS         [ reduce using rule 26 (expression -> expression AND expression .) ]
-  ! LESS            [ reduce using rule 26 (expression -> expression AND expression .) ]
-  ! LESS_EQ         [ reduce using rule 26 (expression -> expression AND expression .) ]
-  ! GREATER         [ reduce using rule 26 (expression -> expression AND expression .) ]
-  ! GREATER_EQ      [ reduce using rule 26 (expression -> expression AND expression .) ]
-  ! IS_EQ           [ reduce using rule 26 (expression -> expression AND expression .) ]
-  ! NOT_EQ          [ reduce using rule 26 (expression -> expression AND expression .) ]
+  ! PLUS            [ reduce using rule 29 (expression -> expression AND expression .) ]
+  ! MINUS           [ reduce using rule 29 (expression -> expression AND expression .) ]
+  ! EXPONENT        [ reduce using rule 29 (expression -> expression AND expression .) ]
+  ! TIMES           [ reduce using rule 29 (expression -> expression AND expression .) ]
+  ! DIVIDE          [ reduce using rule 29 (expression -> expression AND expression .) ]
+  ! MODULUS         [ reduce using rule 29 (expression -> expression AND expression .) ]
+  ! LESS            [ reduce using rule 29 (expression -> expression AND expression .) ]
+  ! LESS_EQ         [ reduce using rule 29 (expression -> expression AND expression .) ]
+  ! GREATER         [ reduce using rule 29 (expression -> expression AND expression .) ]
+  ! GREATER_EQ      [ reduce using rule 29 (expression -> expression AND expression .) ]
+  ! IS_EQ           [ reduce using rule 29 (expression -> expression AND expression .) ]
+  ! NOT_EQ          [ reduce using rule 29 (expression -> expression AND expression .) ]
   ! AND             [ shift and go to state 30 ]
   ! OR              [ shift and go to state 31 ]
 
 
 state 52
 
-    (27) expression -> expression OR expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (30) expression -> expression OR expression .
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
-    OR              reduce using rule 27 (expression -> expression OR expression .)
-    SEMICOLON       reduce using rule 27 (expression -> expression OR expression .)
-    RBRACE          reduce using rule 27 (expression -> expression OR expression .)
-    RPAREN          reduce using rule 27 (expression -> expression OR expression .)
+    OR              reduce using rule 30 (expression -> expression OR expression .)
+    SEMICOLON       reduce using rule 30 (expression -> expression OR expression .)
+    RBRACE          reduce using rule 30 (expression -> expression OR expression .)
+    RPAREN          reduce using rule 30 (expression -> expression OR expression .)
     PLUS            shift and go to state 18
     MINUS           shift and go to state 19
     EXPONENT        shift and go to state 20
@@ -1942,43 +1948,43 @@ state 52
     NOT_EQ          shift and go to state 29
     AND             shift and go to state 30
 
-  ! PLUS            [ reduce using rule 27 (expression -> expression OR expression .) ]
-  ! MINUS           [ reduce using rule 27 (expression -> expression OR expression .) ]
-  ! EXPONENT        [ reduce using rule 27 (expression -> expression OR expression .) ]
-  ! TIMES           [ reduce using rule 27 (expression -> expression OR expression .) ]
-  ! DIVIDE          [ reduce using rule 27 (expression -> expression OR expression .) ]
-  ! MODULUS         [ reduce using rule 27 (expression -> expression OR expression .) ]
-  ! LESS            [ reduce using rule 27 (expression -> expression OR expression .) ]
-  ! LESS_EQ         [ reduce using rule 27 (expression -> expression OR expression .) ]
-  ! GREATER         [ reduce using rule 27 (expression -> expression OR expression .) ]
-  ! GREATER_EQ      [ reduce using rule 27 (expression -> expression OR expression .) ]
-  ! IS_EQ           [ reduce using rule 27 (expression -> expression OR expression .) ]
-  ! NOT_EQ          [ reduce using rule 27 (expression -> expression OR expression .) ]
-  ! AND             [ reduce using rule 27 (expression -> expression OR expression .) ]
+  ! PLUS            [ reduce using rule 30 (expression -> expression OR expression .) ]
+  ! MINUS           [ reduce using rule 30 (expression -> expression OR expression .) ]
+  ! EXPONENT        [ reduce using rule 30 (expression -> expression OR expression .) ]
+  ! TIMES           [ reduce using rule 30 (expression -> expression OR expression .) ]
+  ! DIVIDE          [ reduce using rule 30 (expression -> expression OR expression .) ]
+  ! MODULUS         [ reduce using rule 30 (expression -> expression OR expression .) ]
+  ! LESS            [ reduce using rule 30 (expression -> expression OR expression .) ]
+  ! LESS_EQ         [ reduce using rule 30 (expression -> expression OR expression .) ]
+  ! GREATER         [ reduce using rule 30 (expression -> expression OR expression .) ]
+  ! GREATER_EQ      [ reduce using rule 30 (expression -> expression OR expression .) ]
+  ! IS_EQ           [ reduce using rule 30 (expression -> expression OR expression .) ]
+  ! NOT_EQ          [ reduce using rule 30 (expression -> expression OR expression .) ]
+  ! AND             [ reduce using rule 30 (expression -> expression OR expression .) ]
   ! OR              [ shift and go to state 31 ]
 
 
 state 53
 
-    (28) expression -> identifier EQUALS expression .
-    (14) expression -> expression . PLUS expression
-    (15) expression -> expression . MINUS expression
-    (16) expression -> expression . EXPONENT expression
-    (17) expression -> expression . TIMES expression
-    (18) expression -> expression . DIVIDE expression
-    (19) expression -> expression . MODULUS expression
-    (20) expression -> expression . LESS expression
-    (21) expression -> expression . LESS_EQ expression
-    (22) expression -> expression . GREATER expression
-    (23) expression -> expression . GREATER_EQ expression
-    (24) expression -> expression . IS_EQ expression
-    (25) expression -> expression . NOT_EQ expression
-    (26) expression -> expression . AND expression
-    (27) expression -> expression . OR expression
+    (31) expression -> identifier EQUALS expression .
+    (17) expression -> expression . PLUS expression
+    (18) expression -> expression . MINUS expression
+    (19) expression -> expression . EXPONENT expression
+    (20) expression -> expression . TIMES expression
+    (21) expression -> expression . DIVIDE expression
+    (22) expression -> expression . MODULUS expression
+    (23) expression -> expression . LESS expression
+    (24) expression -> expression . LESS_EQ expression
+    (25) expression -> expression . GREATER expression
+    (26) expression -> expression . GREATER_EQ expression
+    (27) expression -> expression . IS_EQ expression
+    (28) expression -> expression . NOT_EQ expression
+    (29) expression -> expression . AND expression
+    (30) expression -> expression . OR expression
 
-    SEMICOLON       reduce using rule 28 (expression -> identifier EQUALS expression .)
-    RBRACE          reduce using rule 28 (expression -> identifier EQUALS expression .)
-    RPAREN          reduce using rule 28 (expression -> identifier EQUALS expression .)
+    SEMICOLON       reduce using rule 31 (expression -> identifier EQUALS expression .)
+    RBRACE          reduce using rule 31 (expression -> identifier EQUALS expression .)
+    RPAREN          reduce using rule 31 (expression -> identifier EQUALS expression .)
     PLUS            shift and go to state 18
     MINUS           shift and go to state 19
     EXPONENT        shift and go to state 20
@@ -1994,41 +2000,41 @@ state 53
     AND             shift and go to state 30
     OR              shift and go to state 31
 
-  ! PLUS            [ reduce using rule 28 (expression -> identifier EQUALS expression .) ]
-  ! MINUS           [ reduce using rule 28 (expression -> identifier EQUALS expression .) ]
-  ! EXPONENT        [ reduce using rule 28 (expression -> identifier EQUALS expression .) ]
-  ! TIMES           [ reduce using rule 28 (expression -> identifier EQUALS expression .) ]
-  ! DIVIDE          [ reduce using rule 28 (expression -> identifier EQUALS expression .) ]
-  ! MODULUS         [ reduce using rule 28 (expression -> identifier EQUALS expression .) ]
-  ! LESS            [ reduce using rule 28 (expression -> identifier EQUALS expression .) ]
-  ! LESS_EQ         [ reduce using rule 28 (expression -> identifier EQUALS expression .) ]
-  ! GREATER         [ reduce using rule 28 (expression -> identifier EQUALS expression .) ]
-  ! GREATER_EQ      [ reduce using rule 28 (expression -> identifier EQUALS expression .) ]
-  ! IS_EQ           [ reduce using rule 28 (expression -> identifier EQUALS expression .) ]
-  ! NOT_EQ          [ reduce using rule 28 (expression -> identifier EQUALS expression .) ]
-  ! AND             [ reduce using rule 28 (expression -> identifier EQUALS expression .) ]
-  ! OR              [ reduce using rule 28 (expression -> identifier EQUALS expression .) ]
+  ! PLUS            [ reduce using rule 31 (expression -> identifier EQUALS expression .) ]
+  ! MINUS           [ reduce using rule 31 (expression -> identifier EQUALS expression .) ]
+  ! EXPONENT        [ reduce using rule 31 (expression -> identifier EQUALS expression .) ]
+  ! TIMES           [ reduce using rule 31 (expression -> identifier EQUALS expression .) ]
+  ! DIVIDE          [ reduce using rule 31 (expression -> identifier EQUALS expression .) ]
+  ! MODULUS         [ reduce using rule 31 (expression -> identifier EQUALS expression .) ]
+  ! LESS            [ reduce using rule 31 (expression -> identifier EQUALS expression .) ]
+  ! LESS_EQ         [ reduce using rule 31 (expression -> identifier EQUALS expression .) ]
+  ! GREATER         [ reduce using rule 31 (expression -> identifier EQUALS expression .) ]
+  ! GREATER_EQ      [ reduce using rule 31 (expression -> identifier EQUALS expression .) ]
+  ! IS_EQ           [ reduce using rule 31 (expression -> identifier EQUALS expression .) ]
+  ! NOT_EQ          [ reduce using rule 31 (expression -> identifier EQUALS expression .) ]
+  ! AND             [ reduce using rule 31 (expression -> identifier EQUALS expression .) ]
+  ! OR              [ reduce using rule 31 (expression -> identifier EQUALS expression .) ]
 
 
 state 54
 
-    (29) expression -> LPAREN expression RPAREN .
+    (32) expression -> LPAREN expression RPAREN .
 
-    PLUS            reduce using rule 29 (expression -> LPAREN expression RPAREN .)
-    MINUS           reduce using rule 29 (expression -> LPAREN expression RPAREN .)
-    EXPONENT        reduce using rule 29 (expression -> LPAREN expression RPAREN .)
-    TIMES           reduce using rule 29 (expression -> LPAREN expression RPAREN .)
-    DIVIDE          reduce using rule 29 (expression -> LPAREN expression RPAREN .)
-    MODULUS         reduce using rule 29 (expression -> LPAREN expression RPAREN .)
-    LESS            reduce using rule 29 (expression -> LPAREN expression RPAREN .)
-    LESS_EQ         reduce using rule 29 (expression -> LPAREN expression RPAREN .)
-    GREATER         reduce using rule 29 (expression -> LPAREN expression RPAREN .)
-    GREATER_EQ      reduce using rule 29 (expression -> LPAREN expression RPAREN .)
-    IS_EQ           reduce using rule 29 (expression -> LPAREN expression RPAREN .)
-    NOT_EQ          reduce using rule 29 (expression -> LPAREN expression RPAREN .)
-    AND             reduce using rule 29 (expression -> LPAREN expression RPAREN .)
-    OR              reduce using rule 29 (expression -> LPAREN expression RPAREN .)
-    SEMICOLON       reduce using rule 29 (expression -> LPAREN expression RPAREN .)
-    RBRACE          reduce using rule 29 (expression -> LPAREN expression RPAREN .)
-    RPAREN          reduce using rule 29 (expression -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    EXPONENT        reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    TIMES           reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    MODULUS         reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    LESS            reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    LESS_EQ         reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    GREATER         reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    GREATER_EQ      reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    IS_EQ           reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    NOT_EQ          reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    AND             reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    OR              reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    SEMICOLON       reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    RBRACE          reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 32 (expression -> LPAREN expression RPAREN .)
 

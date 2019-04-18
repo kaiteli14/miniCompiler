@@ -15,7 +15,7 @@ class Statement_Block() :
     self.content = 'STATEMENT (BLOCK) <'+str(len(statementList))+'>'
 #---------------------------------------
   def dump( self, indent = 0, fp = sys.stdout ) :
-    dumpHeaderLine( indent, self.m_LineNum,self.content, fp)
+    dumpHeaderLine(indent, self.m_LineNum,self.content, fp)
     for m_Expr in self.m_StatementList:
       m_Expr.dump(indent+1, fp=fp)
 

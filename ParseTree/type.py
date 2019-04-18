@@ -8,10 +8,11 @@ from .common       import *
 
 #---------#---------#---------#---------#---------#--------#
 class type() :
-  def __init__( self, lineNum):
+  def __init__(self, lineNum, type):
     self.m_NodeType = 'TYPE'
     self.m_LineNum = lineNum
-    self.content = 'TYPE (NAME)'+ '\'int\''
+    self.m_Type = type
+    self.content = 'TYPE (NAME)' + f'{self.m_Type!r}'
 
 
 #---------------------------------------
