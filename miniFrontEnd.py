@@ -163,22 +163,23 @@ def p_statement_expr(p):
 def p_statement_A(p):
     '''statement : block_statement
                  | if_then_statement
-                 | while_statement'''
+                 | while_statement
+                 | read_statement'''
     p[0] = p[1]
 
+def p_read_statement(p):
+    '''read_statement : READ LPAREN lvalue lvalue_list RPAREN'''
+    p[4].append(p[3])
+    p[0] = read_statement(p.lineno(1), p[4])
 
-# def p_write_statement(p):
-#     '''write_statement : WRITE LPAREN expression expression_list RPAREN'''
-#     p[4].append(p[3])
-#     write_statement(p.lineno(1),p[4])
-#
-# def p_expression_opt_A(p):
-#     '''expression_opt: epsilon'''
-#     p[0] = []
-#
-# def p_expression_opt_B(p):
-#     '''expression_opt: COMMA expression'''
-#     p[0] = p[0].append(p[2])
+def p_lvalue_list_A(p):
+    '''lvalue_list : lvalue_list COMMA lvalue'''
+    p[1].append(p[3])
+    p[0] = p[1]
+
+def p_lvalue_list_B(p):
+    '''lvalue_list : epsilon'''
+    p[0] = []
 
 
 

@@ -17,6 +17,6 @@ from .lvalue import lvalue
 from .if_then_else_statement import if_then_else_statement
 from .while_statement import while_statement
 from .write_statement import write_statement
-
+from .read_statement import read_statement
 
 # ---------#---------#---------#---------#---------#--------#
