@@ -17,7 +17,11 @@ class Literal() :
 
   #---------------------------------------
   def dump( self, indent = 0, fp = sys.stdout ) :
-    dumpHeaderLine( indent, self.m_LineNum,
+    if self.m_Kind == "int":
+      dumpHeaderLine( indent, self.m_LineNum,
       f'LITERAL {self.m_Kind!r} {self.m_Value!r}', fp )
+    else:
+      dumpHeaderLine(indent, self.m_LineNum,
+                     f'LITERAL {self.m_Kind!r} {self.m_Value!r}', fp)
 
 #---------#---------#---------#---------#---------#--------#

@@ -26,6 +26,8 @@ reserved = {
     'if' : 'IF',
     'else': 'ELSE',
     'while': 'WHILE',
+    'write' : 'WRITE',
+    'read' : 'READ'
 }
 
 tokens = [
@@ -163,9 +165,9 @@ def p_statement_A(p):
                  | while_statement'''
     p[0] = p[1]
 
-# def p_statement_B(p):
-#     '''statement : statement_expr'''
-#     p[0] = p[1]
+
+def p_write_statement(p):
+    '''write_statement : WRITE LPAREN'''
 
 # List of statements separated by semicolons
 def p_statement_decl_list_A(p):
@@ -268,6 +270,11 @@ def p_expression_group(p):
 def p_expression_int_literal(p):
     'expression : INT_LITERAL'
     p[0] = Literal(p.lineno(1), 'int', p[1])
+
+# String literal
+def p_expression_string_literal(p):
+    '''expression : STRING_LITERAL'''
+    p[0] = Literal(p.lineno(1), 'String', p[1][1:-1])
 
 # Lvlue
 def p_lvalue(p):
