@@ -1,37 +1,37 @@
 {
-//   1 + 2 - 3 * 4 / 5 % 6 ^ 7;
+  1 + 2 - 3 * 4 / 5 % 6 ^ 7;
 
-//   8 < 9 || 10 <= 11 && 12 == 13 || 14 != 15 && 16 >= 17 || 18 > 19;
+  8 < 9 || 10 <= 11 && 12 == 13 || 14 != 15 && 16 >= 17 || 18 > 19;
 
-//   -20 + +(21 - !22);
+  -20 + +(21 - !22);
 
-//   a : int = 23;
-//   b : int;
+  a : int = 23;
+  b : int;
 
-//   { // A block inside a block
-//     a % b;
-//   };
+  { // A block inside a block
+    a % b;
+  };
 
-  // if a != b {
-  //   // Then side
-  //   a%b;
-  //   // write( "Then!" )
-  // };
+  if a != b {
+    // Then side
+    a%b;
+    // write( "Then!" )
+  };
 
-  // if a % b {
-    // Another then side
+  if a % b {
+    //Another then side
     // read( a )
-    // a = 3;
-  // } else {
-    // An else side
+    a = 3;
+  } else {
+    //An else side
     // write( "b =", b )
-  //   b = 3;
-  // };
+    b = 3;
+  };
 
-  // while a > b {
-  //   a = a - b
-  // }
+  while a > b {
+    a = a - b
+  }
 
 
-	"Then!"
+
 }

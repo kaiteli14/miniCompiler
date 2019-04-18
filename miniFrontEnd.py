@@ -34,7 +34,7 @@ tokens = [
     'ID', 'INT_LITERAL', 'STRING_LITERAL',
     'PLUS', 'EQUALS', 'MINUS', 'TIMES', 'DIVIDE', 'MODULUS', 'EXPONENT',
     'LPAREN', 'RPAREN', 'SEMICOLON', 'COLON', 'LBRACE', 'RBRACE', 'LESS', 'LESS_EQ', 'GREATER', 'GREATER_EQ',
-    'IS_EQ', 'NOT_EQ', 'AND', 'OR', 'NOT',
+    'IS_EQ', 'NOT_EQ', 'AND', 'OR', 'NOT', 'COMMA',
 ] + list(reserved.values())
 
 
@@ -68,6 +68,7 @@ t_NOT_EQ = r'!='
 t_AND = r'&&'
 t_OR = r'\|\|'
 t_NOT = r'!'
+t_COMMA = r','
 
 
 def t_INT_LITERAL(t):
@@ -166,8 +167,20 @@ def p_statement_A(p):
     p[0] = p[1]
 
 
-def p_write_statement(p):
-    '''write_statement : WRITE LPAREN'''
+# def p_write_statement(p):
+#     '''write_statement : WRITE LPAREN expression expression_list RPAREN'''
+#     p[4].append(p[3])
+#     write_statement(p.lineno(1),p[4])
+#
+# def p_expression_opt_A(p):
+#     '''expression_opt: epsilon'''
+#     p[0] = []
+#
+# def p_expression_opt_B(p):
+#     '''expression_opt: COMMA expression'''
+#     p[0] = p[0].append(p[2])
+
+
 
 # List of statements separated by semicolons
 def p_statement_decl_list_A(p):
