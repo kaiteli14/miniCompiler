@@ -8,10 +8,10 @@ from .common       import *
 
 #---------#---------#---------#---------#---------#--------#
 class decl() :
-  def __init__( self, lineNum, identifier, type, init, number):
+  def __init__( self, lineNum, ID, type, init, number):
     self.m_NodeType = 'decl'
     self.m_LineNum = lineNum
-    self.ID = identifier.m_ID
+    self.ID = ID
     self.content = 'DECLARATION ' + init + ' ID(\'' + self.ID + '\')'
     self.type = type
     self.number = number

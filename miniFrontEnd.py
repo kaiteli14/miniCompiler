@@ -163,9 +163,20 @@ def p_statement_list_C(p):
     'statement_list : epsilon'
     p[0] = [p[1]]
 
+def p_statement_list_D(p):
+    'statement_list : decl'
+    p[0] = [p[1]]
+
+def p_statement_list_E(p):
+    'statement_list : statement_list SEMICOLON decl'
+    p[1].append(p[3])
+    p[0] = p[1]
+
+
+
 # # Declaration
 def p_decl(p):
-    'decl : ID COLON type Initiation'
+    'decl : ID COLON type Initiation SEMICOLON'
     if(p[4] == None):
         p[0] = decl_no_init(p.lineno(1), p[1], p[3], "(VARIABLE-NO-INIT)")
     else:

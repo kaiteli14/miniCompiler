@@ -1,26 +1,4 @@
 (   1) PROGRAM
 (   1)   STATEMENT (BLOCK) <1>
-(   4)     STATEMENT (EXPRESSION)
-(   4)       BINARY_OP '||'
-(   4)         BINARY_OP '||'
-(   4)           BINARY_OP '||'
-(   4)             BINARY_OP '<'
-(   4)               LITERAL 'int' 8
-(   4)               LITERAL 'int' 9
-(   4)             BINARY_OP '&&'
-(   4)               BINARY_OP '<='
-(   4)                 LITERAL 'int' 10
-(   4)                 LITERAL 'int' 11
-(   4)               BINARY_OP '=='
-(   4)                 LITERAL 'int' 12
-(   4)                 LITERAL 'int' 13
-(   4)           BINARY_OP '&&'
-(   4)             BINARY_OP '!='
-(   4)               LITERAL 'int' 14
-(   4)               LITERAL 'int' 15
-(   4)             BINARY_OP '>='
-(   4)               LITERAL 'int' 16
-(   4)               LITERAL 'int' 17
-(   4)         BINARY_OP '>'
-(   4)           LITERAL 'int' 18
-(   4)           LITERAL 'int' 19
+(   4)     DECLARATION (VARIABLE-NO-INIT) ID('a')
+(   4)       TYPE (NAME)'int'
