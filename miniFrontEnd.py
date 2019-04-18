@@ -23,7 +23,8 @@ parser = None
 # Lexical analysis section
 reserved = {
     'int': 'INT',
-    'if' : 'IF'
+    'if' : 'IF',
+    'else': 'ELSE'
 }
 
 tokens = [
@@ -199,6 +200,9 @@ def p_if_then_statement_A(p):
     '''if_then_statement : IF expression block_statement'''
     p[0] = if_then_statement(p.lineno(1), p[2], p[3])
 
+def p_if_then_statement_B(p):
+    '''if_then_statement : IF expression block_statement ELSE block_statement'''
+    p[0] = if_then_else_statement(p.lineno(1), p[2], p[3], p[5])
 
 # -------------------
 # IDENTIFIER ...
