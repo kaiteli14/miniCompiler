@@ -15,6 +15,7 @@ from .type import type
 from .if_then_statement import if_then_statement
 from .lvalue import lvalue
 from .if_then_else_statement import if_then_else_statement
+from .while_statement import while_statement
 
 
 # ---------#---------#---------#---------#---------#--------#

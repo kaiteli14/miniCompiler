@@ -28,7 +28,7 @@
     b = 3;
   };
 
-  // while a > b {
-  //   a = a - b
-  // }
+  while a > b {
+    a = a - b
+  }
 }

@@ -1,5 +1,5 @@
 (   1) PROGRAM
-(   1)   STATEMENT (BLOCK) <1>
+(   1)   STATEMENT (BLOCK) <2>
 (  21)     STATEMENT (IF-THEN)
 (  21)       BINARY_OP '%'
 (  21)         LVALUE(NAME) ID('a')
@@ -14,3 +14,14 @@
 (  28)           BINARY_OP '='
 (  28)             LVALUE(NAME) ID('b')
 (  28)             LITERAL 'int' 3
+(  31)     STATEMENT(WHILE)
+(  31)       BINARY_OP '>'
+(  31)         LVALUE(NAME) ID('a')
+(  31)         LVALUE(NAME) ID('b')
+(  31)       STATEMENT (BLOCK) <1>
+(  32)         STATEMENT (EXPRESSION)
+(  32)           BINARY_OP '='
+(  32)             LVALUE(NAME) ID('a')
+(  32)             BINARY_OP '-'
+(  32)               LVALUE(NAME) ID('a')
+(  32)               LVALUE(NAME) ID('b')

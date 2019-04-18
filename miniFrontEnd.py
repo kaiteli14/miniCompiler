@@ -24,7 +24,8 @@ parser = None
 reserved = {
     'int': 'INT',
     'if' : 'IF',
-    'else': 'ELSE'
+    'else': 'ELSE',
+    'while': 'WHILE',
 }
 
 tokens = [
@@ -153,7 +154,8 @@ def p_statement_expr(p):
 
 def p_statement_A(p):
     '''statement : block_statement
-                 | if_then_statement'''
+                 | if_then_statement
+                 | while_statement'''
     p[0] = p[1]
 
 # def p_statement_B(p):
@@ -203,6 +205,10 @@ def p_if_then_statement_A(p):
 def p_if_then_statement_B(p):
     '''if_then_statement : IF expression block_statement ELSE block_statement'''
     p[0] = if_then_else_statement(p.lineno(1), p[2], p[3], p[5])
+
+def p_while_statement(p):
+    '''while_statement : WHILE expression block_statement'''
+    p[0] = while_statement(p.lineno(1),p[2],p[3])
 
 # -------------------
 # IDENTIFIER ...
