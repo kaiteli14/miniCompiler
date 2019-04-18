@@ -12,10 +12,11 @@
     a % b;
   };
 
-  // if a != b {
-  //   // Then side
-  //   write( "Then!" )
-  // };
+  if a != b {
+    // Then side
+    a%b;
+    // write( "Then!" )
+  };
 
   // if a % b {
   //   // Another then side

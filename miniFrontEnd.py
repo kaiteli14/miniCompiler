@@ -22,7 +22,8 @@ parser = None
 # ---------#---------#---------#---------#---------#--------#
 # Lexical analysis section
 reserved = {
-    'int': 'INT'
+    'int': 'INT',
+    'if' : 'IF'
 }
 
 tokens = [
@@ -150,7 +151,8 @@ def p_statement_expr(p):
     p[0] = Statement_Expression(p.lineno(1), p[1])
 
 def p_statement_A(p):
-    '''statement : block_statement'''
+    '''statement : block_statement
+                 | if_then_statement'''
     p[0] = p[1]
 
 # def p_statement_B(p):
@@ -193,8 +195,9 @@ def p_no_initiation(p):
     'Initiation : epsilon'
     p[0] = None
 
-# def if_statement(p):
-
+def p_if_then_statement_A(p):
+    '''if_then_statement : IF expression block_statement'''
+    p[0] = if_then_statement(p.lineno(1), p[2], p[3])
 
 
 # -------------------
@@ -251,11 +254,16 @@ def p_expression_int_literal(p):
     'expression : INT_LITERAL'
     p[0] = Literal(p.lineno(1), 'int', p[1])
 
+# Lvlue
+def p_lvalue(p):
+    '''lvalue : identifier'''
+    p[0] = p[1]
 
 # Name
-def p_expression_id(p):
-    'expression : identifier'
+def p_expression_lvalue(p):
+    'expression : lvalue'
     p[0] = p[1]
+
 
 
 # -------------------
