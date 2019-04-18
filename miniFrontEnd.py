@@ -21,16 +21,25 @@ parser = None
 
 # ---------#---------#---------#---------#---------#--------#
 # Lexical analysis section
+reserved = {
+    'int': 'INT'
+}
 
-tokens = (
+tokens = [
     'ID', 'INT_LITERAL',
     'PLUS', 'EQUALS', 'MINUS', 'TIMES', 'DIVIDE', 'MODULUS', 'EXPONENT',
     'LPAREN', 'RPAREN', 'SEMICOLON', 'LBRACE','RBRACE', 'LESS', 'LESS_EQ', 'GREATER', 'GREATER_EQ',
-    'IS_EQ', 'NOT_EQ', 'AND', 'OR', 'NOT'
-)
+    'IS_EQ', 'NOT_EQ', 'AND', 'OR', 'NOT',
+] + list(reserved.values())
+
+
+def t_ID(t):
+    r'[a-zA-Z_][a-zA-Z0-9_]*'
+    t.type = reserved.get(t.value, 'ID')
+    return t
+
 
 # Tokens
-
 t_EQUALS = r'='
 t_LPAREN = r'\('
 t_PLUS = r'\+'
@@ -54,9 +63,6 @@ t_OR = r'\|\|'
 t_NOT = r'!'
 
 
-t_ID = r'[a-zA-Z_][a-zA-Z0-9_]*'
-
-
 def t_INT_LITERAL(t):
     r'\d+'
     t.value = int(t.value)
@@ -65,7 +71,7 @@ def t_INT_LITERAL(t):
 
 # -------------------
 # Ignored characters
-# Space, formfeed, carriage return, tab, vertical tab
+# Space, form feed, carriage return, tab, vertical tab
 t_ignore = ' \f\r\t\v'
 
 
@@ -122,7 +128,6 @@ precedence = (
 
 def p_program(p):
     'program : block_statement'
-    # 'program : statement_list'
     p[0] = Program(p.lineno(1), p[1])
 
 
@@ -131,10 +136,11 @@ def p_semicolon_opt(p):
                      | SEMICOLON'''
 
 
+
 # -------------------
 # STATEMENTS ...
 def p_block_statement(p):
-    'block_statement : LBRACE statement_list semicolon_opt RBRACE'
+    '''block_statement : LBRACE statement_list semicolon_opt RBRACE'''
     p[0] = Statement_Block(p.lineno(1), p[2])
 
 # Expression statement
@@ -163,6 +169,10 @@ def p_statement_list_C(p):
 def p_identifier(p):
     'identifier : ID'
     p[0] = Identifier(p.lineno(1), p[1])
+
+def p_type(p):
+    'type : INT'
+    p[0] = type(p.lineno(1))
 
 
 # -------------------

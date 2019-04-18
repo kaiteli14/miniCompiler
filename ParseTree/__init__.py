@@ -9,5 +9,7 @@ from .Program import Program
 from .Statement_Expression import Statement_Expression
 from .UnaryOp import UnaryOp
 from .Statement_Block import Statement_Block
+from .decl import decl
+from .type import type
 
 # ---------#---------#---------#---------#---------#--------#

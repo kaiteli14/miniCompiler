@@ -1,6 +1,6 @@
-# Dalio, Brian A.
-# dalioba
-# 2019-02-27
+# Li, Kaite
+# kxl5704
+# 2019-04-16
 #---------#---------#---------#---------#---------#--------#
 import sys
 
@@ -10,8 +10,7 @@ from .common       import *
 class Statement_Block() :
   def __init__( self, lineNum, statementList) :
     self.m_NodeType = 'Statement_Block'
-    self.m_LineNum  = lineNum
-    # self.m_Expr     = expr
+    self.m_LineNum = lineNum
     self.m_StatementList = statementList
     self.content = 'STATEMENT (BLOCK) <'+str(len(statementList))+'>'
 #---------------------------------------
