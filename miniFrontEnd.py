@@ -29,7 +29,7 @@ reserved = {
 }
 
 tokens = [
-    'ID', 'INT_LITERAL',
+    'ID', 'INT_LITERAL', 'STRING_LITERAL',
     'PLUS', 'EQUALS', 'MINUS', 'TIMES', 'DIVIDE', 'MODULUS', 'EXPONENT',
     'LPAREN', 'RPAREN', 'SEMICOLON', 'COLON', 'LBRACE', 'RBRACE', 'LESS', 'LESS_EQ', 'GREATER', 'GREATER_EQ',
     'IS_EQ', 'NOT_EQ', 'AND', 'OR', 'NOT',
@@ -40,6 +40,7 @@ def t_ID(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     t.type = reserved.get(t.value, 'ID')
     return t
+
 
 
 # Tokens
@@ -72,6 +73,10 @@ def t_INT_LITERAL(t):
     t.value = int(t.value)
     return t
 
+def t_STRING_LITERAL(t):
+    r'"[^"]*"'
+    t.value = str(t.value)
+    return t
 
 # -------------------
 # Ignored characters

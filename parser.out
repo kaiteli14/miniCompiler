@@ -1,5 +1,9 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
+Unused terminals:
+
+    STRING_LITERAL
+
 Grammar
 
 Rule 0     S' -> program
@@ -76,6 +80,7 @@ PLUS                 : 22 25
 RBRACE               : 4
 RPAREN               : 40
 SEMICOLON            : 3 9
+STRING_LITERAL       : 
 TIMES                : 28
 WHILE                : 19
 error                : 
