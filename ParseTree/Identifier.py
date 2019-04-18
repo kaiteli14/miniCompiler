@@ -18,6 +18,6 @@ class Identifier() :
   def dump( self, indent = 0, fp = sys.stdout ) :
     # {self.m_ID !r}, gives the original representation of "self.m_ID"
     dumpHeaderLine(indent, self.m_LineNum,
-      f'IDENTIFIER {self.m_ID!r}', fp)
+      f'LVALUE(NAME) ID({self.m_ID!r})', fp)
 
 #---------#---------#---------#---------#---------#--------#
