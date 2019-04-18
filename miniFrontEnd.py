@@ -239,7 +239,7 @@ def p_expression_binop(p):
                   | expression NOT_EQ expression
                   | expression AND expression
                   | expression OR expression
-                  | identifier EQUALS expression'''
+                  | lvalue EQUALS expression'''
     p[0] = BinaryOp(p.lineno(1), p[2], p[1], p[3])
 
 
@@ -257,12 +257,13 @@ def p_expression_int_literal(p):
 # Lvlue
 def p_lvalue(p):
     '''lvalue : identifier'''
-    p[0] = p[1]
+    p[0] = lvalue(p.lineno(1), p[1])
 
 # Name
 def p_expression_lvalue(p):
     'expression : lvalue'
     p[0] = p[1]
+
 
 
 

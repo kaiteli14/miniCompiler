@@ -8,11 +8,11 @@ from .common       import *
 
 #---------#---------#---------#---------#---------#--------#
 class lvalue() :
-  def __init__( self, lineNum, lvalue) :
-    self.m_NodeType = 'Lvalue'
+  def __init__( self, lineNum, identifier) :
+    self.m_NodeType = 'lvalue'
 
     self.m_LineNum  = lineNum
-    self.m_lvalue    = lvalue
+    self.m_ID    = identifier.m_ID
 
   #---------------------------------------
   def dump( self, indent = 0, fp = sys.stdout ) :
