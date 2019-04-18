@@ -166,7 +166,10 @@ def p_statement_list_C(p):
 # # Declaration
 def p_decl(p):
     'decl : ID COLON type Initiation'
-    p[0] = decl(p.lineno(1), p[1], p[3], "(VARIABLE-NO-INIT)")
+    if(p[4] == None):
+        p[0] = decl_no_init(p.lineno(1), p[1], p[3], "(VARIABLE-NO-INIT)")
+    else:
+        p[0] = decl(p.lineno(1), p[1], p[3], "(VARIABLE)", p[4])
 
 def p_with_initiation(p):
     'Initiation : EQUALS expression'

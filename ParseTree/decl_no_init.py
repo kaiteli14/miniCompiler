@@ -7,18 +7,17 @@ import sys
 from .common       import *
 
 #---------#---------#---------#---------#---------#--------#
-class decl() :
-  def __init__( self, lineNum, identifier, type, init, number):
+class decl_no_init() :
+  def __init__( self, lineNum, identifier, type, non_init):
     self.m_NodeType = 'decl'
     self.m_LineNum = lineNum
     self.ID = identifier.m_ID
-    self.content = 'DECLARATION ' + init + ' ID(\'' + self.ID + '\')'
+    self.content = 'DECLARATION ' + non_init + ' ID(\'' + self.ID + '\')'
     self.type = type
-    self.number = number
 
 #---------------------------------------
   def dump(self, indent=0, fp=sys.stdout):
     dumpHeaderLine(indent, self.m_LineNum, self.content, fp)
     self.type.dump(indent+1, fp=fp)
-    self.number.dump(indent+1, fp=fp)
+
 #---------#---------#---------#---------#---------#--------#
